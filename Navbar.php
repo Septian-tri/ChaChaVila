@@ -6,11 +6,11 @@
 
         <title>Laravel</title>
 
-        <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">        
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="settings/font-awesome/css/font-awesome.min.css">        
+        <link rel="stylesheet" href="Settings/css/bootstrap.min.css">
+        <script src="Settings/js/jquery-3.2.1.slim.min.js"></script>
+        <script src="Settings/js/popper.min.1.12.9.js"></script>
+        <script src="Settings/js/bootstrap.min.js"></script>
 
         <style>
             .navbar-nav {
@@ -21,7 +21,7 @@
             }
             
             #bg { 
-                background: url("img/bg.jpg") no-repeat center center fixed; 
+                background: url("Settings/img/bg.jpg") no-repeat center center fixed; 
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;

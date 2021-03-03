@@ -5,12 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Chacha Villa's</title>
-        <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-
-        <style>
-           
-        </style>
-
+        <link rel="stylesheet" href="Settings/font-awesome/css/font-awesome.min.css">
+        
     </head>
     <body id="bg">
 
