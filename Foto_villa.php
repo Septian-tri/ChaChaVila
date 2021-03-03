@@ -145,10 +145,6 @@
                         <img  src="https://images.pexels.com/photos/1038002/pexels-photo-1038002.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="zoom img-fluid "  alt="">
                     </a>
                 </div>
-                
-                
-            
-            
             </div>
         </div>
     </body>
