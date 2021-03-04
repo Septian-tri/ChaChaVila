@@ -27,18 +27,13 @@
                             </div>
                             <form action="#" method="post">
                                 <div class="form-group first">
-                                    <label for="username">Username</label>
+                                    <label for="username">Nama Pengguna</label>
                                     <input type="text" class="form-control" id="username">
                                 </div>
 
                                 <div class="form-group first">
                                     <label for="username">Email</label>
                                     <input type="email" class="form-control">
-                                </div>
-                                
-                                <div class="form-group last mb-4">
-                                    <label for="password">Name</label>
-                                    <input type="password" class="form-control" id="password">
                                 </div>
                                 <div class="form-group last mb-4">
                                     <label for="password">Phone Number</label>
@@ -55,23 +50,23 @@
                                     <input type="password" class="form-control" id="password">
                                 </div>
                                 <div class="form-group last mb-4">
-                                    <label for="password">Reapet Password</label>
+                                    <label for="password">Konfirmasi Password</label>
                                     <input type="password" class="form-control" id="password">
                                 </div>
                                 <br><hr>
-                                <input type="submit" value="Sign In" class="btn btn-pill text-white btn-block btn-primary">
-                                <span class="d-block text-center my-4 text-muted"> or sign in with</span>
+                                <button type="button" value="Daftar" id="lgnBtn" class="btn btn-pill text-white btn-block btn-primary">DAFTAR SEKARANG</button>
+                                <!-- <span class="d-block text-center my-4 text-muted"> or sign in with</span>
                                 <div class="social-login text-center">
                                     <a href="" class="btn btn-block text-white" style="background-color:#1DA1F2;"> <i class="fab fa-twitter"></i>   Login via Twitter</a>
                                     <a href="" class="btn btn-block text-white" style="background-color:#4267B2;"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
                                     <a href="" class="btn btn-block btn-danger "> <i class="fab fa-google"></i>   Login Google</a>
-                                </div>
+                                </div> -->
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        <script src="settings/js/registerSystem.js"></script>
     </body>
 </html>

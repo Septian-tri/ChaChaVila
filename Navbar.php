@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="settings/font-awesome/css/font-awesome.min.css">        
         <link rel="stylesheet" href="Settings/css/bootstrap.min.css">
         <script src="Settings/js/jquery-3.2.1.slim.min.js"></script>
-        <script src="Settings/js/popper.min.1.12.9.js"></script>
+        <!-- <script src="Settings/js/popper.min.1.12.9.js"></script> -->
         <script src="Settings/js/bootstrap.min.js"></script>
 
         <style>
@@ -89,8 +89,8 @@
                         </div>
                     </li>
                 </ul>
-
             </div>
         </nav>
+        <script src="Settings/js/main.js"></script>
     </body>
 </html>
