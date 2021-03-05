@@ -171,7 +171,7 @@
                     <s>Rp 2.000.000</s>
                 </p>
                 <h4 class="">Rp 1.000.000<small class="e mb-2 text-muted"> / Night</small></h4>
-                <a href="#Features" class="btn btn-primary mt-3">Check In</a>
+                <a href="CheckIn.php" class="btn btn-primary mt-3">Check In</a>
             </div>
         </div>
 
