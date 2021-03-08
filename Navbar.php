@@ -69,24 +69,25 @@
                 
                 <ul class="nav navbar-nav mt-2 ml-auto">
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link h5 dropdown-toggle" data-toggle="dropdown">
+                        
+                        <!-- NOTE USE THIS WHEN NOT LOGIN -->
+                        <a href="Login.php" class="nav-link h5">
+                            Login
+                        </a>
+
+                        <!-- NOTE use this when login -->
+                        <!-- <a href="#" class="nav-link h5 dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-user" aria-hidden="true"></i>
                             username
                         </a>
-                        <!-- NOTE use this when user already login -->
-                        <!-- isi nya bisa di ganti sesuai nani -->
-                        <!-- <div class="dropdown-menu dropdown-menu-right">
+
+                        <div class="dropdown-menu dropdown-menu-right">
                             <a href="#" class="dropdown-item">Reports</a>
                             <a href="#" class="dropdown-item">Settings</a>
                             <div class="dropdown-divider"></div>
                             <a href="#"class="dropdown-item">Logout</a>
                         </div> -->
 
-                        <!-- NOTE use this when not login -->
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a href="Login.php" class="dropdown-item">login</a>
-                            <a href="Register.php" class="dropdown-item">register</a>
-                        </div>
                     </li>
                 </ul>
             </div>
