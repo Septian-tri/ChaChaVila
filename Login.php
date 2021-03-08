@@ -39,6 +39,7 @@
                             <div class="form-group last mb-4">
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password">
+                                <div id="ErrorMessage"></div>
                             </div>
                             <div class="d-flex mb-5 align-items-center">
                                 <div class="custom-control custom-checkbox">
