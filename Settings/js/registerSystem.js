@@ -1,5 +1,6 @@
-var boolLogin   = false;
-var loginButton = document.getElementById("lgnBtn");
+var boolLogin       = false;
+var boolNotifikasi  = 'Tampilkan';
+var loginButton     = document.getElementById("lgnBtn");
 
 
 if(loginButton === undefined || loginButton === null){
@@ -33,26 +34,29 @@ if(loginButton === undefined || loginButton === null){
                         try{
 
                             var parseJson       = JSON.parse(response);
-                            var messageNotif    = parseJson.isiPesan;
+                            var messageType     = parseJson.messageType;
+                            var messageNotif    = parseJson.messageNotif;
 
-                            // switch(typePesan){
-                            //     case 'bidangDataError' :
-                            //         errorBidangInputData(bidangError, isiPesan, 'Tampilkan');
-                            //     break;
+                            switch(messageType){
 
-                            //     default :
-                            //         alert('Maaf Kami, kami mengalami masalah sistem :( . Code : ERP');
-                            //         return false;
-                            //     break;
-                            // }
+                                case 'fieldError' :
+                                    messageNotification(messageNotif, 'Tampilkan');
+                                break;
 
-                            // console.log(messageNotif);
+                                default :
+                                    alert('Maaf Kami, kami mengalami masalah sistem :( . Code : ERP' + messageType);
+                                    return false;
+                                break;
+
+                            }
+
+                            console.log(messageNotif);
                         
                         }catch(e){
 
-                            alert("Maaf Kami melihat ada Sesuatu Yang kurang Baik, kami akan Merload Halaman kamu !");
-                            window.document.location = window.document.location.origin
-                            console.log(response);
+                            console.log(e);
+                            // alert("Maaf Kami melihat ada Sesuatu Yang kurang Baik, kami akan Merload Halaman kamu !");
+                            window.document.location = window.document.location.origin;
                             return false;
 
                         }
