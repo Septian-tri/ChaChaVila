@@ -35,6 +35,7 @@
                             <div class="form-group first">
                                 <label for="username">Username</label>
                                 <input type="text" class="form-control" id="username">
+                                <div id="ErrorMessage"></div>
                             </div>
                             <div class="form-group last mb-4">
                                 <label for="password">Password</label>
@@ -54,9 +55,9 @@
                             <input type="submit" value="Log In" class="btn btn-pill text-white btn-block btn-primary">
                             <span class="d-block text-center my-4 text-muted"> or log in with</span>
                             <div class="text-center">
-                                <a href="" class="btn btn-block text-white" style="background-color:#1DA1F2;"> <i class="fab fa-twitter"></i>   Login via Twitter</a>
-                                <a href="" class="btn btn-block text-white" style="background-color:#4267B2;"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
-                                <a href="" class="btn btn-block btn-danger "> <i class="fab fa-google"></i>   Login via Google</a>
+                                <a href="" class="btn btn-block text-white" style="background-color:#1DA1F2;"> <i class="fa fa-twitter"></i>   Login via Twitter</a>
+                                <a href="" class="btn btn-block text-white" style="background-color:#4267B2;"> <i class="fa fa-facebook-f"></i>   Login via facebook</a>
+                                <a href="" class="btn btn-block btn-danger "> <i class="fa fa-google"></i>   Login via Google</a>
                                 <br>    
                                 <a href="Register.php">Register</a>
                             </div>

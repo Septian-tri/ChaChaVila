@@ -69,7 +69,7 @@ function ModalNotif() {
         '<div class="bg-danger text-white">',
             '<div class="py-2 px-3">',
                 'some error',
-                '<a class="float-right" onclick="' + this.parentElement.style.display =='none' +' ">&times;</a>',
+                '<a class="float-right" onclick=" ">&times;</a>',
             '</div>',
         '</div>'].join('');
     document.getElementById("ErrorMessage").innerHTML = lines;
