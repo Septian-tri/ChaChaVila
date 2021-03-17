@@ -1,5 +1,12 @@
 <?php
 
+//hanya dapat mengeset cokkie pada jaringan http
+ini_set('session.cookie_httponly', 1);
+ini_set('session.use_only_cookies', 1);
+ini_set('session.cookie_secure', 1);
+session_set_cookie_params(['samesite' => 'none']); 
+
+
 //cek domain email jika penyedia layanan email tidak di temukan maka aka mebertikan nilai false, jika di temukan akan memberikan nilai true
 function domainEmailCheck($Email){
     $PisahDomain = 'https://'.explode('@', filter_var($Email, FILTER_SANITIZE_EMAIL))[1];
@@ -26,10 +33,10 @@ function domainEmailCheck($Email){
 
 
 //Kirim notifikasi ke gagalan 
-function sendErrorMessage($isiPesan, $typePesan, $bidangDataError){
+function sendErrorMessage($messageValue, $messageType, $fieldError){
     
-    $Pesan = array("isiPesan" => $isiPesan, "typePesan" => $typePesan, "bidangError" => $bidangDataError);
-    echo json_encode($Pesan);
+    $message = array("messageNotif" => $messageValue, "messageType" => $messageType, "fieldError" => $fieldError);
+    echo json_encode($message);
 
 }
 

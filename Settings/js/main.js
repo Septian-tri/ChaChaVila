@@ -62,15 +62,4 @@ function disabledButtonSend(type, button, action, buttonValue){
         }
     }
 }
-function ModalNotif() {
-    // var exitFucntion = this.parentElement.style.display ='none';
-    // bool boolNotiClose = true;
-    var lines = [
-        '<div class="bg-danger text-white">',
-            '<div class="py-2 px-3">',
-                'some error',
-                '<a class="float-right" onclick=" ">&times;</a>',
-            '</div>',
-        '</div>'].join('');
-    document.getElementById("ErrorMessage").innerHTML = lines;
-}
+
