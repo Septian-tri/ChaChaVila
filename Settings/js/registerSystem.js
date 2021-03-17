@@ -56,7 +56,7 @@ if(loginButton === undefined || loginButton === null){
 
                             console.log(e);
                             // alert("Maaf Kami melihat ada Sesuatu Yang kurang Baik, kami akan Merload Halaman kamu !");
-                            window.document.location = window.document.location.origin;
+                            // window.document.location = window.document.location.origin;
                             return false;
 
                         }

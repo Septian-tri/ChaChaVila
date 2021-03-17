@@ -105,7 +105,18 @@ function notifikasiPesan(Pesan, Mode){
             }
         
     }
+
+    if(boolNotifikasi === Mode){
+        
+        return buatDiv(Pesan, null);
+
+    }else{
+
+        return buatDiv(null, Mode);
+
+    }
 }
+
 
 function messageNotification(Pesan, Mode){
     
