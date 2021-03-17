@@ -65,8 +65,49 @@ function disabledButtonSend(type, button, action, buttonValue){
     }
 }
 
-
 function notifikasiPesan(Pesan, Mode){
+    
+    function buatDiv(PesanDiv, modeDiv){
+
+        var elemenNotifikasi = document.getElementsByClassName('notifikasi')[0];
+        
+        if(elemenNotifikasi !== undefined){
+            
+            hapusElemen('notifikasi', 'class');
+            
+        }
+
+        
+            if(modeDiv === null && PesanDiv !== null){
+                
+                var elemenDiv               = document.createElement('div');
+                elemenDiv.className         = "notifikasi";
+                elemenDiv.innerHTML         = '<div class="isiNotif">'+ PesanDiv + '</div>' + '<div class="sembunyikan">TUTUP</div>';
+                
+                masukinElement('sebelum', 'header', 'tag', elemenDiv);
+                
+                posisikanNotifikasi();
+
+                document.getElementsByClassName("sembunyikan")[0].onclick = function(){
+                    
+                    if(document.getElementsByClassName("sembunyikan")[0] !== undefined){
+
+                        hapusElemen('notifikasi', 'class');
+
+                    }
+
+                };
+
+            }else{
+
+                hapusElemen('notifikasi', 'class');
+
+            }
+        
+    }
+}
+
+function messageNotification(Pesan, Mode){
     
     function buatDiv(PesanDiv, modeDiv){
 
@@ -162,7 +203,6 @@ function errorBidangInputData(bidangInputId, Pesan, Mode){
         }
     }
 }
-
 
 function muatDivAja(metode, div, lokasi, fungsiSukses){
     
