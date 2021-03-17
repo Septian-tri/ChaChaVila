@@ -1,4 +1,5 @@
-var mappingErrorNetwork    = {
+var boolNotification      = "Tampilkan";
+var mappingErrorNetwork   = {
     "0"   : "Opps..Maaf Periksa Kembali Jaringan Kamu ya. Code : NW",
     "400" : "Permintaan Buruk",
     "403" : "Akses Telah di larang",
@@ -8,14 +9,20 @@ var mappingErrorNetwork    = {
     "500" : "Internal Server Error"
 };
 
+var styleWrongField     = {  //Tambah style css disini untuk bidang data input yang salah 
+    "background-color" : "red",
+    "Font-size"        : "20px"
+};
 
-var sendToHome     = {
+var sendToHome          = {
         send : function(){
             return window.document.location = window.document.location.origin;
         } 
     } 
 
-// Fungsi matikan tombol ketika pengiriman data berlangsung
+
+
+// Fungsi matikan tombol ketika pengiriman data berlangsung, ganti style element pada bari 88 kode 22
 function disabledButtonSend(type, button, action, buttonValue){
 
 
@@ -65,59 +72,7 @@ function disabledButtonSend(type, button, action, buttonValue){
     }
 }
 
-function notifikasiPesan(Pesan, Mode){
-    
-    function buatDiv(PesanDiv, modeDiv){
-
-        var elemenNotifikasi = document.getElementsByClassName('notifikasi')[0];
-        
-        if(elemenNotifikasi !== undefined){
-            
-            hapusElemen('notifikasi', 'class');
-            
-        }
-
-        
-            if(modeDiv === null && PesanDiv !== null){
-                
-                var elemenDiv               = document.createElement('div');
-                elemenDiv.className         = "notifikasi";
-                elemenDiv.innerHTML         = '<div class="isiNotif">'+ PesanDiv + '</div>' + '<div class="sembunyikan">TUTUP</div>';
-                
-                masukinElement('sebelum', 'header', 'tag', elemenDiv);
-                
-                posisikanNotifikasi();
-
-                document.getElementsByClassName("sembunyikan")[0].onclick = function(){
-                    
-                    if(document.getElementsByClassName("sembunyikan")[0] !== undefined){
-
-                        hapusElemen('notifikasi', 'class');
-
-                    }
-
-                };
-
-            }else{
-
-                hapusElemen('notifikasi', 'class');
-
-            }
-        
-    }
-
-    if(boolNotifikasi === Mode){
-        
-        return buatDiv(Pesan, null);
-
-    }else{
-
-        return buatDiv(null, Mode);
-
-    }
-}
-
-
+//fungsi menampilkan floating notifkasi
 function messageNotification(Pesan, Mode){
     
     function buatDiv(PesanDiv, modeDiv){
@@ -126,7 +81,7 @@ function messageNotification(Pesan, Mode){
         
         if(elemenNotifikasi !== undefined){
             
-            hapusElemen('notifikasi', 'class');
+            deleteObjectElement('notifikasi', 'class');
             
         }
 
@@ -135,17 +90,17 @@ function messageNotification(Pesan, Mode){
                 
                 var elemenDiv               = document.createElement('div');
                 elemenDiv.className         = "notifikasi";
-                elemenDiv.innerHTML         = '<div class="isiNotif">'+ PesanDiv + '</div>' + '<div class="sembunyikan">TUTUP</div>';
+                elemenDiv.innerHTML         = '<div class="isiNotif">'+ PesanDiv + '</div>' + '<div class="sembunyikan">TUTUP</div>'; //Kode : 22 , ganti style notifikasi disini, style terdapat di file navbar
                 
-                masukinElement('sebelum', 'header', 'tag', elemenDiv);
+                insertElement('sebelum', 'nav', 'tag', elemenDiv); // silahkan rubah posisi div disini
                 
-                posisikanNotifikasi();
+                notificationPosition();
 
                 document.getElementsByClassName("sembunyikan")[0].onclick = function(){
                     
                     if(document.getElementsByClassName("sembunyikan")[0] !== undefined){
 
-                        hapusElemen('notifikasi', 'class');
+                        deleteObjectElement('notifikasi', 'class');
 
                     }
 
@@ -153,13 +108,13 @@ function messageNotification(Pesan, Mode){
 
             }else{
 
-                hapusElemen('notifikasi', 'class');
+                deleteObjectElement('notifikasi', 'class');
 
             }
         
     }
 
-    if(boolNotifikasi === Mode){
+    if(boolNotification === Mode){
         
         return buatDiv(Pesan, null);
 
@@ -170,69 +125,8 @@ function messageNotification(Pesan, Mode){
     }
 }
 
-function errorBidangInputData(bidangInputId, Pesan, Mode){
-    
-    var errorBidangIntId = document.querySelectorAll("#" + bidangInputId)[0];
-
-    if(tempBidangError.length > 0){
-
-        var errorTempBidangData     = document.querySelectorAll("#" + tempBidangError)[0];
-        
-    }
-
-    notifikasiPesan(Pesan, Mode);
-    
-    if(errorBidangIntId !== undefined){
-
-        if(tempBidangError.length === 0){
-            
-            errorBidangIntId.style.cssText =  "border: 1px solid #e91e63; color: #88606d; background-color: #ffd5e3;";
-            errorBidangIntId.focus();
-            tempBidangError = bidangInputId;
-
-        }else if(tempBidangError === bidangInputId){
-
-            errorBidangIntId.style.cssText =   "border: 1px solid #e91e63; color: #88606d; background-color: #ffd5e3;";
-            errorBidangIntId.focus();
-            tempBidangError = bidangInputId;
-
-        }else{
-
-            errorTempBidangData.style.cssText =  "border: 1px solid #5cb3e7; color: #6f6f6f; background-color: #ffffff;";
-            errorBidangIntId.style.cssText =  "border: 1px solid #e91e63; background-color: #ffd5e3; color: #88606d;";
-            errorBidangIntId.focus();
-            tempBidangError = bidangInputId;
-
-        }
-    
-    }else{
-
-        if(errorTempBidangData !== undefined){
-        
-            errorTempBidangData.style.cssText =  "border: 1px solid #5cb3e7; color: #6f6f6f; background-color: #ffffff;";
-        
-        }
-    }
-}
-
-function muatDivAja(metode, div, lokasi, fungsiSukses){
-    
-    var mintaXML = new XMLHttpRequest();
-    var parseDOM = new DOMParser();
-
-    mintaXML.open(metode, lokasi, true);
-    mintaXML.onreadystatechange = function(){
-    
-        if(mintaXML.readyState != 4 || mintaXML.status != 200) return false;
-
-            window.document.getElementsByClassName(div)[0].innerHTML =  parseDOM.parseFromString(mintaXML.responseText,"text/html").getElementsByClassName(div)[0].innerHTML;
-            fungsiSukses;
-        }
-
-    mintaXML.send();
-}
-
-function masukinElement (mode, elementAwal, tipeElementAwal, elemen3){                   
+//fungsi seperti append atau prepend
+function insertElement(mode, elementAwal, tipeElementAwal, elemen3){                   
 
     switch(tipeElementAwal){
 
@@ -258,7 +152,7 @@ function masukinElement (mode, elementAwal, tipeElementAwal, elemen3){
 
     if(elemen1 === undefined || elemen1 === null || elemen3 == undefined || elemen3 === null){
 
-       console.log("elemen tidak di temukan");
+       console.log("elemen tidak di temukan" + elemen1);
        return false;
 
     }else{
@@ -266,11 +160,77 @@ function masukinElement (mode, elementAwal, tipeElementAwal, elemen3){
         var elemen2 = elemen1.parentNode;
         
         if(mode === "sebelum"){
+
             elemen2.insertBefore(elemen3, elemen1);
+        
         }else if(mode === "sesudah"){
+
             elemen1.appendChild(elemen3);
+        
         }
 
     }
 
 }
+
+//fungsing menghapus object
+function deleteObjectElement(objectElement, tipeElemen){
+
+    switch(tipeElemen){
+
+        case 'tag' :
+            
+            var deleteElement = document.getElementsByTagName(objectElement)[0];
+
+        break;
+
+        case 'id' :
+
+            var deleteElement = document.getElementById(objectElement);
+            
+        break;
+
+        case 'class' :
+            
+            var deleteElement = document.getElementsByClassName(objectElement)[0];
+        
+        break;
+
+        default :
+            alert("Maaf tipe tag tidak di ketahui !");
+            return false;
+        break;
+
+    }
+
+
+    if(deleteElement === undefined || deleteElement === null){
+
+        alert("Opps..Sorry kami kehilangan sala satu file, Coba lagi ! " + deleteElement + " " + objectElement + " " +tipeElemen);
+        // sendToHome.send();
+
+    }else{
+
+        deleteElement.parentNode.removeChild(deleteElement);
+        close;
+
+    }
+
+}
+
+//posisikan notifikasi
+function notificationPosition(){
+                
+    var elemenNotifikasi2   = document.getElementsByClassName('notifikasi')[0];
+
+    if(elemenNotifikasi2 !== undefined){
+    
+        var ukuranLayar         = window.innerWidth;
+        var ukuranNotifikasi    = elemenNotifikasi2.clientWidth;
+        var kalkulasiPosisi     = Math.ceil((ukuranLayar-ukuranNotifikasi)/2);
+        elemenNotifikasi2.style.cssText = "left: " + kalkulasiPosisi + "px;";
+    
+    }
+    
+}
+

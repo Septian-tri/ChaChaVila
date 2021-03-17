@@ -33,9 +33,9 @@ function domainEmailCheck($Email){
 
 
 //Kirim notifikasi ke gagalan 
-function sendErrorMessage($messageValue, $messageType, $fieldError){
+function sendErrorMessage($messageValue,  $fieldError, $messageType){
     
-    $message = array("messageNotif" => $messageValue, "messageType" => $messageType, "fieldError" => $fieldError);
+    $message = array("messageNotif" => $messageValue,  "fieldError" => $fieldError, "messageType" => $messageType,);
     echo json_encode($message);
 
 }

@@ -7,6 +7,6 @@ include("mainSystem.php");
 session_name("registerSession"); 
 session_start();
 
-sendErrorMessage("sadas", "fieldError", "fieldError");
+sendErrorMessage("sadas", "fieldError", "notificationErrorField");
 
 ?>
