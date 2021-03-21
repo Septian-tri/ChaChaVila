@@ -1,4 +1,5 @@
 var boolLogin           = false;
+var boolNotification    = "Tampilkan";
 var loginButton         = document.getElementById("lgnBtn");
 
 
@@ -23,18 +24,35 @@ if(loginButton === undefined || loginButton === null){
                 accepts     : "text/html",
                 method      : "POST",
                 crossDomain : false,
-                beforeSend  : function(){ boolLogin = true; disabledButtonSend("id", "lgnBtn", "disabled", 'Loading'); }, //tambahkan animasi loading. ganti tulisan 'loading' e.g '<div class="loading"></div>'
-                complete    : function(){ boolLogin = false; disabledButtonSend("id", "lgnBtn", "enabled", "DAFTAR SEKARANG"); },
-                error       : function(jqXHR){ boolLogin = true; disabledButtonSend("id", "lgnBtn", "disabled", 'Loading'); console.log(mappingErrorNetwork[jqXHR.status])},
+                beforeSend  : function(){ 
+
+                    boolLogin = true; 
+                    disabledButtonSend("id", "lgnBtn", "disabled", 'Loading'); 
+
+                }, //tambahkan animasi loading. ganti tulisan 'loading' e.g '<div class="loading"></div>'
+                complete    : function(){ 
+
+                    boolLogin = false; 
+                    disabledButtonSend("id", "lgnBtn", "enabled", "DAFTAR SEKARANG"); 
+
+                },
+                error       : function(jqXHR){
+
+                    boolLogin = true;
+                    disabledButtonSend("id", "lgnBtn", "disabled", 'Loading');  
+                    messageNotification(mappingErrorNetwork[jqXHR.status], 'Tampilkan');
+
+                },
                 success     : function(response){
 
                    if(response){
                         
                         try{
 
-                            var parseJson       = JSON.parse(response);
-                            var messageType     = parseJson.messageType;
-                            var messageNotif    = parseJson.messageNotif;
+                            var parseJson               = JSON.parse(response);
+                            var messageType             = parseJson.messageType;
+                            var messageNotif            = parseJson.messageNotif;
+                            var messageFieldError       = parseJson.messageFieldErrorObject;
 
                             switch(messageType){
 
@@ -44,10 +62,11 @@ if(loginButton === undefined || loginButton === null){
 
                                 case 'notificationErrorField' :
                                     messageNotification(messageNotif, 'Tampilkan');
+                                    styleWrong(messageFieldError);
                                 break;
 
                                 default :
-                                    alert('Maaf Kami, kami mengalami masalah sistem :( . Code : ' + messageType);
+                                    alert('Maaf Kami mengalami masalah sistem :( . Code : ' + messageType);
                                     return false;
                                 break;
 

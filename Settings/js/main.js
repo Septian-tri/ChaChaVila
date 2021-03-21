@@ -1,4 +1,4 @@
-var boolNotification      = "Tampilkan";
+var tempStyleWrongField   = [];
 var mappingErrorNetwork   = {
     "0"   : "Opps..Maaf Periksa Kembali Jaringan Kamu ya. Code : NW",
     "400" : "Permintaan Buruk",
@@ -8,14 +8,12 @@ var mappingErrorNetwork   = {
     "404" : "Halaman Yang di tuju tidak di temukan",
     "500" : "Internal Server Error"
 };
-
-//tambah / kurangi style bidang input data errror disini. silahkan ikuti aturan penulisan 
-var styleWrongField     = Array(
-    "background-color : red;",
-    "Font-size : 20px;",
-    "color : red;"
+var styleWrongField     = Array( //tambah / kurangi style bidang input data errror disini. silahkan ikuti aturan penulisan 
+    "background-color: #ffdede;",
+    "font-size: 20px;",
+    "color: #b97a7a;",
+    "border: solid 1px;"
 );
-
 var sendToHome          = {
         send : function(){
             return window.document.location = window.document.location.origin;
@@ -81,14 +79,14 @@ function messageNotification(Pesan, Mode){
 
         var elemenNotifikasi = document.getElementsByClassName('notifikasi')[0];
         
-        if(elemenNotifikasi !== undefined){
+        if(elemenNotifikasi != undefined){
             
             deleteObjectElement('notifikasi', 'class');
             
         }
 
         
-            if(modeDiv === null && PesanDiv !== null){
+            if(modeDiv === null && PesanDiv != null){
                 
                 var elemenDiv               = document.createElement('div');
                 elemenDiv.className         = "notifikasi";
@@ -100,7 +98,7 @@ function messageNotification(Pesan, Mode){
 
                 document.getElementsByClassName("sembunyikan")[0].onclick = function(){
                     
-                    if(document.getElementsByClassName("sembunyikan")[0] !== undefined){
+                    if(document.getElementsByClassName("sembunyikan")[0] != undefined){
 
                         deleteObjectElement('notifikasi', 'class');
 
@@ -225,7 +223,7 @@ function notificationPosition(){
                 
     var elemenNotifikasi2   = document.getElementsByClassName('notifikasi')[0];
 
-    if(elemenNotifikasi2 !== undefined){
+    if(elemenNotifikasi2 != undefined){
     
         var ukuranLayar         = window.innerWidth;
         var ukuranNotifikasi    = elemenNotifikasi2.clientWidth;
@@ -236,28 +234,75 @@ function notificationPosition(){
     
 }
 
-//input error data
-function styleWrongField(){ 
+//fungsi untuk styleWrong field error data
+function styleWrong(object){ 
 
-    let className       = document.getElementsByClassName("form-control");
-    let errorObjectId   = "username";
+    var classObject = document.getElementsByClassName(object);
+    var idObject    = document.getElementById(object);
 
-    if(className[0] === null || className[0] === undefined){
+    function gantiStyleClass(styleObject){
 
-        messageNotification('Objek id tidak di temukan !', 'Tampilkan');
-        close;
+        hapusStyle(object, 'class');
+        for(let i = 0; i < styleObject.length; i++){
+
+            styleObject[i].style.cssText = styleWrongField.join("").split(";").join(" !important;");
+            
+        }
+    }
+
+    function gantiStyleId(styleObject){
+
+        hapusStyle(object, 'id');
+        styleObject.style.cssText = styleWrongField.join("").split(";").join(" !important;");
+        styleObject.focus();
+    
+    }
+
+    function hapusStyle(object, type){
+
+        if(Object.keys(tempStyleWrongField).length === 0){
+
+            tempStyleWrongField = [object, type];
+        }
+
+        if(tempStyleWrongField[0] != object){
+
+            if(tempStyleWrongField[1] === "id"){
+                
+                document.getElementById(tempStyleWrongField[0]).removeAttribute("style");
+
+            }else{
+
+                var objectClassHapus = document.getElementsByClassName(tempStyleWrongField[0]);
+
+                for(let i = 0; i < objectClassHapus.length; i++){
+
+                    objectClassHapus[i].removeAttribute("style");
+                }
+            }
+
+            tempStyleWrongField = [];
+            tempStyleWrongField = [object, type];
+        }
+
         
+    }
+
+    if(classObject.length  > 0){
+
+        gantiStyleClass(classObject);
+
     }else{
 
-        for(let i = 0; i < className.length; i++){
+        if(idObject != undefined || idObject != null){
 
-            let identifikasiId = className[i].id;
+            gantiStyleId(idObject);
     
-            if(identifikasiId === errorObjectId){
-    
-                className[i].style.cssText = styleWrongField.join("").split(";").join(" !important;");
+        }else{
             
-            }
+            messageNotification('Objek tidak di temukan !', 'Tampilkan');
+            close;
+        
         }
     }
 }

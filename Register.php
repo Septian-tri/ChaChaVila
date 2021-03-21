@@ -28,12 +28,12 @@
                             <form action="#" method="post">
                                 <div class="form-group first">
                                     <label for="username">Nama Pengguna</label>
-                                    <input type="text" class="form-control" id="username">
+                                    <input type="text" class="form-contro" id="username">
                                 </div>
 
                                 <div class="form-group first">
                                     <label for="username">Email</label>
-                                    <input type="email" class="form-control">
+                                    <input type="email" id="email" class="form-contro">
                                 </div>
                                 <div class="form-group last mb-4">
                                     <label for="password">Phone Number</label>
