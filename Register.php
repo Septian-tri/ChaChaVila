@@ -28,12 +28,12 @@
                             <form action="#" method="post">
                                 <div class="form-group first">
                                     <label for="username">Nama Pengguna</label>
-                                    <input type="text" class="form-contro" id="username">
+                                    <input type="text" class="form-control" id="username">
                                 </div>
 
                                 <div class="form-group first">
                                     <label for="username">Email</label>
-                                    <input type="email" id="email" class="form-contro">
+                                    <input type="email" id="email" class="form-control" id="email">
                                 </div>
                                 <div class="form-group last mb-4">
                                     <label for="password">Phone Number</label>
@@ -42,7 +42,7 @@
                                             <option selected="">+62</option>
                                             <option value="1">+69</option>
                                         </select>
-                                        <input name="" class="form-control" placeholder="Phone number" type="text">
+                                        <input name="" class="form-control" placeholder="Phone number" type="text" id="phonenumber">
                                     </div>
                                 </div>
                                 <div class="form-group last mb-4">
@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="form-group last mb-4">
                                     <label for="password">Konfirmasi Password</label>
-                                    <input type="password" class="form-control" id="password">
+                                    <input type="password" class="form-control" id="repassword">
                                 </div>
                                 <br><hr>
                                 <button type="button" value="Daftar" id="lgnBtn" class="btn btn-pill text-white btn-block btn-primary">DAFTAR SEKARANG</button>

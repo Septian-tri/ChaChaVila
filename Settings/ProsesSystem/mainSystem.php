@@ -1,5 +1,8 @@
 <?php
 
+//rubah tanggal sistem menjadi utc +7 bangkok, hanoi, jakarta
+date_default_timezone_set("Asia/Jakarta");
+
 //hanya dapat mengeset cokkie pada jaringan http
 ini_set('session.cookie_httponly', 1);
 ini_set('session.use_only_cookies', 1);
@@ -33,11 +36,10 @@ function domainEmailCheck($Email){
 
 
 //Kirim notifikasi ke gagalan 
-function sendErrorMessage($messageValue,  $fieldError, $messageType, $messageFieldError){
+function sendErrorMessage($messageValue, $messageType, $messageFieldError){
     
     $message = array(
-        "messageNotif"              => $messageValue, 
-        "fieldError"                => $fieldError, 
+        "messageNotif"              => $messageValue,
         "messageType"               => $messageType, 
         "messageFieldErrorObject"   => $messageFieldError,
     );

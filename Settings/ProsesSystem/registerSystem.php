@@ -3,10 +3,15 @@
 //include main sistem untuk mengambil function
 include("mainSystem.php");
 
-//set nama session dan mulai session
-session_name("registerSession"); 
-session_start();
+if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['password'], $_POST['repassword'])){
 
-sendErrorMessage("sadas", "fieldError", "notificationErrorField", "email");
+    sendErrorMessage("Proses tidak dapat di lanjutkan !", "notificationErrorField", "form-control");
+    exit;
+    return false;
 
+}else{
+
+    sendErrorMessage("Proses tidak dapat di lanjutkan !", "notificationErrorField", "email");
+
+}
 ?>

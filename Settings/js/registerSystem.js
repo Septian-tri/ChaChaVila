@@ -20,7 +20,15 @@ if(loginButton === undefined || loginButton === null){
             $.ajax({
 
                 url         : document.location.origin + "/settings/ProsesSystem/registerSystem.php",
-                data        : {"tikus" : "got", "kacang" : "panjang"},
+                data        : {
+                    
+                    "username"    : document.getElementById("username").value, 
+                    "email"       : document.getElementById("email").value, 
+                    "phonenumber" : document.getElementById("username").value,
+                    "password"    : document.getElementById("username").value,
+                    "repassword"  : document.getElementById("username").value,
+
+                },
                 accepts     : "text/html",
                 method      : "POST",
                 crossDomain : false,

@@ -243,7 +243,7 @@ function styleWrong(object){
     function gantiStyleClass(styleObject){
 
         hapusStyle(object, 'class');
-        for(let i = 0; i < styleObject.length; i++){
+        for(var i = 0; i < styleObject.length; i++){
 
             styleObject[i].style.cssText = styleWrongField.join("").split(";").join(" !important;");
             
@@ -271,14 +271,15 @@ function styleWrong(object){
                 
                 document.getElementById(tempStyleWrongField[0]).removeAttribute("style");
 
-            }else{
+            }else if(tempStyleWrongField[1] === "class"){
 
                 var objectClassHapus = document.getElementsByClassName(tempStyleWrongField[0]);
 
-                for(let i = 0; i < objectClassHapus.length; i++){
+                for(var i = 0; i < objectClassHapus.length; i++){
 
                     objectClassHapus[i].removeAttribute("style");
                 }
+
             }
 
             tempStyleWrongField = [];
