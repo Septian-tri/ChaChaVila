@@ -67,6 +67,7 @@
                 </div>
             </div>
         </div>
+        <script src="Settings/js/main.js"></script>
         <script src="settings/js/registerSystem.js"></script>
     </body>
 </html>

@@ -9,10 +9,12 @@ var mappingErrorNetwork   = {
     "500" : "Internal Server Error"
 };
 
-var styleWrongField     = {  //Tambah style css disini untuk bidang data input yang salah 
-    "background-color" : "red",
-    "Font-size"        : "20px"
-};
+//tambah / kurangi style bidang input data errror disini. silahkan ikuti aturan penulisan 
+var styleWrongField     = Array(
+    "background-color : red;",
+    "Font-size : 20px;",
+    "color : red;"
+);
 
 var sendToHome          = {
         send : function(){
@@ -233,4 +235,32 @@ function notificationPosition(){
     }
     
 }
+
+//input error data
+function styleWrongField(){ 
+
+    let className       = document.getElementsByClassName("form-control");
+    let errorObjectId   = "username";
+
+    if(className[0] === null || className[0] === undefined){
+
+        messageNotification('Objek id tidak di temukan !', 'Tampilkan');
+        close;
+        
+    }else{
+
+        for(let i = 0; i < className.length; i++){
+
+            let identifikasiId = className[i].id;
+    
+            if(identifikasiId === errorObjectId){
+    
+                className[i].style.cssText = styleWrongField.join("").split(";").join(" !important;");
+            
+            }
+        }
+    }
+}
+
+
 

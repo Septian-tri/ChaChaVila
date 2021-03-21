@@ -56,11 +56,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-
-
+    <script src="Settings/js/main.js"></script>
 </body>
 
 </html>

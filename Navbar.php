@@ -112,6 +112,5 @@
                 </ul>
             </div>
         </nav>
-        <script src="Settings/js/main.js"></script>
     </body>
 </html>

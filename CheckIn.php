@@ -92,6 +92,6 @@
     </div>
     <br>
     <br>
+    <script src="Settings/js/main.js"></script>
 </body>
-
 </html>

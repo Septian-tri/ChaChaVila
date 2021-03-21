@@ -236,7 +236,7 @@
                 </div>
 <!--       END DELETEABLE JUST FOR TEMPLATE             -->
             </div>
-
         </div>
+        <script src="Settings/js/main.js"></script>
     </body>
 </html>
