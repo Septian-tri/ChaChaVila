@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="settings/font-awesome/css/font-awesome.min.css">        
         <link rel="stylesheet" href="Settings/css/bootstrap.min.css">
         <script src="Settings/js/jquery-3.2.1.slim.min.js"></script>
+        <script src="Settings/js/main.js"></script>
+        <!-- <script src="Settings/js/registerSystem.js"></script> -->
         <!-- <script src="Settings/js/popper.min.1.12.9.js"></script> -->
         <script src="Settings/js/bootstrap.min.js"></script>
 
@@ -46,19 +48,19 @@
                 width: auto;
                 height: auto;
                 position: fixed;
-                top: 10px;
-                left: 0;
-                right: 0;
-                background-color: #007bff;
-                border: 2px solid #2687b5;
+                top: 30px;
+                /* left: 0;
+                right: 0; */
+                /* background-color: #007bff;
+                border: 2px solid #2687b5; */
                 z-index: 2000;
                 max-width: 70%;
-                min-width: auto;
+                min-width: 30%;
                 text-align: center;
-                color: white;
-                border-radius: 3px;
-                box-shadow: #2b2b2b 0px 0px 9px 2px;
-                font-size: 13px;
+                /* color: white; */
+                /* border-radius: 3px;
+                box-shadow: #2b2b2b 0px 0px 9px 2px; */
+                font-size: auto;
                 display: table;
             }
         </style>
@@ -112,5 +114,6 @@
                 </ul>
             </div>
         </nav>
+        <div class="notifikasi"></div>
     </body>
 </html>
