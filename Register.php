@@ -38,10 +38,10 @@
                                 <div class="form-group last mb-4">
                                     <label for="password">Phone Number</label>
                                     <div class="input-group">
-                                        <select class="custom-select" style="max-width: 120px;">
+                                        <!-- <select class="custom-select" style="max-width: 120px;">
                                             <option selected="">+62</option>
                                             <option value="1">+69</option>
-                                        </select>
+                                        </select> -->
                                         <input name="" class="form-control" placeholder="Phone number" type="text" id="phonenumber">
                                     </div>
                                 </div>

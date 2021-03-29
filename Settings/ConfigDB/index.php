@@ -1,12 +1,5 @@
 <?php
 
-//hanya dapat mengeset cokie situs jika sambungan menggunakan https
-ini_set('session.cookie_httponly', 1);
-ini_set('session.use_only_cookies', 1);
-ini_set('session.cookie_secure', 1);
-session_set_cookie_params(['samesite' => 'none']); 
-
-
 //rubah di sini untuk mengatur segala aktivitas yang menyangkut dengan database
 $namaServer         = "localhost";
 $userNameDatabese   = "root";

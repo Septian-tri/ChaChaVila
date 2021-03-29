@@ -65,7 +65,7 @@ function disabledButtonSend(type, button, action, buttonValue) {
 
         } else {
 
-            sendToHome.send() + "?sadsda";
+            sendToHome.send();
             close;
 
         }
@@ -319,8 +319,8 @@ function styleWrong(object) {
             gantiStyleId(idObject);
 
         } else {
-
-            messageNotification('Objek tidak di temukan !', 'Tampilkan');
+            
+            messageNotification(messageNotif, 'Tampilkan');
             close;
 
         }

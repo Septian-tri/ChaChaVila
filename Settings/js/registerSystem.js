@@ -24,9 +24,9 @@ if(loginButton === undefined || loginButton === null){
                     
                     "username"    : document.getElementById("username").value, 
                     "email"       : document.getElementById("email").value, 
-                    "phonenumber" : document.getElementById("username").value,
-                    "password"    : document.getElementById("username").value,
-                    "repassword"  : document.getElementById("username").value,
+                    "phonenumber" : document.getElementById("phonenumber").value,
+                    "password"    : document.getElementById("password").value,
+                    "repassword"  : document.getElementById("repassword").value,
 
                 },
                 accepts     : "text/html",
@@ -82,7 +82,7 @@ if(loginButton === undefined || loginButton === null){
                         
                         }catch(e){
 
-                            console.log(e);
+                            console.log(response);
                             alert("Maaf Kami melihat ada Sesuatu Yang kurang Baik, kami akan Merload Halaman kamu !");
                             // window.document.location = window.document.location.origin;
                             return false;
