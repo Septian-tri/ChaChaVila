@@ -318,11 +318,8 @@ function styleWrong(object) {
 
             gantiStyleId(idObject);
 
-        } else {
-            
-            messageNotification(messageNotif, 'Tampilkan');
-
         }
+        
     }
 }
 

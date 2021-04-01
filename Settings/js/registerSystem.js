@@ -66,7 +66,7 @@ if(loginButton === undefined || loginButton === null){
                                 var messageType             = parseJson.messageType;
                                 var messageNotif            = parseJson.messageNotif;
                                 var messageFieldError       = parseJson.messageFieldErrorObject;
-                                
+
                                 switch(messageType){
                                     
                                     case 'notification' :
