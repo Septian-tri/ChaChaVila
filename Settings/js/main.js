@@ -133,7 +133,7 @@ function messageNotification(Pesan, Mode) {
 
     }
 
-    if (boolNotification === Mode) {
+    if (notificationMode === Mode) {
 
         return buatDiv(Pesan, null);
 
@@ -321,7 +321,6 @@ function styleWrong(object) {
         } else {
             
             messageNotification(messageNotif, 'Tampilkan');
-            close;
 
         }
     }

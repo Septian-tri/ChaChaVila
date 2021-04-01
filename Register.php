@@ -27,13 +27,16 @@
                             </div>
                             <form action="#" method="post">
                                 <div class="form-group first">
-                                    <label for="username">Nama Pengguna</label>
-                                    <input type="text" class="form-control" id="username">
+                                    <label for="nikktp">NIK KTP</label>
+                                    <input type="text" id="nikktp" placeholder="Masukan NIK KTP" class="form-control">
                                 </div>
-
+                                <div class="form-group first">
+                                    <label for="username">Nama Pengguna</label>
+                                    <input type="text" class="form-control" placeholder="dadang" id="username">
+                                </div>
                                 <div class="form-group first">
                                     <label for="username">Email</label>
-                                    <input type="email" id="email" class="form-control" id="email">
+                                    <input type="text" id="email" class="form-control" id="email">
                                 </div>
                                 <div class="form-group last mb-4">
                                     <label for="password">Phone Number</label>
