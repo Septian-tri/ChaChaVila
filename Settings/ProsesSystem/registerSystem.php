@@ -203,7 +203,7 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
 
                                                                                         if(mysqli_num_rows($queryIdRandom) > 0){
                                                                                             
-                                                                                            return $idRandom.hitungJumlahPengguna($koneksi);
+                                                                                            return $idRandom.(hitungJumlahPengguna($koneksi) - 1);
                                                                                         
                                                                                         }else{
 
@@ -214,22 +214,32 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                     }
                                                                                 }
 
-                                                                                function cekNamaSama($koneksi, $username){
-                                                                                    $queryIdRandom = mysqli_query($koneksi, "SELECT * FROM userdata WHERE username = '".$username."' ");
+                                                                                function cekNamaSama($koneksi, $namapanggilan){
+                                                                                    $queryNama = mysqli_query($koneksi, "SELECT * FROM userdata WHERE namapanggilan = '".$namapanggilan."' ");
 
-                                                                                    if(!$queryIdRandom){
+                                                                                    if(!$queryNama){
                                                                                         
                                                                                         return  false;
                                                                                     
                                                                                     }else{
 
-                                                                                        if(mysqli_num_rows($queryIdRandom) > 0){
+                                                                                        if(mysqli_num_rows($queryNama) > 0){
                                                                                             
-                                                                                            return $idRandom.hitungJumlahPengguna($koneksi);
+                                                                                            if(hitungJumlahPengguna($koneksi) <= 9){
+
+                                                                                                $t = 0;
+
+                                                                                            }else{
+
+                                                                                                $t = ""; 
+
+                                                                                            }
+
+                                                                                            return $namapanggilan." ".$t.hitungJumlahPengguna($koneksi);
                                                                                         
                                                                                         }else{
 
-                                                                                            return $idRandom;
+                                                                                            return $namapanggilan;
 
                                                                                         }
 
@@ -273,18 +283,18 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                 
                                                                                 }
                                                                                 
-                                                                                $namaPengguna       = (hitungJumlahPengguna($koneksi) == 0) ? explode(' ', $_POST["username"])[0] : explode(' ', $_POST["username"])[0]."-".hitungNamaPenggunaSama($koneksi);
-                                                                                $username           = base64_encode(htmlentities($_POST["username"], ENT_QUOTES));
+                                                                                $namaPanggilan      = cekNamaSama($koneksi, explode(' ', $_POST["username"])[0]);
+                                                                                $namaPengguna       = base64_encode(htmlentities($_POST["username"], ENT_QUOTES));
                                                                                 $nomorNikKtp        = base64_encode($_POST['nikktp']);
                                                                                 $emailPengguna      = base64_encode($filterDomainemail);
                                                                                 $nomorHp            = base64_encode($_POST["phonenumber"]);
                                                                                 $Garem              = "*|_*_|* Semoga Semua Yang Di Kerja Kan Menghasilkan Kesuksesan...Aamiin *|_*_|*";
                                                                                 $password           = md5($_POST["password"]." ".$Garem);
                                                                                 $tanggalBergabung   = date("d-m-Y H:i:s", strtotime("today ".date("H:i:s")));
-                                                                                $idRandomGabung     = md5($namaPengguna." ".$tanggalBergabung." ".hitungJumlahPengguna($koneksi));
+                                                                                $idRandomGabung     = md5($emailPengguna.$namaPengguna." ".$tanggalBergabung." ".hitungJumlahPengguna($koneksi));
                                                                                 $idRandom           = strtoupper(substr($idRandomGabung, 22, strlen($idRandomGabung)));
                                                                                 $finalIdRandom      = cekIDRandom($koneksi, $idRandom);
-                                                                                $kodeverifikasi      = md5($finalIdRandom." ".$Garem);
+                                                                                $kodeverifikasi     = md5($finalIdRandom." ".$Garem);
                                                                                 $satatusAkun        = "Terbuka";
                                                                                 $typePengguna       = "user";
 
@@ -309,7 +319,7 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                         
                                                                                         }else{
 
-                                                                                            $queryInputPengguna = mysqli_query($koneksi, "INSERT INTO userdata (username, name, nikktp, email, idrandom, statusakun, durasiterkunci , typeakun, password, phonenumber, tanggalbergabung, typepengguna, kodeverifikasi) VALUES ('$username', '$namaPengguna', '$nomorNikKtp', '$emailPengguna', '$finalIdRandom', '$satatusAkun', '0', 'Normal', '$password', '$nomorHp', '$tanggalBergabung', '$typePengguna', '$kodeverifikasi')");
+                                                                                            $queryInputPengguna = mysqli_query($koneksi, "INSERT INTO userdata (namapengguna, namapanggilan, nikktp, email, idrandom, statusakun, durasiterkunci , typeakun, password, phonenumber, tanggalbergabung, typepengguna, kodeverifikasi) VALUES ('$namaPengguna', '$namaPanggilan', '$nomorNikKtp', '$emailPengguna', '$finalIdRandom', '$satatusAkun', '0', 'Normal', '$password', '$nomorHp', '$tanggalBergabung', '$typePengguna', '$kodeverifikasi')");
 
                                                                                             if(!$queryInputPengguna){
 
@@ -330,11 +340,11 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                                         <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/Pengaturan/Gambar/LogoUtama/Logo.png" />
                                                                                                     </div>
                                                                                                     
-                                                                                                    <h1 style="width: auto;text-align: center;color: #eee;line-height: 31px;margin: auto;padding: 5px;border-bottom: solid 2px #042035;text-shadow: #fbdf03 1px 1px 0px;font-weight: none;">Terima Kasih '.$namaPengguna.' Pendaftaran Kamu Berhasil</h1>
+                                                                                                    <h1 style="width: auto;text-align: center;color: #eee;line-height: 31px;margin: auto;padding: 5px;border-bottom: solid 2px #042035;text-shadow: #fbdf03 1px 1px 0px;font-weight: none;">Terima Kasih '.$namaPanggilan.' Pendaftaran Kamu Berhasil</h1>
                                                                                                     
                                                                                                     <p style="text-indent:20px;text-align:left;padding:10px;color:#ececec;background-color: #01090f;">
                                                                                                         
-                                                                                                        Terimakasih yah <strong>'.$namaPengguna.'</strong>. Kamu Sudah mendaftar di <strong style="color:#56cdd2;">'.strtoupper($_SERVER['HTTP_HOST']).'</strong>, Sebelum kamu menggunkan layanan dari kami,
+                                                                                                        Terimakasih yah <strong>'.$namaPanggilan.'</strong>. Kamu Sudah mendaftar di <strong style="color:#56cdd2;">'.strtoupper($_SERVER['HTTP_HOST']).'</strong>, Sebelum kamu menggunkan layanan dari kami,
                                                                                                         kami meminta maaf atas ketidak nyamanan nanti yang kamu temukan, karna website kami masih berstatus beta. kamu juga dapat memeberi masukan memelalui menu saran ya, terimakasih. <strong>HAVE A NICE DAY</strong>
                                                                                                         <br/>
                                                                                                         <div class="verfikasi" style="color:#ececec;text-align:center;">Ini Kode Verfikasi Kamu ya : <strong style="color:#56cdd2;">'.$finalIdRandom.'</strong></div>
