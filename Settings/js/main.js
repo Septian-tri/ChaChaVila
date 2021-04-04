@@ -20,8 +20,6 @@ var sendToHome = {
     }
 }
 
-
-
 // Fungsi matikan tombol ketika pengiriman data berlangsung, ganti style element pada bari 88 kode 22
 function disabledButtonSend(type, button, action, buttonValue) {
 
@@ -319,9 +317,22 @@ function styleWrong(object) {
             gantiStyleId(idObject);
 
         }
-        
+
     }
 }
 
+//buat object baru. gunakan {'type' : 'text'} untuk memberikan atribute
+function createElement(tagElement, attribute){
 
+    var buatElement = window.document.createElement(tagElement);
+    var i;
 
+    for( i in attribute){
+
+        buatElement.setAttribute(i, attribute[i]);
+
+    }
+
+    return buatElement;
+
+}
