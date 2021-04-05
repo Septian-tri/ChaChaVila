@@ -1,29 +1,28 @@
 var boolLogin           = false;
 var boolNoticeData      = false;
 var notificationMode    = "Tampilkan";
-var loginButton         = document.getElementById("lgnBtn");
+var regButton           = document.getElementById("regAbtn");
 var regFilter           = (/^[^\s]*$/gi); 
 
 
-if(loginButton === undefined || loginButton === null){
+if(regButton === undefined || regButton === null){
     
     alert("kami mengalami ke gagalan memmuat komponen !");
     sendToHome.send();
 
 }else{
-    loginButton.onclick = function(e){
+    regButton.onclick = function(e){
         e.preventDefault();
         e.stopImmediatePropagation();
         e.stopPropagation();
 
         var dataUser            = {
     
-            "username"    : document.getElementById("username").value, 
-            "email"       : document.getElementById("email").value, 
-            "phonenumber" : document.getElementById("phonenumber").value,
-            "password"    : document.getElementById("password").value,
-            "repassword"  : document.getElementById("repassword").value,
-            "nikktp"      : document.getElementById("nikktp").value
+            "namaadmin"      : document.getElementById("namaadmin").value, 
+            "emailadmin"     : document.getElementById("emailadmin").value, 
+            "nomorhandphone" : document.getElementById("nomorhandphone").value,
+            "password"       : document.getElementById("password").value,
+            "repassword"     : document.getElementById("repassword").value
         
         }
         
@@ -33,7 +32,7 @@ if(loginButton === undefined || loginButton === null){
             if(boolLogin === false){
                 
                 $.ajax({
-                    url         : document.location.origin + "/settings/ProsesSystem/registerSystem.php",
+                    url         : document.location.origin + "/settings/ProsesSystem/registerSystemAdmin.php",
                     data        : dataUser,
                     accepts     : "text/html",
                     method      : "POST",
@@ -41,19 +40,19 @@ if(loginButton === undefined || loginButton === null){
                     beforeSend  : function(){
                         
                         boolLogin = true;
-                        disabledButtonSend("id", "lgnBtn", "disabled", 'Loading');
+                        disabledButtonSend("id", "regAbtn", "disabled", 'Loading');
                     
                     }, //tambahkan animasi loading. ganti tulisan 'loading' e.g '<div class="loading"></div>'
                     complete    : function(){
                         
                         boolLogin = false;
-                        disabledButtonSend("id", "lgnBtn", "enabled", "DAFTAR SEKARANG");
+                        disabledButtonSend("id", "regAbtn", "enabled", "DAFTAR SEKARANG");
                     
                     },
                     error       : function(jqXHR){
                         
                         boolLogin = true;
-                        disabledButtonSend("id", "lgnBtn", "disabled", 'Loading');
+                        disabledButtonSend("id", "regAbtn", "disabled", 'Loading');
                         messageNotification(mappingErrorNetwork[jqXHR.status], 'Tampilkan');
                     
                     },
@@ -103,7 +102,7 @@ if(loginButton === undefined || loginButton === null){
 
         }
 
-        if(dataUser.email.length > 0 && dataUser.email.match(/^[a-zA-Z0-9]+[a-zA-Z0-9\.\-\_]+[a-zA-Z0-9]+[\@]{1}[a-zA-Z0-9\-\_]+[\.]{1}[a-zA-Z]{2,}$/gi) !== null){
+        if(dataUser.emailadmin.length > 0 && dataUser.emailadmin.match(/^[a-zA-Z0-9]+[a-zA-Z0-9\.\-\_]+[a-zA-Z0-9]+[\@]{1}[a-zA-Z0-9\-\_]+[\.]{1}[a-zA-Z]{2,}$/gi) !== null){
 
             if(boolNoticeData === true){
 
@@ -112,7 +111,7 @@ if(loginButton === undefined || loginButton === null){
 
             }else{
 
-                if(window.confirm("Periksa Kembali email kamu ya " + dataUser.email + " .Sudah Sesuai ? Klik Oke") === true){
+                if(window.confirm("Periksa Kembali emailadmin kamu ya " + dataUser.emailadmin + " .Sudah Sesuai ? Klik Oke") === true){
 
                     sendData();
                     boolNoticeData = true;
@@ -125,7 +124,7 @@ if(loginButton === undefined || loginButton === null){
 
         }else{
 
-            styleWrong('email');
+            styleWrong('emailadmin');
             return false;
 
         }
