@@ -17,12 +17,14 @@ if(regButton === undefined || regButton === null){
         e.stopPropagation();
 
         var dataUser            = {
-    
-            "namaadmin"      : document.getElementById("namaadmin").value, 
-            "emailadmin"     : document.getElementById("emailadmin").value, 
-            "nomorhandphone" : document.getElementById("nomorhandphone").value,
-            "password"       : document.getElementById("password").value,
-            "repassword"     : document.getElementById("repassword").value
+            
+            "nikktp"        : document.getElementById("nikktp").value,
+            "username"      : document.getElementById("username").value, 
+            "email"         : document.getElementById("email").value, 
+            "phonenumber"   : document.getElementById("phonenumber").value,
+            "password"      : document.getElementById("password").value,
+            "repassword"    : document.getElementById("repassword").value,
+            "typeAkun"      : "Master_Admin"
         
         }
         
@@ -78,6 +80,10 @@ if(regButton === undefined || regButton === null){
                                         styleWrong(messageFieldError);
                                     break;
                                     
+                                    case 'OKE' :
+                                        sendToHome.send();
+                                    break;
+
                                     default :
                                         alert('Maaf Kami mengalami masalah sistem :( . Code : ' + messageType);
                                         return false;
@@ -88,7 +94,6 @@ if(regButton === undefined || regButton === null){
 
                                 console.log(response + " " + e);
                                 alert("Maaf Kami melihat ada Sesuatu Yang kurang Baik, kami akan Merload Halaman kamu !");
-                                // window.document.location = window.document.location.origin;
                                 return false;
 
                             }
@@ -102,7 +107,7 @@ if(regButton === undefined || regButton === null){
 
         }
 
-        if(dataUser.emailadmin.length > 0 && dataUser.emailadmin.match(/^[a-zA-Z0-9]+[a-zA-Z0-9\.\-\_]+[a-zA-Z0-9]+[\@]{1}[a-zA-Z0-9\-\_]+[\.]{1}[a-zA-Z]{2,}$/gi) !== null){
+        if(dataUser.email.length > 0 && dataUser.email.match(/^[a-zA-Z0-9]+[a-zA-Z0-9\.\-\_]+[a-zA-Z0-9]+[\@]{1}[a-zA-Z0-9\-\_]+[\.]{1}[a-zA-Z]{2,}$/gi) !== null){
 
             if(boolNoticeData === true){
 
@@ -111,7 +116,7 @@ if(regButton === undefined || regButton === null){
 
             }else{
 
-                if(window.confirm("Periksa Kembali emailadmin kamu ya " + dataUser.emailadmin + " .Sudah Sesuai ? Klik Oke") === true){
+                if(window.confirm("Periksa Kembali email kamu ya " + dataUser.email + " .Sudah Sesuai ? Klik Oke") === true){
 
                     sendData();
                     boolNoticeData = true;
@@ -124,7 +129,7 @@ if(regButton === undefined || regButton === null){
 
         }else{
 
-            styleWrong('emailadmin');
+            styleWrong('email');
             return false;
 
         }
