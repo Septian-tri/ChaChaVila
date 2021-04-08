@@ -3,7 +3,7 @@
 //include main sistem untuk mengambil function
 include("mainSystem.php");
 
-if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['password'], $_POST['repassword'], $_POST['nikktp'])){
+if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['password'], $_POST['repassword'], $_POST['nikktp'], $_POST['typeAkun'])){
 
     sendErrorMessage("Proses tidak dapat di lanjutkan !", "notificationErrorField", "form-control");
     exit;
@@ -173,11 +173,27 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                             
                                                                             }else{
 
+                                                                                switch($_POST['typeAkun']){
+                                                                                    
+                                                                                    case "Master_Admin" :
+
+                                                                                        $typeAkun = "Master_Admin";
+                                                                                    
+                                                                                    break;
+
+                                                                                    default :
+                                                                                        sendErrorMessage('Maaf terjadi Kegagalan System Silahkan Refresh Halaman'.$_POST['typeAkun'], "notificationErrorField", null);
+                                                                                        exit;
+                                                                                        return false;
+                                                                                    break;
+                                
+                                                                                }
+
                                                                                 include "../ConfigDB/index.php";
 
                                                                                 function hitungJumlahPengguna($koneksi){
 
-                                                                                    $queryJumlahPengguna = mysqli_query($koneksi, "SELECT * FROM userdata COUNT ");
+                                                                                    $queryJumlahPengguna = mysqli_query($koneksi, "SELECT * FROM admindata COUNT ");
 
                                                                                     if(!$queryJumlahPengguna){
                                                                                         
@@ -193,7 +209,7 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                 }
 
                                                                                 function cekIDRandom($koneksi, $idRandom){
-                                                                                    $queryIdRandom = mysqli_query($koneksi, "SELECT * FROM userdata WHERE idrandom = '".$idRandom."' ");
+                                                                                    $queryIdRandom = mysqli_query($koneksi, "SELECT * FROM admindata WHERE idrandom = '".$idRandom."' ");
 
                                                                                     if(!$queryIdRandom){
                                                                                         
@@ -215,7 +231,7 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                 }
 
                                                                                 function cekNamaSama($koneksi, $namapanggilan){
-                                                                                    $queryNama = mysqli_query($koneksi, "SELECT * FROM userdata WHERE namapanggilan = '".$namapanggilan."' ");
+                                                                                    $queryNama = mysqli_query($koneksi, "SELECT * FROM admindata WHERE namapanggilan = '".$namapanggilan."' ");
 
                                                                                     if(!$queryNama){
                                                                                         
@@ -248,9 +264,9 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
 
                                                                                 function cekDataUdahAdaAtauBelum($koneksi, $data, $valData){
 
-                                                                                    $cekuserdata = mysqli_query($koneksi, "SELECT * FROM userdata WHERE ".$data." = '".$valData."' ");
+                                                                                    $cekadmindata = mysqli_query($koneksi, "SELECT * FROM admindata WHERE ".$data." = '".$valData."' ");
 
-                                                                                    if(!$cekuserdata){
+                                                                                    if(!$cekadmindata){
                                                                                         
                                                                                     sendErrorMessage(mysqli_error($koneksi), 'notificationErrorField', null);
                                                                                     exit;
@@ -258,7 +274,7 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                     
                                                                                     }else{
 
-                                                                                        if(mysqli_num_rows($cekuserdata) > 0){
+                                                                                        if(mysqli_num_rows($cekadmindata) > 0){
                                                                                             
                                                                                             return false;
                                                                                         
@@ -296,161 +312,93 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                 $finalIdRandom      = cekIDRandom($koneksi, $idRandom);
                                                                                 $kodeverifikasi     = md5($finalIdRandom." ".$Garem);
                                                                                 $satatusAkun        = "Terbuka";
-                                                                                $typePengguna       = "user";
+                                                                                $typePengguna       = "Non_Customer";
 
-                                                                                if(cekDataUdahAdaAtauBelum($koneksi, 'nikktp', $nomorNikKtp) !== true){
+                                                                                if(cekDataUdahAdaAtauBelum($koneksi, 'typeakun', 'Master_Admin') !== true){
 
-                                                                                sendErrorMessage("Haii..Nomor Ktp Kamu Sudah terdaftar, Maaf kamu tidak dapat melanjutkan Pembuatan Akun", 'notificationErrorField', 'nikktp');
+                                                                                    sendErrorMessage("Proses Tidak Dapat Di lanjutkan", 'OKE', null);
                                                                                     exit;
 
                                                                                 }else{
-                                                                                    
-                                                                                    if(cekDataUdahAdaAtauBelum($koneksi, 'email', $emailPengguna) !== true){
-                                                                                        
-                                                                                    sendErrorMessage("Haii..email Kamu Sudah terdaftar, Maaf kamu tidak dapat melanjutkan Pembuatan Akun", 'notificationErrorField', 'email');
-                                                                                        exit;
-                                                                                    
-                                                                                    }else{
+                                                                        
+                                                                                    if(cekDataUdahAdaAtauBelum($koneksi, 'nikktp', $nomorNikKtp) !== true){
 
-                                                                                        if(cekDataUdahAdaAtauBelum($koneksi, 'phonenumber', $nomorHp) !== true){
+                                                                                        sendErrorMessage("Haii..Nomor Ktp Kamu Sudah terdaftar, Maaf kamu tidak dapat melanjutkan Pembuatan Akun", 'notificationErrorField', 'nikktp');
+                                                                                        exit;
+
+                                                                                    }else{
                                                                                         
-                                                                                        sendErrorMessage("Haii..No Hape Kamu Sudah terdaftar, Maaf kamu tidak dapat melanjutkan Pembuatan Akun", 'notificationErrorField', 'phonenumber');
+                                                                                        if(cekDataUdahAdaAtauBelum($koneksi, 'email', $emailPengguna) !== true){
+                                                                                            
+                                                                                            sendErrorMessage("Haii..email Kamu Sudah terdaftar, Maaf kamu tidak dapat melanjutkan Pembuatan Akun", 'notificationErrorField', 'email');
                                                                                             exit;
                                                                                         
                                                                                         }else{
 
-                                                                                            $queryInputPengguna = mysqli_query($koneksi, "INSERT INTO userdata (namapengguna, namapanggilan, nikktp, email, idrandom, statusakun, durasiterkunci , typeakun, password, phonenumber, tanggalbergabung, typepengguna, kodeverifikasi) VALUES ('$namaPengguna', '$namaPanggilan', '$nomorNikKtp', '$emailPengguna', '$finalIdRandom', '$satatusAkun', '0', 'Normal', '$password', '$nomorHp', '$tanggalBergabung', '$typePengguna', '$kodeverifikasi')");
-
-                                                                                            if(!$queryInputPengguna){
-
-                                                                                            sendErrorMessage("Ooops..maaf kami gagal mendaftar kan kamu, coba di ulang yah.. ".mysqli_error($koneksi), 'notificationErrorField', null);
-                                                                                            exit;
-
+                                                                                            if(cekDataUdahAdaAtauBelum($koneksi, 'phonenumber', $nomorHp) !== true){
+                                                                                            
+                                                                                            sendErrorMessage("Haii..No Hape Kamu Sudah terdaftar, Maaf kamu tidak dapat melanjutkan Pembuatan Akun", 'notificationErrorField', 'phonenumber');
+                                                                                                exit;
+                                                                                            
                                                                                             }else{
 
-                                                                                                $mimePesan      = "MIME-Version: 1.0"."\r\n";
-                                                                                                $typePesan      = "Content-type:text/html; charset=UTF-8"."\r\n";
-                                                                                                $pengirimPesan  = "From: ".$_SERVER['HTTP_HOST'];
-                                                                                                $ccPesan        = "";
-                                                                                                $bccPesan       = "";
-                                                                                                $isiPesan       = '
-                                                                                                    <body style="
-                                                                                                        background-color: #D3D3D3;
-                                                                                                        text-align: center;
-                                                                                                        font-family: verdana;
-                                                                                                        border-radius:10px;
-                                                                                                        
-                                                                                                        ">
-                                                                                                        <div style="padding-right:20%;
-                                                                                                                padding-left:20%;">
-                                                                                                            <div style="
-                                                                                                                background-color: #ffffff;
-                                                                                                                ">
+                                                                                                $queryInputPengguna = mysqli_query($koneksi, "INSERT INTO admindata (namapengguna, namapanggilan, nikktp, email, idrandom, statusakun, durasiterkunci , typeakun, password, phonenumber, tanggalbergabung, typepengguna, kodeverifikasi) VALUES ('$namaPengguna', '$namaPanggilan', '$nomorNikKtp', '$emailPengguna', '$finalIdRandom', '$satatusAkun', '0', '$typeAkun', '$password', '$nomorHp', '$tanggalBergabung', '$typePengguna', '$kodeverifikasi')");
 
-                                                                                                                <div class="nav" style="
-                                                                                                                    background-color: #7ABD7E;
-                                                                                                                    width:auto;
-                                                                                                                    height:auto;
-                                                                                                                    padding:10px;
-                                                                                                                    ">
-                                                                                                                    <!-- <img src="https://placehold.it/70x70"> -->
-                                                                                                                    <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/Pengaturan/Gambar/LogoUtama/Logo.png" />
-                                                                                                                </div>
+                                                                                                if(!$queryInputPengguna){
 
-                                                                                                                <h1 style="
-                                                                                                                    width: auto;
-                                                                                                                    text-align: center;
-                                                                                                                    color: #0B8142;
-                                                                                                                    line-height: 31px;
-                                                                                                                    margin: auto;
-                                                                                                                    padding-top: 30px;
-                                                                                                                    padding-bottom: 30px;
-                                                                                                                    /* border-bottom: solid 2px #042035;     */
-                                                                                                                    /* text-shadow: #fbdf03 1px 1px 0px; */
-                                                                                                                    font-weight: none;">
-
-                                                                                                                    Terima Kasih '.$namaPengguna.' Pendaftaran Kamu Berhasil
-                                                                                                                </h1>
-
-                                                                                                                <hr style="
-                                                                                                                    /* color: #FFFFFF; */
-                                                                                                                    height: 12px;
-                                                                                                                    border: 0;
-                                                                                                                    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
-                                                                                                                    ">
-
-                                                                                                                <p style="
-                                                                                                                    text-indent:50px;
-                                                                                                                    text-align:left;
-                                                                                                                    padding:30px;
-                                                                                                                    /* color: white; */
-                                                                                                                    ">
-
-                                                                                                                    Terimakasih Kamu Sudah mendaftar di <strong style="color:#ffdf7a;">'.strtoupper($_SERVER['HTTP_HOST']).'</strong>, Sebelum kamu menggunkan layanan dari kami,
-                                                                                                                    kami meminta maaf atas ketidak nyamanan nanti yang kamu temukan, karna website kami masih berstatus beta. kamu juga dapat memeberi masukan memelalui menu saran ya, terimakasih. <strong>HAVE A NICE DAY</strong>
-
-                                                                                                                    <br>
-                                                                                                                    
-                                                                                                                    <div class="verfikasi" style="
-                                                                                                                        color:#ffffff;
-                                                                                                                        text-align:center;
-                                                                                                                        background-color: #a0e892;
-                                                                                                                        padding: 10px">
-
-                                                                                                                        Kode Verfikasi : <strong style="color:#FF6961;">'.$finalIdRandom.'</strong>
-                                                                                                                    </div>
-                                                                                                                    
-                                                                                                                    <br>
-
-                                                                                                                    <div class="salam" style="
-                                                                                                                        width:auto; 
-                                                                                                                        /* font-weight: bold;  */
-                                                                                                                        padding:7px; 
-                                                                                                                        margin:7px;
-                                                                                                                        text-align:left;
-                                                                                                                        /* color: white; */
-                                                                                                                        ">
-
-                                                                                                                        Salam Hangat CEO & OWNER,
-                                                                                                                        <br/>
-                                                                                                                        <br>
-                                                                                                                        Septian & Ahmad 
-                                                                                                                        <hr style="width: 140px;margin-left:0px;">
-                                                                                                                    </div>
-                                                                                                                    <br>
-                                                                                                                    <div class="bawah" style="
-                                                                                                                        text-align:center;
-                                                                                                                        font-size:10px;
-                                                                                                                        width:auto;
-                                                                                                                        padding:10px;
-                                                                                                                        color:white;
-                                                                                                                        background-color: #2c5f2d;
-                                                                                                                        border-bottom-left-radius: 5px;
-                                                                                                                        border-bottom-right-radius: 5px;
-                                                                                                                        border-top: solid 2px #3a4957;">
-
-                                                                                                                        jika kamu tidak merasa melakukan pendaftaran / melakukan aktivitas pada '.$_SERVER['HTTP_HOST'].', Silahkan abaikan atau Hapus Pesan ini, atas pengertian nya
-                                                                                                                        <br />
-                                                                                                                        team '.$_SERVER['HTTP_HOST'].' mengucapkan terimakasih.
-                                                                                                                    </div>
-                                                                                                                </p>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        
-                                                                                                        
-                                                                                                    </body>
-                                                                                                ';
-
-                                                                                                if(!mail(base64_decode($emailPengguna), 'Sukses Mendaftar Di '.$_SERVER['HTTP_HOST'], $isiPesan, $mimePesan.$typePesan.$pengirimPesan)){
-
-                                                                                                    $AaBb = mysqli_query($koneksi, "DELETE FROM userdata WHERE nikktp = '".$nomorNikKtp."' and email = '".$emailPengguna."' and idrandom = '".$finalIdRandom."'");
-                                                                                                    sendErrorMessage("Ooops..maaf kami gagal mengirimkan kan kamu email, coba di ulang yah.. ".mysqli_error($koneksi), 'notificationErrorField', null);
-                                                                                                    exit;
+                                                                                                sendErrorMessage("Ooops..maaf kami gagal mendaftar kan kamu, coba di ulang yah.. ".mysqli_error($koneksi), 'notificationErrorField', null);
+                                                                                                exit;
 
                                                                                                 }else{
-                                                                                                    
-                                                                                                    sendErrorMessage("Terimakasih Ya..Akun kamu sudah terdaftar silahkan Login dan masukan kode verfikasi yang dikirm melalui email ya", 'notificationErrorField', null);
-                                                                                                    exit;
+
+                                                                                                    $mimePesan      = "MIME-Version: 1.0"."\r\n";
+                                                                                                    $typePesan      = "Content-type:text/html; charset=UTF-8"."\r\n";
+                                                                                                    $pengirimPesan  = "From: ".$_SERVER['HTTP_HOST'];
+                                                                                                    $ccPesan        = "";
+                                                                                                    $bccPesan       = "";
+                                                                                                    $isiPesan       = '
+                                                                                                    <body style="background-color: #01090f;text-align: center;font-family: verdana;border-radius:10px;">
+                                                                                                        
+                                                                                                        <div class="nav" style="background-color: #031421;width:auto;height:auto;padding:10px;">
+                                                                                                            <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/Pengaturan/Gambar/LogoUtama/Logo.png" />
+                                                                                                        </div>
+                                                                                                        
+                                                                                                        <h1 style="width: auto;text-align: center;color: #eee;line-height: 31px;margin: auto;padding: 5px;border-bottom: solid 2px #042035;text-shadow: #fbdf03 1px 1px 0px;font-weight: none;">Terima Kasih '.$namaPanggilan.' Pendaftaran Kamu Berhasil</h1>
+                                                                                                        
+                                                                                                        <p style="text-indent:20px;text-align:left;padding:10px;color:#ececec;background-color: #01090f;">
+                                                                                                            
+                                                                                                            Terimakasih yah <strong>'.$namaPanggilan.'</strong>. Kamu Sudah mendaftar di <strong style="color:#56cdd2;">'.strtoupper($_SERVER['HTTP_HOST']).'</strong>, Sebelum kamu menggunkan layanan dari kami,
+                                                                                                            kami meminta maaf atas ketidak nyamanan nanti yang kamu temukan, karna website kami masih berstatus beta. kamu juga dapat memeberi masukan memelalui menu saran ya, terimakasih. <strong>HAVE A NICE DAY</strong>
+                                                                                                            <br/>
+                                                                                                            <div class="verfikasi" style="color:#ececec;text-align:center;">Ini Kode Verfikasi Kamu ya : <strong style="color:#56cdd2;">'.$finalIdRandom.'</strong></div>
+                                                                                                            <div class="salam" style="width:auto; font-weight: bold; padding:7px; margin:7px;text-align:left;color: #fbdf00;">
+                                                                                                                Salam Hangat CEO & OWNER,
+                                                                                                                <br/>
+                                                                                                                <br/>
+                                                                                                                <br/>
+                                                                                                                Septian & Ahmad Arrafi
+                                                                                                            </div>
+                                                                                                            <div class="bawah" style="text-align:center;font-size:10px;width:auto;padding:10px;color:white;background-color: #03121e;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;border-top: solid 2px #3a4957;">
+                                                                                                            jika kamu tidak merasa melakukan pendaftaran / melakukan aktivitas pada '.$_SERVER['HTTP_HOST'].', Silahkan abaikan atau Hapus Pesan ini, atas pengertian nya
+                                                                                                            <br/>
+                                                                                                            team '.$_SERVER['HTTP_HOST'].' mengucapkan terimakasih.
+                                                                                                        </div>
+                                                                                                        </p>
+                                                                                                    </body>
+                                                                                                    ';
+
+                                                                                                    if(!mail(base64_decode($emailPengguna), 'Sukses Mendaftar Di '.$_SERVER['HTTP_HOST'], $isiPesan, $mimePesan.$typePesan.$pengirimPesan)){
+
+                                                                                                        $AaBb = mysqli_query($koneksi, "DELETE FROM admindata WHERE nikktp = '".$nomorNikKtp."' and email = '".$emailPengguna."' and idrandom = '".$finalIdRandom."'");
+                                                                                                        sendErrorMessage("Ooops..maaf kami gagal mengirimkan kan kamu email, coba di ulang yah.. ".mysqli_error($koneksi), 'notificationErrorField', null);
+                                                                                                        exit;
+
+                                                                                                    }else{
+                                                                                                        
+                                                                                                        sendErrorMessage("Master Admin berhasil di daftarkan, Silahkan Muat ulang Halaman Ini Untuk Login. dan masukan kode verfikasi yang dikirm melalui email setalah login", 'notificationErrorField', null);
+                                                                                                        exit;
+
+                                                                                                    }
 
                                                                                                 }
 
@@ -459,9 +407,9 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                         }
 
                                                                                     }
-
+                                                                                
                                                                                 }
-
+                                                                            
                                                                             }
 
                                                                         }

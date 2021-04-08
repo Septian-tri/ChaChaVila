@@ -6,13 +6,13 @@
 
         <title>Laravel</title>
 
-        <link rel="stylesheet" href="settings/font-awesome/css/font-awesome.min.css">        
-        <link rel="stylesheet" href="Settings/css/bootstrap.min.css">
-        <script src="Settings/js/jquery-3.2.1.slim.min.js"></script>
-        <script src="Settings/js/main.js"></script>
+        <link rel="stylesheet" href="/settings/font-awesome/css/font-awesome.min.css">        
+        <link rel="stylesheet" href="/Settings/css/bootstrap.min.css">
+        <script src="/Settings/js/jquery-3.2.1.slim.min.js"></script>
+        <script src="/Settings/js/main.js"></script>
         <!-- <script src="Settings/js/registerSystem.js"></script> -->
         <!-- <script src="Settings/js/popper.min.1.12.9.js"></script> -->
-        <script src="Settings/js/bootstrap.min.js"></script>
+        <script src="/Settings/js/bootstrap.min.js"></script>
 
         <style>
             .navbar-nav {

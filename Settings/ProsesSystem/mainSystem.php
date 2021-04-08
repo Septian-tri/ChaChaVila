@@ -47,5 +47,51 @@ function sendErrorMessage($messageValue, $messageType, $messageFieldError){
 
 }
 
+function cekDataMasterAdmin($koneksi){
+
+    $queryCekMasterAdmin = mysqli_query($koneksi, "SELECT * FROM admindata where typeakun = 'Master_Admin' and typepengguna = 'Non_Customer'");
+
+    if(!$queryCekMasterAdmin){
+
+        return 'Hai..Maaf, kami mengalami ke gagalan sistem '.mysqli_error($koneksi)."<br />";
+
+    }else{
+
+        if(mysqli_num_rows($queryCekMasterAdmin) <= 0){
+
+            return false;
+
+        }else{
+
+            return true;
+
+        }
+    }
+}
+
+function catatProsesGagalLogin(){
+                                    
+    if(!isset($_SESSION['PercobaanGagalLogin'])){
+        
+        $_SESSION['PercobaanGagalLogin'] = 1;
+    
+    }else{
+
+        if($_SESSION['PercobaanGagalLogin'] > 5 || $_SESSION['PercobaanGagalLogin'] < 0){
+
+            sendErrorMessage('Opps..Maaf kami mengalami kegaglan sistem silahkan ulangi', "OKE", null);  
+            session_destroy();
+            exit;
+            return false;
+        
+        }else{
+        
+            $_SESSION['PercobaanGagalLogin'] += 1;
+        
+        }
+    
+    }
+
+}
 
 ?>

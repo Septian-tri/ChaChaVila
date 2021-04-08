@@ -1,29 +1,30 @@
 var boolLogin           = false;
 var boolNoticeData      = false;
 var notificationMode    = "Tampilkan";
-var loginButton         = document.getElementById("lgnBtn");
+var regButton           = document.getElementById("regAbtn");
 var regFilter           = (/^[^\s]*$/gi); 
 
 
-if(loginButton === undefined || loginButton === null){
+if(regButton === undefined || regButton === null){
     
     alert("kami mengalami ke gagalan memmuat komponen !");
     sendToHome.send();
 
 }else{
-    loginButton.onclick = function(e){
+    regButton.onclick = function(e){
         e.preventDefault();
         e.stopImmediatePropagation();
         e.stopPropagation();
 
         var dataUser            = {
-    
-            "username"    : document.getElementById("username").value, 
-            "email"       : document.getElementById("email").value, 
-            "phonenumber" : document.getElementById("phonenumber").value,
-            "password"    : document.getElementById("password").value,
-            "repassword"  : document.getElementById("repassword").value,
-            "nikktp"      : document.getElementById("nikktp").value
+            
+            "nikktp"        : document.getElementById("nikktp").value,
+            "username"      : document.getElementById("username").value, 
+            "email"         : document.getElementById("email").value, 
+            "phonenumber"   : document.getElementById("phonenumber").value,
+            "password"      : document.getElementById("password").value,
+            "repassword"    : document.getElementById("repassword").value,
+            "typeAkun"      : "Master_Admin"
         
         }
         
@@ -33,7 +34,7 @@ if(loginButton === undefined || loginButton === null){
             if(boolLogin === false){
                 
                 $.ajax({
-                    url         : document.location.origin + "/settings/ProsesSystem/registerSystem.php",
+                    url         : document.location.origin + "/settings/ProsesSystem/registerSystemAdmin.php",
                     data        : dataUser,
                     accepts     : "text/html",
                     method      : "POST",
@@ -41,19 +42,19 @@ if(loginButton === undefined || loginButton === null){
                     beforeSend  : function(){
                         
                         boolLogin = true;
-                        disabledButtonSend("id", "lgnBtn", "disabled", 'Loading');
+                        disabledButtonSend("id", "regAbtn", "disabled", 'Loading');
                     
                     }, //tambahkan animasi loading. ganti tulisan 'loading' e.g '<div class="loading"></div>'
                     complete    : function(){
                         
                         boolLogin = false;
-                        disabledButtonSend("id", "lgnBtn", "enabled", "DAFTAR SEKARANG");
+                        disabledButtonSend("id", "regAbtn", "enabled", "DAFTAR SEKARANG");
                     
                     },
                     error       : function(jqXHR){
                         
                         boolLogin = true;
-                        disabledButtonSend("id", "lgnBtn", "disabled", 'Loading');
+                        disabledButtonSend("id", "regAbtn", "disabled", 'Loading');
                         messageNotification(mappingErrorNetwork[jqXHR.status], 'Tampilkan');
                     
                     },
@@ -79,6 +80,10 @@ if(loginButton === undefined || loginButton === null){
                                         styleWrong(messageFieldError);
                                     break;
                                     
+                                    case 'OKE' :
+                                        sendToHome.send();
+                                    break;
+
                                     default :
                                         alert('Maaf Kami mengalami masalah sistem :( . Code : ' + messageType);
                                         return false;
@@ -89,7 +94,6 @@ if(loginButton === undefined || loginButton === null){
 
                                 console.log(response + " " + e);
                                 alert("Maaf Kami melihat ada Sesuatu Yang kurang Baik, kami akan Merload Halaman kamu !");
-                                // window.document.location = window.document.location.origin;
                                 return false;
 
                             }
@@ -101,10 +105,6 @@ if(loginButton === undefined || loginButton === null){
                 });
             }
 
-        // boolLogin = true;
-        // disabledButtonSend("id", "lgnBtn", "disabled", 'Loading');  
-        // messageNotification(mappingErrorNetwork[jqXHR.status], 'Tampilkan');
-        // //ini lu bisa ilangin ini biar gada notif jaringan erro , tapi kalo misalkan din taku user nya bingung kenapa gak bisa konek
         }
 
         if(dataUser.email.length > 0 && dataUser.email.match(/^[a-zA-Z0-9]+[a-zA-Z0-9\.\-\_]+[a-zA-Z0-9]+[\@]{1}[a-zA-Z0-9\-\_]+[\.]{1}[a-zA-Z]{2,}$/gi) !== null){

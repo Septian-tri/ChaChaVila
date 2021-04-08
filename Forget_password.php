@@ -26,27 +26,23 @@
                             <h3>Reset Password</h3>
                             <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>
                         </div>
-                        <form action="#" method="post">
-                            <div class="form-group first">
-                                <label for="username">Email</label>
-                                <input type="text" class="form-control" id="username">
+                        <form action="#" method="post" id="reset-password-box">
+                            <div class ="reset-password-box">
+                                <div class="form-group first">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" id="email">
+                                </div>
+                                <div class="form-group first">
+                                    <label for="phonenumber">Nomor Handphone</label>
+                                    <input type="text" class="form-control" id="phonenumber">
+                                </div>
                             </div>
-
-                            <!-- tampilkan input code saat send email terjadi dan 
-                            sembunyikan input email -->
-
-                            <!-- <div class="form-group first">
-                                <label for="username">Input Code</label>
-                                <input type="text" class="form-control" id="username">
-                            </div> -->
-                            
                             <small class="text-secondary">
-                            Resend email in 15 seconds
+                                Token hanya berlaku 5 menit
                             </small>
                             <div class="my-2">
-                                <a href="" type="submit" class="btn btn-primary btn-block">Send Email</a>
+                                <button type="button" class="btn btn-primary btn-block" id="resetbtn">RESET PASSWORD</a>
                             </div>
-
                             <div>
                                 <p class="text-center m-4">
                                     we will notif you via email to confirm reset password
@@ -59,6 +55,7 @@
         </div>
     </div>
     <script src="Settings/js/main.js"></script>
+    <script src="Settings/js/resetPasswordSystem.js"></script>
 </body>
 
 </html>
