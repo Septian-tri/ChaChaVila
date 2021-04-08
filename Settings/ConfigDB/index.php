@@ -1,7 +1,7 @@
 <?php
 
 //rubah di sini untuk mengatur segala aktivitas yang menyangkut dengan database
-$namaServer         = "localhost";
+$namaServer         = "127.0.0.1";
 $userNameDatabese   = "root";
 $passwordDataBase   = ""; 
 $namaDataBase       = "chachavilla";

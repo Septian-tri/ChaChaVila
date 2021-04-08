@@ -13,7 +13,7 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
 
     if(strlen($_POST['username']) <= 0 & strlen($_POST['email']) <= 0 & strlen($_POST['phonenumber']) <= 0 & strlen($_POST['password']) <= 0 & strlen($_POST['repassword']) <= 0){
 
-        sendErrorMessage("silahka isi bidang data terlebih dahulu !".$_POST['password'] , "notificationErrorField", "form-control");
+        sendErrorMessage("silahka isi bidang data terlebih dahulu !" , "notificationErrorField", "form-control");
         exit;
         return false;
 

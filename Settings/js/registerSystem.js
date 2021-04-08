@@ -49,6 +49,7 @@ if(loginButton === undefined || loginButton === null){
                     boolLogin = true;
                     disabledButtonSend("id", "lgnBtn", "disabled", 'Loading');  
                     messageNotification(mappingErrorNetwork[jqXHR.status], 'Tampilkan');
+        //ini lu bisa ilangin ini biar gada notif jaringan erro , tapi kalo misalkan din taku user nya bingung kenapa gak bisa konek
 
                 },
                 success     : function(response){
