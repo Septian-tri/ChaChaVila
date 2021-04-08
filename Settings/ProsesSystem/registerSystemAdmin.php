@@ -209,7 +209,7 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                 }
 
                                                                                 function cekIDRandom($koneksi, $idRandom){
-                                                                                    $queryIdRandom = mysqli_query($koneksi, "SELECT * FROM admindata WHERE idrandom = '".$idRandom."' ");
+                                                                                    $queryIdRandom = mysqli_query($koneksi, "SELECT * FROM admindata WHERE  idrandom = BINARY('".$idRandom."') ");
 
                                                                                     if(!$queryIdRandom){
                                                                                         
@@ -231,7 +231,7 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                 }
 
                                                                                 function cekNamaSama($koneksi, $namapanggilan){
-                                                                                    $queryNama = mysqli_query($koneksi, "SELECT * FROM admindata WHERE namapanggilan = '".$namapanggilan."' ");
+                                                                                    $queryNama = mysqli_query($koneksi, "SELECT * FROM admindata WHERE  namapanggilan = BINARY('".$namapanggilan."') ");
 
                                                                                     if(!$queryNama){
                                                                                         
@@ -264,7 +264,7 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
 
                                                                                 function cekDataUdahAdaAtauBelum($koneksi, $data, $valData){
 
-                                                                                    $cekadmindata = mysqli_query($koneksi, "SELECT * FROM admindata WHERE ".$data." = '".$valData."' ");
+                                                                                    $cekadmindata = mysqli_query($koneksi, "SELECT * FROM admindata WHERE  ".$data." = BINARY('".$valData."') ");
 
                                                                                     if(!$cekadmindata){
                                                                                         
@@ -389,7 +389,7 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
 
                                                                                                     if(!mail(base64_decode($emailPengguna), 'Sukses Mendaftar Di '.$_SERVER['HTTP_HOST'], $isiPesan, $mimePesan.$typePesan.$pengirimPesan)){
 
-                                                                                                        $AaBb = mysqli_query($koneksi, "DELETE FROM admindata WHERE nikktp = '".$nomorNikKtp."' and email = '".$emailPengguna."' and idrandom = '".$finalIdRandom."'");
+                                                                                                        $AaBb = mysqli_query($koneksi, "DELETE FROM admindata WHERE nikktp = '".$nomorNikKtp."' and email =  BINARY('".$emailPengguna."') and idrandom = BINARY('".$finalIdRandom."')");
                                                                                                         sendErrorMessage("Ooops..maaf kami gagal mengirimkan kan kamu email, coba di ulang yah.. ".mysqli_error($koneksi), 'notificationErrorField', null);
                                                                                                         exit;
 

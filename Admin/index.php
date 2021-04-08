@@ -2,7 +2,16 @@
 
     include "../Settings/ProsesSystem/mainsystem.php";
     include "../Settings/ConfigDB/index.php";
-    
+
+    session_name("_lgn");
+    session_start();
+
+    if(cekSession()){
+
+       header("location:home.php");
+
+    }
+
 ?>
 <!DOCTYPE html>
 <html>

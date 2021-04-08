@@ -80,7 +80,7 @@
 
     function cekDataResetUdahAdaAtauBelum($koneksi, $data, $valData){
 
-        $cekDataPengguna = mysqli_query($koneksi, "SELECT * FROM logresetpassword WHERE ".$data." = '".$valData."' ");
+        $cekDataPengguna = mysqli_query($koneksi, "SELECT * FROM logresetpassword WHERE  ".$data." = BINARY('".$valData."') ");
         
         if(!$cekDataPengguna){
             
@@ -191,7 +191,7 @@
     
                                         function cekDataUdahAdaAtauBelum($koneksi, $data, $valData){
     
-                                            $cekuserdata = mysqli_query($koneksi, "SELECT * FROM userdata WHERE ".$data." = '".$valData."' ");
+                                            $cekuserdata = mysqli_query($koneksi, "SELECT * FROM userdata WHERE  ".$data." = BINARY('".$valData."') ");
     
                                             if(!$cekuserdata){
                                                 
@@ -243,7 +243,7 @@
                                                 
                                             }else{
                                                 
-                                                $cekSemuaData = mysqli_query($koneksi, "SELECT * FROM userdata WHERE phonenumber = '".$nomorHp."' and email = '".$emailPengguna."' ");
+                                                $cekSemuaData = mysqli_query($koneksi, "SELECT * FROM userdata WHERE phonenumber = '".$nomorHp."' and email =  BINARY('".$emailPengguna."') ");
                                                 
                                                 if(!$cekSemuaData){
                                                     
@@ -268,7 +268,7 @@
                                                         $finalKodeVer       = substr($randomKodeVer, 33, strlen($randomKodeVer));
                                                         $ecryptKodeVer      = md5($finalKodeVer."*|*Semoga Apa Yang kita Kerjakan Ini Berkah dan Sukses .Aamiin*|*");
                                                         
-                                                        $cekDataReset       = mysqli_query($koneksi,"SELECT * FROM logresetpassword WHERE idrandom = '".$idRandomPengguna."' and nikktp = '".$nikPengguna."' and email = '".$emailPengguna."' ");
+                                                        $cekDataReset       = mysqli_query($koneksi,"SELECT * FROM logresetpassword WHERE  idrandom = BINARY('".$idRandomPengguna."') and nikktp = '".$nikPengguna."' and email = BINARY('".$emailPengguna."') ");
                                                         
                                                         if(!$cekDataReset){
                                                             
@@ -290,7 +290,7 @@
 
                                                                     if(kirimEmail($emailPengguna,$namaPengguna,$finalKodeVer)){
 
-                                                                        $hapusReset = mysqli_query($koneksi, "DELETE FROM logresetpassword WHERE idrandom = '".$idRandomPengguna."' and nikktp = '".$nikPengguna."' and email = '".$emailPengguna."' ");
+                                                                        $hapusReset = mysqli_query($koneksi, "DELETE FROM logresetpassword WHERE idrandom = BINARY('".$idRandomPengguna."') and nikktp = '".$nikPengguna."' and email = BINARY('".$emailPengguna."') ");
                                                                         sendErrorMessage("emm..Maaf kami gagal mengirimkan kamu email, silahkan coba lagi ya ", "notificationErrorField", null);
                                                                         exit;
 
@@ -316,7 +316,7 @@
 
                                                                 }else{
                                                                                 
-                                                                    $updateResetSandi = mysqli_query($koneksi,"UPDATE logresetpassword SET tanggalresetpassword = '$waktuVerifikasi', kodeverifikasi = '$ecryptKodeVer' WHERE  idrandom = '".$idRandomPengguna."' and nikktp = '".$nikPengguna."' and email = '".$emailPengguna."' ");
+                                                                    $updateResetSandi = mysqli_query($koneksi,"UPDATE logresetpassword SET tanggalresetpassword = '$waktuVerifikasi', kodeverifikasi = '$ecryptKodeVer' WHERE   idrandom = BINARY('".$idRandomPengguna."') and nikktp = '".$nikPengguna."' and email = BINARY('".$emailPengguna."') ");
 
                                                                     if(!$updateResetSandi){
 
@@ -327,7 +327,7 @@
                                                                                     
                                                                         if(kirimEmail($emailPengguna,$namaPengguna,$finalKodeVer)){
 
-                                                                            $updateResetGagal = mysqli_query($koneksi,"UPDATE logresetpassword SET tanggalresetpassword = '$dbWktuVerfikasi', kodeverifikasi = '$kodeLama' WHERE  idrandom = '".$idRandomPengguna."' and nikktp = '".$nikPengguna."' and email = '".$emailPengguna."' ");
+                                                                            $updateResetGagal = mysqli_query($koneksi,"UPDATE logresetpassword SET tanggalresetpassword = '$dbWktuVerfikasi', kodeverifikasi = '$kodeLama' WHERE   idrandom = BINARY('".$idRandomPengguna."') and nikktp = '".$nikPengguna."' and email = BINARY('".$emailPengguna."') ");
                                                                             sendErrorMessage("emm..Maaf kami gagal mengirimkan kamu email, silahkan coba lagi ya ", "notificationErrorField", null);
                                                                             exit;
 
@@ -470,7 +470,7 @@
                                                             $kodeVerfikasi      = md5($_POST['kodeToken']."*|*Semoga Apa Yang kita Kerjakan Ini Berkah dan Sukses .Aamiin*|*");
                                                             $password           = md5($_POST["password"]." ".$Garem);
     
-                                                            $cekKodeVerfikasi   = mysqli_query($koneksi, "SELECT * FROM logresetpassword WHERE email = '".$_SESSION['em']."' and idrandom = '".$_SESSION['iR']."' and kodeverifikasi = '".$kodeVerfikasi."' ");
+                                                            $cekKodeVerfikasi   = mysqli_query($koneksi, "SELECT * FROM logresetpassword WHERE  email = BINARY('".$_SESSION['em']."') and idrandom = BINARY('".$_SESSION['iR']."') and kodeverifikasi = BINARY('".$kodeVerfikasi."') ");
     
                                                             if(!$cekKodeVerfikasi){
     
@@ -495,7 +495,7 @@
     
                                                                     }else{
     
-                                                                        $updatePassword = mysqli_query($koneksi, "UPDATE userdata, logresetpassword SET userdata.password = '".$password."',  logresetpassword.tanggalresetpassword = '".strtotime(date("d-m-Y H:i:s", strtotime("today ".date("H:i:s"))))."' WHERE userdata.idrandom = logresetpassword.idrandom and userdata.email = logresetpassword.email and userdata.idrandom = '".$_SESSION['iR']."' and  userdata.email = '".$_SESSION['em']."' ");                                                     
+                                                                        $updatePassword = mysqli_query($koneksi, "UPDATE userdata, logresetpassword SET userdata.password = '".$password."',  logresetpassword.tanggalresetpassword = '".strtotime(date("d-m-Y H:i:s", strtotime("today ".date("H:i:s"))))."' WHERE  userdata.idrandom = logresetpassword.idrandom and userdata.email = logresetpassword.email and userdata.idrandom = BINARY('".$_SESSION['iR']."') and  userdata.email = BINARY('".$_SESSION['em']."') ");                                                     
                                                                             
                                                                         if(!$updatePassword){
     
