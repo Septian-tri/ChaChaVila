@@ -167,6 +167,7 @@ if(cekSession()){
                                                     $_SESSION['TokenSementara'] = $genarateRandomString."?".$genarateRandomString2;
                                                     $_SESSION['IR']             = base64_encode($idrandom);
                                                     $_SESSION['TLOGIN']         = base64_encode($dataAdmin['typeakun']);
+                                                    $_SESSION['TPG']            = base64_encode($dataAdmin['typepengguna']);
                                                     $_SESSION['EM']             = base64_encode($emailPengguna);
 
                                                     $cekTokenSementara = mysqli_query($koneksi, "SELECT * FROM temptokenmasuk WHERE  idrandom = BINARY('".$idrandom."') ");

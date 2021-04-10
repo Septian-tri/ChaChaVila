@@ -10,6 +10,10 @@
 
        header("location:home.php");
 
+    }else{
+
+        session_destroy();
+
     }
 
 ?>

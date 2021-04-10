@@ -70,9 +70,7 @@ if(cekSession() === false){
                            $typeAkun        = $dataAdmin['typeakun'];
             
                         }
-
-                    }
-                    
+                    }        
                 }
             }
         }
@@ -104,5 +102,6 @@ Hai <b><?php echo $namaPanggilan; ?></b>, Semoga Hari mu Menyenangkan</br>
     console.log(tinymce.activeEditor.getContent({format : 'html'}));
 
 </script>
+<a href="../Settings/ProsesSystem/logoutSystem.php">KELUAR</a>
 </body>
 </html>
