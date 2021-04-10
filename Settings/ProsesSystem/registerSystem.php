@@ -294,7 +294,7 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                 $idRandomGabung     = md5($emailPengguna.$namaPengguna." ".$tanggalBergabung." ".hitungJumlahPengguna($koneksi));
                                                                                 $idRandom           = strtoupper(substr($idRandomGabung, 22, strlen($idRandomGabung)));
                                                                                 $finalIdRandom      = cekIDRandom($koneksi, $idRandom);
-                                                                                $kodeverifikasi     = md5($finalIdRandom." ".$Garem);
+                                                                                $kodeverifikasi     = "Belum_Verifikasi.".md5($finalIdRandom." ".$Garem);
                                                                                 $satatusAkun        = "Terbuka";
                                                                                 $typePengguna       = "user";
 

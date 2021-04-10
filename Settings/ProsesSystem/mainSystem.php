@@ -133,4 +133,40 @@ function cekDataSession($koneksi, $namaDatabse, $namaTable, $valueTable){
 
 }
 
+
+function cekValidasiEmail($koneksi, $namadatabase){
+    $queryCekVerifikasi = mysqli_query($koneksi, "SELECT * FROM $namadatabase WHERE idrandom = BINARY('".base64_decode($_SESSION['IR'])."') and email = BINARY('".base64_decode($_SESSION['EM'])."')"); 
+    
+    if(!$queryCekVerifikasi){
+        
+        session_destroy();
+        header("location:index.php");
+        return false;
+
+    }else{
+
+        if(mysqli_num_rows($queryCekVerifikasi) !== 1){
+    
+            session_destroy();
+            header("location:index.php");
+            return false;
+
+        }else{
+
+            $dataVerifikasi = mysqli_fetch_array($queryCekVerifikasi);
+            $kodeValidasi   = explode(".", $dataVerifikasi['kodeverifikasi'])[0];
+
+            if($kodeValidasi === "Belum_Verifikasi"){
+
+                return false;
+            
+            }else{
+
+                return true;
+
+            }
+
+        }
+    }
+}
 ?>

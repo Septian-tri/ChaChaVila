@@ -49,20 +49,30 @@ if(cekSession() === false){
                     return false;
         
                 }else{
-        
-                    if(mysqli_num_rows($queryCekDataAdmin) !== 1){
-        
-                        session_destroy();
-                        header("location:index.php");
-                        return false;
-        
+
+                    if(cekValidasiEmail($koneksi, 'admindata') === false){
+
+                        header("location:verifikasiEmailAdmin.php");
+                
                     }else{
+
+                        if(mysqli_num_rows($queryCekDataAdmin) !== 1){
         
-                       $dataAdmin       = mysqli_fetch_array($queryCekDataAdmin);
-                       $namaPengguna    = base64_decode($dataAdmin['namapengguna']);
-                       $namaPanggilan   = $dataAdmin['namapanggilan'];
-        
+                            session_destroy();
+                            header("location:index.php");
+                            return false;
+            
+                        }else{
+            
+                           $dataAdmin       = mysqli_fetch_array($queryCekDataAdmin);
+                           $namaPengguna    = base64_decode($dataAdmin['namapengguna']);
+                           $namaPanggilan   = $dataAdmin['namapanggilan'];
+                           $typeAkun        = $dataAdmin['typeakun'];
+            
+                        }
+
                     }
+                    
                 }
             }
         }
@@ -76,9 +86,23 @@ if(cekSession() === false){
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hai <?php echo $namaPanggilan; ?> Selamat datang di menu Admin</title>
+    <title>Hai <?php echo $namaPanggilan; ?> Selamat datang di menu <?php echo str_replace("_", " ", $typeAkun); ?></title>
+    <script src="Settings/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: '#deskripsi'
+        });
+    </script>
 </head>
+
 <body id="Bg">
 
+Hai <b><?php echo $namaPanggilan; ?></b>, Semoga Hari mu Menyenangkan</br>
+<textarea id="deskripsi"></textarea>
+<script>
+
+    console.log(tinymce.activeEditor.getContent({format : 'html'}));
+
+</script>
 </body>
 </html>
