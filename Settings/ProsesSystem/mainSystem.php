@@ -34,7 +34,6 @@ function domainEmailCheck($Email){
     return true;
 }
 
-
 //Kirim notifikasi ke gagalan 
 function sendErrorMessage($messageValue, $messageType, $messageFieldError){
     
@@ -49,7 +48,7 @@ function sendErrorMessage($messageValue, $messageType, $messageFieldError){
 
 function cekDataMasterAdmin($koneksi){
 
-    $queryCekMasterAdmin = mysqli_query($koneksi, "SELECT * FROM admindata where typeakun = 'Master_Admin' and typepengguna = 'Non_Customer'");
+    $queryCekMasterAdmin = mysqli_query($koneksi, "SELECT * FROM admindata WHERE typeakun = 'Master_Admin' and typepengguna = 'Non_Customer'");
 
     if(!$queryCekMasterAdmin){
 
@@ -94,4 +93,80 @@ function catatProsesGagalLogin(){
 
 }
 
+function cekSession(){
+
+    if(isset($_SESSION['TokenSementara'], $_SESSION['IR'], $_SESSION['TLOGIN'], $_SESSION['EM'])){
+
+        return true;
+
+    }else{
+
+        return false;
+
+    }
+
+}
+
+function cekDataSession($koneksi, $namaDatabse, $namaTable, $valueTable){
+
+    $queryCekDataSession = mysqli_query($koneksi, "SELECT * FROM $namaDatabse WHERE  $namaTable = BINARY('".$valueTable."')");
+
+    if(!$queryCekDataSession){
+
+        sendErrorMessage('Opps..Maaf kami mengalami kegaglan sistem silahkan ulangi '.mysqli_error($koneksi), "notificationErrorField", null);                        
+        exit;
+        return false;
+
+    }else{
+
+        if(mysqli_num_rows($queryCekDataSession) !== 1){
+
+            return false;
+
+        }else{
+
+            return true;
+
+        }
+
+    }
+
+}
+
+
+function cekValidasiEmail($koneksi, $namadatabase){
+    $queryCekVerifikasi = mysqli_query($koneksi, "SELECT * FROM $namadatabase WHERE idrandom = BINARY('".base64_decode($_SESSION['IR'])."') and email = BINARY('".base64_decode($_SESSION['EM'])."')"); 
+    
+    if(!$queryCekVerifikasi){
+        
+        session_destroy();
+        header("location:index.php");
+        return false;
+
+    }else{
+
+        if(mysqli_num_rows($queryCekVerifikasi) !== 1){
+    
+            session_destroy();
+            header("location:index.php");
+            return false;
+
+        }else{
+
+            $dataVerifikasi = mysqli_fetch_array($queryCekVerifikasi);
+            $kodeValidasi   = explode(".", $dataVerifikasi['kodeverifikasi'])[0];
+
+            if($kodeValidasi === "Belum_Verifikasi"){
+
+                return false;
+            
+            }else{
+
+                return true;
+
+            }
+
+        }
+    }
+}
 ?>

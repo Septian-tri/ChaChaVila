@@ -4,6 +4,14 @@
 
     session_name("_lgn");
     session_start();
+    session_regenerate_id(true);
+
+if(cekSession()){
+
+    sendErrorMessage("", "OKE", null);
+    return false;
+
+}else{
 
     if(!isset($_POST['email'], $_POST['password'])){
 
@@ -65,7 +73,7 @@
 
                                 function cekDataUdahAdaAtauBelum($koneksi, $data, $valData){
 
-                                    $cekuserdata = mysqli_query($koneksi, "SELECT * FROM admindata WHERE ".$data." = '".$valData."' ");
+                                    $cekuserdata = mysqli_query($koneksi, "SELECT * FROM admindata WHERE  ".$data." = BINARY('".$valData."') ");
 
                                     if(!$cekuserdata){
                                         
@@ -111,7 +119,7 @@
                                     $emailPengguna     = base64_encode($filterDomainemail);
                                     $Garem             = "*|_*_|* Semoga Semua Yang Di Kerja Kan Menghasilkan Kesuksesan...Aamiin *|_*_|*";
                                     $password          = md5($_POST["password"]." ".$Garem);
-                                    $queryDataPengguna = mysqli_query($koneksi,"SELECT * FROM admindata WHERE email = '$emailPengguna' ");
+                                    $queryDataPengguna = mysqli_query($koneksi,"SELECT * FROM admindata WHERE  email = BINARY('$emailPengguna') ");
 
                                     if(!$queryDataPengguna){
 
@@ -130,11 +138,11 @@
 
                                         }else{
 
-                                            $querySandiPengguna = mysqli_query($koneksi,"SELECT * FROM admindata WHERE email = '$emailPengguna' and password = '".$password."' ");
+                                            $querySandiPengguna = mysqli_query($koneksi,"SELECT * FROM admindata WHERE  email = BINARY('$emailPengguna') and password = BINARY('".$password."') ");
 
                                             if(!$querySandiPengguna){
 
-                                                sendErrorMessage('Opps..Maaf kami mengalami kegaglan sistem silahkan ulangi', "notificationErrorField", null);                        
+                                                sendErrorMessage('Opps..Maaf kami mengalami kegaglan sistem silahkan ulangi'.mysqli_error($koneksi), "notificationErrorField", null);                        
                                                 exit;
                                                 return false;
 
@@ -156,13 +164,13 @@
                                                     $idrandom               = $dataAdmin['idrandom'];
                                                     $tipeLogin              = $dataAdmin['typepengguna'];
 
-                                                    
                                                     $_SESSION['TokenSementara'] = $genarateRandomString."?".$genarateRandomString2;
                                                     $_SESSION['IR']             = base64_encode($idrandom);
                                                     $_SESSION['TLOGIN']         = base64_encode($dataAdmin['typeakun']);
-                                                    session_regenerate_id(true);
+                                                    $_SESSION['TPG']            = base64_encode($dataAdmin['typepengguna']);
+                                                    $_SESSION['EM']             = base64_encode($emailPengguna);
 
-                                                    $cekTokenSementara = mysqli_query($koneksi, "SELECT * FROM temptokenmasuk WHERE idrandom = '".$idrandom."' ");
+                                                    $cekTokenSementara = mysqli_query($koneksi, "SELECT * FROM temptokenmasuk WHERE  idrandom = BINARY('".$idrandom."') ");
 
                                                     if(!$cekTokenSementara){
 
@@ -179,11 +187,11 @@
                 
                                                                 if($jumlahIdUnik <= 0){
                 
-                                                                    $queryTempLogin = mysqli_query($koneksi, "INSERT INTO temptokenmasuk (tanggalLogin, token, idrandom, typeDataMasuk) VALUES ('$tanggalMasuk', '".md5($genarateRandomString)."', '$idrandom', '$tipeLogin') ");
+                                                                    $queryTempLogin = mysqli_query($koneksi, "INSERT INTO temptokenmasuk (tanggalLogin, token, idrandom, typeDataMasuk, email) VALUES ('$tanggalMasuk', '".md5($genarateRandomString)."', '$idrandom', '$tipeLogin', '".base64_encode(strtolower($_POST["email"]))."') ");
                                                                 
                                                                 }else{
                 
-                                                                    $queryTempLogin = mysqli_query($koneksi, "UPDATE temptokenmasuk SET  tanggalLogin = '$tanggalMasuk', token = '".md5($genarateRandomString)."', typeDataMasuk = '$tipeLogin' WHERE idrandom = '$idrandom' ");
+                                                                    $queryTempLogin = mysqli_query($koneksi, "UPDATE temptokenmasuk SET  tanggalLogin = '$tanggalMasuk', token = '".md5($genarateRandomString)."', typeDataMasuk = '$tipeLogin' WHERE  idrandom = BINARY('$idrandom') and email = BINARY('".base64_encode(strtolower($_POST["email"]))."') ");
                                     
                                                                 }
 
@@ -193,11 +201,11 @@
                                                                 
                                                                         return false;
         
-                                                                }else{
+                                                                    }else{
 
                                                                         return true;
         
-                                                                }
+                                                                    }
 
                                                                 }else{
 
@@ -248,5 +256,5 @@
         }
 
     }
-
+}
 ?>

@@ -193,7 +193,7 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                 }
 
                                                                                 function cekIDRandom($koneksi, $idRandom){
-                                                                                    $queryIdRandom = mysqli_query($koneksi, "SELECT * FROM userdata WHERE idrandom = '".$idRandom."' ");
+                                                                                    $queryIdRandom = mysqli_query($koneksi, "SELECT * FROM userdata WHERE  idrandom = BINARY('".$idRandom."') ");
 
                                                                                     if(!$queryIdRandom){
                                                                                         
@@ -215,7 +215,7 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                 }
 
                                                                                 function cekNamaSama($koneksi, $namapanggilan){
-                                                                                    $queryNama = mysqli_query($koneksi, "SELECT * FROM userdata WHERE namapanggilan = '".$namapanggilan."' ");
+                                                                                    $queryNama = mysqli_query($koneksi, "SELECT * FROM userdata WHERE  namapanggilan = BINARY('".$namapanggilan."') ");
 
                                                                                     if(!$queryNama){
                                                                                         
@@ -248,7 +248,7 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
 
                                                                                 function cekDataUdahAdaAtauBelum($koneksi, $data, $valData){
 
-                                                                                    $cekuserdata = mysqli_query($koneksi, "SELECT * FROM userdata WHERE ".$data." = '".$valData."' ");
+                                                                                    $cekuserdata = mysqli_query($koneksi, "SELECT * FROM userdata WHERE  ".$data." = BINARY('".$valData."') ");
 
                                                                                     if(!$cekuserdata){
                                                                                         
@@ -294,7 +294,7 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                 $idRandomGabung     = md5($emailPengguna.$namaPengguna." ".$tanggalBergabung." ".hitungJumlahPengguna($koneksi));
                                                                                 $idRandom           = strtoupper(substr($idRandomGabung, 22, strlen($idRandomGabung)));
                                                                                 $finalIdRandom      = cekIDRandom($koneksi, $idRandom);
-                                                                                $kodeverifikasi     = md5($finalIdRandom." ".$Garem);
+                                                                                $kodeverifikasi     = "Belum_Verifikasi.".md5($finalIdRandom." ".$Garem);
                                                                                 $satatusAkun        = "Terbuka";
                                                                                 $typePengguna       = "user";
 
@@ -443,7 +443,7 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
 
                                                                                                 if(!mail(base64_decode($emailPengguna), 'Sukses Mendaftar Di '.$_SERVER['HTTP_HOST'], $isiPesan, $mimePesan.$typePesan.$pengirimPesan)){
 
-                                                                                                    $AaBb = mysqli_query($koneksi, "DELETE FROM userdata WHERE nikktp = '".$nomorNikKtp."' and email = '".$emailPengguna."' and idrandom = '".$finalIdRandom."'");
+                                                                                                    $AaBb = mysqli_query($koneksi, "DELETE FROM userdata WHERE  nikktp = '".$nomorNikKtp."' and email = BINARY('".$emailPengguna."') and idrandom = BINARY('".$finalIdRandom."')");
                                                                                                     sendErrorMessage("Ooops..maaf kami gagal mengirimkan kan kamu email, coba di ulang yah.. ".mysqli_error($koneksi), 'notificationErrorField', null);
                                                                                                     exit;
 
