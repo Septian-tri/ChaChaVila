@@ -42,17 +42,19 @@ if(lgnBtn === undefined || lgnBtn === null){
                 complete    : function(){
                         
                     boolLogin = false;
-                    disabledButtonSend("id", "lgnBtn", "enabled", "DAFTAR SEKARANG");
+                    
                     
                 },
                 error       : function(jqXHR){
                         
                     boolLogin = true;
-                    disabledButtonSend("id", "lgnBtn", "disabled", 'Loading');
+                    disabledButtonSend("id", "lgnBtn", "disabled", 'Login');
                     messageNotification(mappingErrorNetwork[jqXHR.status], 'Tampilkan');
                     
                 },
                 success     : function(response){
+
+                    disabledButtonSend("id", "lgnBtn", "enabled", "Login");
                         
                     if(response){
                             
@@ -75,8 +77,8 @@ if(lgnBtn === undefined || lgnBtn === null){
                                 break;
                                     
                                 case 'OKE' :
-                                    disabledButtonSend("id", "lgnBtn", "disabled", 'Masih Memuat');
                                     window.document.location.href = window.document.URL;
+                                    window.document.getElementsByClassName("card-body")[0].removeChild(lgnBtn);
                                 break;
 
                                 default :
