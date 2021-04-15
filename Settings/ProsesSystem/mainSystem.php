@@ -7,7 +7,7 @@ date_default_timezone_set("Asia/Jakarta");
 ini_set('session.cookie_httponly', 1);
 ini_set('session.use_only_cookies', 1);
 ini_set('session.cookie_secure', 1);
-session_set_cookie_params(['samesite' => 'none']); 
+// session_set_cookie_params(['samesite' => 'none']); 
 
 
 //cek domain email jika penyedia layanan email tidak di temukan maka aka mebertikan nilai false, jika di temukan akan memberikan nilai true

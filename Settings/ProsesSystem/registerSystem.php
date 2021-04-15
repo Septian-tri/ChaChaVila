@@ -334,34 +334,111 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                                 $ccPesan        = "";
                                                                                                 $bccPesan       = "";
                                                                                                 $isiPesan       = '
-                                                                                                <body style="background-color: #01090f;text-align: center;font-family: verdana;border-radius:10px;">
-                                                                                                    
-                                                                                                    <div class="nav" style="background-color: #031421;width:auto;height:auto;padding:10px;">
-                                                                                                        <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/Pengaturan/Gambar/LogoUtama/Logo.png" />
-                                                                                                    </div>
-                                                                                                    
-                                                                                                    <h1 style="width: auto;text-align: center;color: #eee;line-height: 31px;margin: auto;padding: 5px;border-bottom: solid 2px #042035;text-shadow: #fbdf03 1px 1px 0px;font-weight: none;">Terima Kasih '.$namaPanggilan.' Pendaftaran Kamu Berhasil</h1>
-                                                                                                    
-                                                                                                    <p style="text-indent:20px;text-align:left;padding:10px;color:#ececec;background-color: #01090f;">
+                                                                                                    <body style="
+                                                                                                        background-color: #D3D3D3;
+                                                                                                        text-align: center;
+                                                                                                        font-family: verdana;
+                                                                                                        border-radius:10px;
                                                                                                         
-                                                                                                        Terimakasih yah <strong>'.$namaPanggilan.'</strong>. Kamu Sudah mendaftar di <strong style="color:#56cdd2;">'.strtoupper($_SERVER['HTTP_HOST']).'</strong>, Sebelum kamu menggunkan layanan dari kami,
-                                                                                                        kami meminta maaf atas ketidak nyamanan nanti yang kamu temukan, karna website kami masih berstatus beta. kamu juga dapat memeberi masukan memelalui menu saran ya, terimakasih. <strong>HAVE A NICE DAY</strong>
-                                                                                                        <br/>
-                                                                                                        <div class="verfikasi" style="color:#ececec;text-align:center;">Ini Kode Verfikasi Kamu ya : <strong style="color:#56cdd2;">'.$finalIdRandom.'</strong></div>
-                                                                                                        <div class="salam" style="width:auto; font-weight: bold; padding:7px; margin:7px;text-align:left;color: #fbdf00;">
-                                                                                                            Salam Hangat CEO & OWNER,
-                                                                                                            <br/>
-                                                                                                            <br/>
-                                                                                                            <br/>
-                                                                                                            Septian & Ahmad Arrafi
+                                                                                                        ">
+                                                                                                        <div style="padding-right:20%;
+                                                                                                                padding-left:20%;">
+                                                                                                            <div style="
+                                                                                                                background-color: #ffffff;
+                                                                                                                ">
+
+                                                                                                                <div class="nav" style="
+                                                                                                                    background-color: #7ABD7E;
+                                                                                                                    width:auto;
+                                                                                                                    height:auto;
+                                                                                                                    padding:10px;
+                                                                                                                    ">
+                                                                                                                    <!-- <img src="https://placehold.it/70x70"> -->
+                                                                                                                    <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/Pengaturan/Gambar/LogoUtama/Logo.png" />
+                                                                                                                </div>
+
+                                                                                                                <h1 style="
+                                                                                                                    width: auto;
+                                                                                                                    text-align: center;
+                                                                                                                    color: #0B8142;
+                                                                                                                    line-height: 31px;
+                                                                                                                    margin: auto;
+                                                                                                                    padding-top: 30px;
+                                                                                                                    padding-bottom: 30px;
+                                                                                                                    /* border-bottom: solid 2px #042035;     */
+                                                                                                                    /* text-shadow: #fbdf03 1px 1px 0px; */
+                                                                                                                    font-weight: none;">
+
+                                                                                                                    Terima Kasih '.$namaPengguna.' Pendaftaran Kamu Berhasil
+                                                                                                                </h1>
+
+                                                                                                                <hr style="
+                                                                                                                    /* color: #FFFFFF; */
+                                                                                                                    height: 12px;
+                                                                                                                    border: 0;
+                                                                                                                    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+                                                                                                                    ">
+
+                                                                                                                <p style="
+                                                                                                                    text-indent:50px;
+                                                                                                                    text-align:left;
+                                                                                                                    padding:30px;
+                                                                                                                    /* color: white; */
+                                                                                                                    ">
+
+                                                                                                                    Terimakasih Kamu Sudah mendaftar di <strong style="color:#ffdf7a;">'.strtoupper($_SERVER['HTTP_HOST']).'</strong>, Sebelum kamu menggunkan layanan dari kami,
+                                                                                                                    kami meminta maaf atas ketidak nyamanan nanti yang kamu temukan, karna website kami masih berstatus beta. kamu juga dapat memeberi masukan memelalui menu saran ya, terimakasih. <strong>HAVE A NICE DAY</strong>
+
+                                                                                                                    <br>
+                                                                                                                    
+                                                                                                                    <div class="verfikasi" style="
+                                                                                                                        color:#ffffff;
+                                                                                                                        text-align:center;
+                                                                                                                        background-color: #a0e892;
+                                                                                                                        padding: 10px">
+
+                                                                                                                        Kode Verfikasi : <strong style="color:#FF6961;">'.$finalIdRandom.'</strong>
+                                                                                                                    </div>
+                                                                                                                    
+                                                                                                                    <br>
+
+                                                                                                                    <div class="salam" style="
+                                                                                                                        width:auto; 
+                                                                                                                        /* font-weight: bold;  */
+                                                                                                                        padding:7px; 
+                                                                                                                        margin:7px;
+                                                                                                                        text-align:left;
+                                                                                                                        /* color: white; */
+                                                                                                                        ">
+
+                                                                                                                        Salam Hangat CEO & OWNER,
+                                                                                                                        <br/>
+                                                                                                                        <br>
+                                                                                                                        Septian & Ahmad 
+                                                                                                                        <hr style="width: 140px;margin-left:0px;">
+                                                                                                                    </div>
+                                                                                                                    <br>
+                                                                                                                    <div class="bawah" style="
+                                                                                                                        text-align:center;
+                                                                                                                        font-size:10px;
+                                                                                                                        width:auto;
+                                                                                                                        padding:10px;
+                                                                                                                        color:white;
+                                                                                                                        background-color: #2c5f2d;
+                                                                                                                        border-bottom-left-radius: 5px;
+                                                                                                                        border-bottom-right-radius: 5px;
+                                                                                                                        border-top: solid 2px #3a4957;">
+
+                                                                                                                        jika kamu tidak merasa melakukan pendaftaran / melakukan aktivitas pada '.$_SERVER['HTTP_HOST'].', Silahkan abaikan atau Hapus Pesan ini, atas pengertian nya
+                                                                                                                        <br />
+                                                                                                                        team '.$_SERVER['HTTP_HOST'].' mengucapkan terimakasih.
+                                                                                                                    </div>
+                                                                                                                </p>
+                                                                                                            </div>
                                                                                                         </div>
-                                                                                                        <div class="bawah" style="text-align:center;font-size:10px;width:auto;padding:10px;color:white;background-color: #03121e;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;border-top: solid 2px #3a4957;">
-                                                                                                        jika kamu tidak merasa melakukan pendaftaran / melakukan aktivitas pada '.$_SERVER['HTTP_HOST'].', Silahkan abaikan atau Hapus Pesan ini, atas pengertian nya
-                                                                                                        <br/>
-                                                                                                        team '.$_SERVER['HTTP_HOST'].' mengucapkan terimakasih.
-                                                                                                    </div>
-                                                                                                    </p>
-                                                                                                </body>
+                                                                                                        
+                                                                                                        
+                                                                                                    </body>
                                                                                                 ';
 
                                                                                                 if(!mail(base64_decode($emailPengguna), 'Sukses Mendaftar Di '.$_SERVER['HTTP_HOST'], $isiPesan, $mimePesan.$typePesan.$pengirimPesan)){

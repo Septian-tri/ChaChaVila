@@ -101,6 +101,10 @@ if(loginButton === undefined || loginButton === null){
                 });
             }
 
+        // boolLogin = true;
+        // disabledButtonSend("id", "lgnBtn", "disabled", 'Loading');  
+        // messageNotification(mappingErrorNetwork[jqXHR.status], 'Tampilkan');
+        // //ini lu bisa ilangin ini biar gada notif jaringan erro , tapi kalo misalkan din taku user nya bingung kenapa gak bisa konek
         }
 
         if(dataUser.email.length > 0 && dataUser.email.match(/^[a-zA-Z0-9]+[a-zA-Z0-9\.\-\_]+[a-zA-Z0-9]+[\@]{1}[a-zA-Z0-9\-\_]+[\.]{1}[a-zA-Z]{2,}$/gi) !== null){
