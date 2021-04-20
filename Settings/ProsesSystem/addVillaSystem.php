@@ -64,7 +64,7 @@ if(cekSession() === false){
                     
                         }else{
                             
-                            sendErrorMessage(print_r($_FILES['thumbnail']), "notificationErrorField", "NamaVilla");
+                            sendErrorMessage(print_r($_POST), "notificationErrorField", "NamaVilla");
 
                         }
                     }        
