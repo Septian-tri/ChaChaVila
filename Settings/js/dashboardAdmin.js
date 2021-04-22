@@ -36,59 +36,62 @@ btnAdd.onclick = function(e){
             
             if(FV[i].files[0] === undefined){
                 
-                fileFormat.append(FV[i].id, "TA_FOTO");
-            
-            }else{
-                
                 fileFormat.append(FV[i].id, FV[i].files[0]);
             }
         
         }else if(FV[i].type === "text"){
             
-            fileFormat.append(FV[i].id, FV[i].value);
+            if(FV[i].id === "HargaVilla"){
+                
+                fileFormat.append(FV[i].id, FV[i].value.split(".").join(""));
+            
+            }else{
+
+                fileFormat.append(FV[i].id, FV[i].value);
+            }
         
         }
     }
-
-        if(boolAddVilla === false){
+    
+    if(boolAddVilla === false){
             
-            $.ajax({
-                url         : document.location.origin + "/settings/ProsesSystem/addVillaSystem.php",
-                data        : fileFormat,
-                accepts     : "text/html",
-                method      : "POST",
-                contentType : false,
-                processData : false,
-                crossDomain : false,
-                beforeSend  : function(){
+        $.ajax({
+            url         : document.location.origin + "/settings/ProsesSystem/addVillaSystem.php",
+            data        : fileFormat,
+            accepts     : "text/html",
+            method      : "POST",
+            contentType : false,
+            processData : false,
+            crossDomain : false,
+            beforeSend  : function(){
                     
-                    boolAddVilla = true;
-                    disabledButtonSend("id", "advBtn", "disabled", 'Loading');
+                boolAddVilla = true;
+                disabledButtonSend("id", "advBtn", "disabled", 'Loading');
                 
-                }, //tambahkan animasi loading. ganti tulisan 'loading' e.g '<div class="loading"></div>'
-                complete    : function(){
+            }, //tambahkan animasi loading. ganti tulisan 'loading' e.g '<div class="loading"></div>'
+            complete    : function(){
                     
-                    boolAddVilla = false;
-                    disabledButtonSend("id", "advBtn", "enabled", "Tambahkan Villa");
+                boolAddVilla = false;
+                disabledButtonSend("id", "advBtn", "enabled", "Tambahkan Villa");
                 
-                },
-                error       : function(jqXHR){
+            },
+            error       : function(jqXHR){
                     
-                    boolAddVilla = true;
-                    disabledButtonSend("id", "advBtn", "disabled", 'Loading');
-                    messageNotification(mappingErrorNetwork[jqXHR.status], 'Tampilkan');
+                boolAddVilla = true;
+                disabledButtonSend("id", "advBtn", "disabled", 'Loading');
+                messageNotification(mappingErrorNetwork[jqXHR.status], 'Tampilkan');
                 
-                },
-                success     : function(response){
+            },
+            success     : function(response){
                     
-                    if(response){
+                if(response){
                         
-                        try{
+                    try{
                             
-                            var parseJson               = JSON.parse(response);
-                            var messageType             = parseJson.messageType;
-                            var messageNotif            = parseJson.messageNotif;
-                            var messageFieldError       = parseJson.messageFieldErrorObject;
+                        var parseJson               = JSON.parse(response);
+                        var messageType             = parseJson.messageType;
+                        var messageNotif            = parseJson.messageNotif;
+                        var messageFieldError       = parseJson.messageFieldErrorObject;
 
                             switch(messageType){
                                 

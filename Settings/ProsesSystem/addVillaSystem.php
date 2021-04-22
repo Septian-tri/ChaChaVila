@@ -63,14 +63,84 @@ if(cekSession() === false){
                             return false;
                     
                         }else{
-                            
-                            sendErrorMessage(print_r($_POST), "notificationErrorField", "NamaVilla");
 
+                            if(preg_match('/^[\s]*$/', $_POST['NamaVilla'])){
+
+                                sendErrorMessage("Nama Vila Belum Di isi", "notificationErrorField", "NamaVilla");
+                                return false;
+
+                            }else{
+
+                                if(strlen($_POST['NamaVilla']) > 100 || strlen($_POST['NamaVilla']) < 3){
+
+                                    sendErrorMessage("Panjang Nama Villa Tidak Valid", "notificationErrorField", "NamaVilla");
+                                    return false;
+    
+                                }else{
+
+                                    if(preg_match('/^[\s]*$/', $_POST['AlamatVilla'])){
+
+                                        sendErrorMessage("Alamat Villa Belum Di isi", "notificationErrorField", "AlamatVilla");
+                                        return false;
+        
+                                    }else{
+        
+                                        if(strlen($_POST['AlamatVilla']) > 300 || strlen($_POST['AlamatVilla']) < 10){
+        
+                                            sendErrorMessage("Panjang Alamat Villa Tidak Valid", "notificationErrorField", "AlamatVilla");
+                                            return false;
+            
+                                        }else{
+        
+                                            if(preg_match('/^[\s]*$/', $_POST['HargaVilla'])){
+
+                                                sendErrorMessage("Harga Villa Belum Di isi", "notificationErrorField", "HargaVilla");
+                                                return false;
+                
+                                            }else{
+                
+                                                if(strlen($_POST['HargaVilla']) > 20 || strlen($_POST['HargaVilla']) < 5){
+                
+                                                    sendErrorMessage("Panjang Harga Villa Tidak Valid", "notificationErrorField", "HargaVilla");
+                                                    return false;
+                    
+                                                }else{
+
+                                                    if(!preg_match('/^[\0-9]*$/', $_POST['HargaVilla'])){
+
+                                                        sendErrorMessage("Harga Villa Tidak Valid", "notificationErrorField", "HargaVilla");
+                                                        return false;
+                        
+                                                    }else{
+                
+                                                        sendErrorMessage(htmlentities($_POST['HargaVilla'], ENT_QUOTES), "notificationErrorField", "NamaVilla");
+                                                        return false;
+                                                    
+                                                    }
+                
+                                                }
+                
+                                            }
+        
+                                        }
+        
+                                    }
+
+                                }
+
+                            }
+                            
                         }
-                    }        
+
+                    }
+
                 }
+
             }
+            
         }
+
     }
+
 }
 ?>
