@@ -135,22 +135,38 @@ if(cekSession() === false){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hai <?php echo $namaPengguna; ?> Selamat datang di menu Verfikasi Email</title>
+
+    <link rel="stylesheet" href="/settings/font-awesome/css/font-awesome.min.css">        
+    <link rel="stylesheet" href="/Settings/css/bootstrap.min.css">
+    <script src="/Settings/js/jquery-3.2.1.slim.min.js"></script>
+    <script src="/Settings/js/main.js"></script>
+    <script src="/Settings/js/bootstrap.min.js"></script>
+
 </head>
-<body id="Bg">
-<h3>Hail <?php echo $namaPanggilan; ?> Mengapa Kamu Di Arah Kesini ? Kami hanya ingin memastikan bawha email yang kamu gunakan untuk mendaftar adalah email yang bersifat pribadi dan bukan milik orang lain. silahkan masukan kode verfikasi yang kami kirim melalui email, Terimakasih</h3>
-    <?php 
-        
-        //Tampilkan Pesan disini
-        if(isset($pesan)){
+<body class="bg-success">
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Hai <?php echo $namaPanggilan; ?></h1>
+            <p class="lead">Mengapa Kamu Di Arah Kesini ? Kami hanya ingin memastikan bawha email yang kamu gunakan untuk mendaftar adalah email yang bersifat pribadi dan bukan milik orang lain. silahkan masukan kode verfikasi yang kami kirim melalui email, Terimakasih</p>
+            <p>
+                <?php 
+                    
+                    //Tampilkan Pesan disini
+                    if(isset($pesan)){
 
-            echo $pesan;
+                        echo $pesan;
 
-        }
-    
-    ?>
-    <form name="verfikasiEmail" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-        <input type="text" placeholder="Kode Verfikasi" id="kodeverifikasiemail" maxlength="<?php echo strlen(base64_decode($_SESSION['IR'])); ?>" name="kodeVerifikasi" value=""></br>
-        <input type="submit" id="verBtn" name="verBtn" value="Verifikasi Email">
-    </form>
+                    }
+                
+                ?>
+            </p>
+            <form name="verfikasiEmail" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                <input type="text" class="form-control" placeholder="Kode Verifikasi" id="kodeverifikasiemail" maxlength="<?php echo strlen(base64_decode($_SESSION['IR'])); ?>" name="kodeVerifikasi" value="">
+                <br>
+                <button type="submit" class="btn btn-lg btn-primary text-white"  id="verBtn" name="verBtn">Konfirmasi</button>
+            </form>
+        </div>
+    </div>
+    <!-- 372351F7D -->
 </body>
 </html>
