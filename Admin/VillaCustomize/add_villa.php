@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <?php include('../navbar_admin.php'); ?>
+    <?php include('../home.php'); ?>
     <!-- format buat nambahin page / halaman baru -->
     <div class="page-wrapper new-theme toggled">
         <main class="page-content">
@@ -22,7 +22,7 @@
                     <form class="needs-validation" novalidate="">
                         <div class="mb-3">
                             <label>Nama Villa</label>
-                            <input type="text" class="form-control" placeholder="" value="" required="">
+                            <input type="text" class="FV form-control" id="NamaVilla" required>
                             <div class="invalid-feedback">
                                 Valid first name is required.
                             </div>
@@ -31,7 +31,14 @@
                         <div class="mb-3">
                             <label>Alamat</label>
                             <div class="input-group">
-                                <textarea class="form-control" aria-label="With textarea"></textarea>
+                                <textarea class="FV form-control" id="AlamatVilla" aria-label="With textarea"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Desripsi</label>
+                            <div class="input-group">
+                                <textarea class="FV form-control" aria-label="With textarea"></textarea>
                             </div>
                         </div>
 
@@ -45,7 +52,7 @@
                                                 <i class="fa fa-bed text-white"></i>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control border-0" placeholder="Jumlah kamar">
+                                        <input type="text" class="FV form-control border-0" id="FVT_KamarTidur" placeholder="Jumlah kamar">
                                     </div>
                                 </li>
 
@@ -56,29 +63,7 @@
                                                 <i class="fa fa-bath text-white"></i>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control border-0" placeholder="jumlah kamar mandi">
-                                    </div>
-                                </li>
-
-                                <li class="list-group-item">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="btn bg-success">
-                                                <i class="fa fa-shower text-white"></i>
-                                            </span>
-                                        </div>
-                                        <input type="text" class="form-control border-0" placeholder="Air panas yes/no">
-                                    </div>
-                                </li>
-
-                                <li class="list-group-item">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="btn bg-success">
-                                                <i class="fa fa-wifi text-white"></i>
-                                            </span>
-                                        </div>
-                                        <input type="text" class="form-control border-0" placeholder="Wifi ya/tidak">
+                                        <input type="text" class="FV form-control border-0" id="FVT_KamarMandi" placeholder="jumlah kamar mandi">
                                     </div>
                                 </li>
 
@@ -89,7 +74,18 @@
                                                 <i class="fa fa-coffee text-white"></i>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control border-0" placeholder="jumlah ruang tamu">
+                                        <input type="text" class="FV form-control border-0" id="FVT_RuangTamu" placeholder="jumlah ruang tamu">
+                                    </div>
+                                </li>
+
+                                <li class="list-group-item">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="btn bg-success">
+                                                <i class="fa fa-cutlery text-white"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="FV form-control border-0" id="FVT_Dapur" placeholder="jumlah dapur">
                                     </div>
                                 </li>
 
@@ -100,7 +96,18 @@
                                                 <i class="fa fa-suitcase text-white"></i>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control border-0" placeholder="jumlah ruang multiguna">
+                                        <input type="text" class="FV form-control border-0" id="FVT_RuangKeluarga" placeholder="jumlah ruang multiguna">
+                                    </div>
+                                </li>
+
+                                <li class="list-group-item">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="btn bg-success">
+                                                <i class="fa fa-moon-o text-white"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="FV form-control border-0" id="FVT_Mushola" placeholder="Mushola">
                                     </div>
                                 </li>
 
@@ -111,7 +118,7 @@
                                                 <i class="fa fa-pagelines text-white"></i>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control border-0" placeholder="tempat hiburan seperti taman/kolam renang/area bermain">
+                                        <input type="text" class="FV form-control border-0" id="FVT_TempatHiburan" placeholder="tempat hiburan seperti taman/kolam renang/area bermain">
                                     </div>
                                 </li>
 
@@ -122,7 +129,71 @@
                                                 <i class="fa fa-snowflake-o text-white"></i>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control border-0" placeholder="AC yes/no">
+                                        <!-- <input type="text" class="FV form-control border-0" id="FVT_Ac" placeholder="AC yes/no"> -->
+                                        <div class="custom-control custom-checkbox my-auto ml-5" style="left:1.8px;">
+                                            <input type="checkbox" class="FV custom-control-input" id="FVT_Ac" aria-label="...">
+                                            <label class="custom-control-label text-secondary" for="FVT_Ac">AC yes/no</label>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="list-group-item">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="btn bg-success">
+                                                <i class="fa fa-shower text-white"></i>
+                                            </span>
+                                        </div>
+                                        <!-- <input type="text" class="FV form-control border-0" id="FVT_AirPanas" placeholder="Air panas yes/no"> -->
+                                        <div class="custom-control custom-checkbox my-auto ml-5">
+                                            <input type="checkbox" class="FV custom-control-input" id="FVT_AirPanas" aria-label="...">
+                                            <label class="custom-control-label text-secondary" for="FVT_AirPanas">Air panas yes/no</label>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="list-group-item">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="btn bg-success">
+                                                <i class="fa fa-wifi text-white"></i>
+                                            </span>
+                                        </div>
+                                        <!-- <input type="text" class="FV form-control border-0" id="FVT_Wifi" placeholder="Wifi ya/tidak"> -->
+                                        <div class="custom-control custom-checkbox my-auto ml-5">
+                                            <input type="checkbox" class="FV custom-control-input" id="FVT_Wifi" aria-label="...">
+                                            <label class="custom-control-label text-secondary" for="FVT_Wifi">Air panas yes/no</label>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="list-group-item">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="btn bg-success">
+                                                <i class="fa fa-television text-white"></i>
+                                            </span>
+                                        </div>
+                                        <!-- <input type="text" class="FV form-control border-0" id="FVT_Televisi" placeholder="Tv ya/tidak"> -->
+                                        <div class="custom-control custom-checkbox my-auto ml-5">
+                                            <input type="checkbox" class="FV custom-control-input" id="FVT_Televisi" aria-label="...">
+                                            <label class="custom-control-label text-secondary" for="FVT_Televisi">Tv yes/no</label>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="list-group-item">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="btn bg-success">
+                                                <i class="fa fa-car text-white"></i>
+                                            </span>
+                                        </div>
+                                        <!-- <input type="text" class="FV form-control border-0" id="FVT_AreaParkir" placeholder="Area parkir ya/tidak"> -->
+                                        <div class="custom-control custom-checkbox my-auto ml-5">
+                                            <input type="checkbox" class="FV custom-control-input" id="FVT_AreaParkir" aria-label="...">
+                                            <label class="custom-control-label text-secondary" for="FVT_AreaParkir">Area parkir yes/no</label>
+                                        </div>
                                     </div>
                                 </li>
                             </ul>
@@ -136,16 +207,27 @@
                                         Rp.
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Total harga permalam">
+                                <input type="text" class="FV form-control" id="HargaVilla" placeholder="Total harga permalam">
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label for="address2">Foto-foto</label>
-                            
+                            <label for="address2">Tumbnail</label>
+
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple>
+                                    <!-- <input type="file" class="form-control-file" id="exampleFormControlFile1"> -->
+                                    <input type="file" class="FV" accept="image/*" id="ThumbnailVilla">
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address2">Foto-foto</label>
+
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <input type="file" class="FV form-control-file" id="exampleFormControlFile1" multiple>
                                 </li>
                             </ul>
                             <!-- <div class="input-group mb-3">
@@ -161,7 +243,7 @@
 
                         <div class="mb-3">
                             <label for="address2">Alamat maps</label>
-                            
+
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <span>
@@ -171,17 +253,101 @@
                             </ul>
                         </div>
 
-                       
+
                         <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">tambah</button>
+                        <button class="btn btn-primary btn-lg btn-block" type="submit" id="advBtn">tambah</button>
                     </form>
                 </div>
 
                 <!-- end format isi buat nambahin page / halaman baru -->
+
+                <!-- <div>
+                    <input type="text" class="FV" maxlength="100" id="NamaVilla" placeholder="Nama Villa"><br />
+                    <input type="text" class="FV" maxlength="300" id="AlamatVilla" placeholder="Lokasi / Alamat Villa"><br />
+                    <input type="text" class="FV" maxlength="20" id="HargaVilla" placeholder="HargaVilla / Malam"></br />
+                    <label for="ThumbnailVilla">Thumbnail / Gambar depan Villa</label>
+                    <input type="file" class="FV" accept="image/*" id="ThumbnailVilla">
+
+                    <h5>Fasilitas Villa Yang tersedia</h5>
+
+                    <label for="FVT_RuangTamu">Ruang Tamu</label>
+                    <input type="text" class="FV" maxlength="2" id="FVT_RuangTamu" placeholder="Total Ruang Tamu">
+                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_RuangTamu_IMG">
+                    <br />
+
+                    <label for="FVT_KamarTidur">Kamar Tidur</label>
+                    <input type="text" class="FV" maxlength="2" id="FVT_KamarTidur" placeholder="Total Kamar Tidur">
+                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_KamarTidur_IMG">
+                    <br />
+
+                    <label for="FVT_RuangKeluarga">Ruang Keluarga</label>
+                    <input type="text" class="FV" maxlength="2" id="FVT_RuangKeluarga" placeholder="Total Ruang Keluarga">
+                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_RuangKeluarga_IMG">
+                    <br />
+
+                    <label for="FVT_KamarMandi">Kamar Mandi</label>
+                    <input type="text" class="FV" maxlength="2" id="FVT_KamarMandi" placeholder="Kamar Mandi">
+                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_KamarMandi_IMG">
+                    <br />
+
+                    <label for="FVT_Mushola">Mushola</label>
+                    <input type="text" name="fasilitasVilla" class="FV" maxlength="2" id="FVT_Mushola">
+                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_Mushola_IMG">
+                    <br />
+
+                    <label for="FVT_Dapur">Dapur</label>
+                    <input type="text" name="fasilitasVilla" class="FV" maxlength="2" id="FVT_Dapur">
+                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_Dapur_IMG">
+                    <br />
+
+                    <label for="FVT_RuangKerja">Ruang Kerja</label>
+                    <input type="text" name="fasilitasVilla" class="FV" maxlength="2" id="FVT_RuangKerja">
+                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_RuangKerja_IMG">
+                    <br />
+
+                    <label for="FVT_Garasi">Garasi</label>
+                    <input type="text" name="fasilitasVilla" class="FV" maxlength="2" id="FVT_Garasi">
+                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_Garasi_IMG">
+                    <br />
+
+                    <label for="FVT_Garasi">Area Parkir</label>
+                    <input type="text" name="fasilitasVilla" class="FV" maxlength="2" id="FVT_AreaParkir">
+                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_AreaParkir_IMG">
+                    <br />
+
+                    <label for="FVT_Taman">Taman</label>
+                    <input type="text" name="fasilitasVilla" class="FV" maxlength="2" id="FVT_Taman">
+                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_Taman_IMG">
+                    <br />
+
+                    <label for="FVT_KolamRenang">Kolam Renang</label>
+                    <input type="text" name="fasilitasVilla" class="FV" maxlength="2" id="FVT_KolamRenang">
+                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_KolamRenang_IMG">
+                    <br />
+
+                    <label for="FVT_Televisi">Televisi</label>
+                    <input type="checkbox" name="fasilitasVilla" class="FV" id="FVT_Televisi">
+                    <br />
+
+                    <label for="FVT_Wifi">Wifi</label>
+                    <input type="checkbox" name="fasilitasVilla" class="FV" id="FVT_Wifi">
+                    <br />
+                    <div>
+                        <script type="text/javascript">
+                            tinymce.init({
+                                selector: '#deskripsi'
+                            });
+                        </script>
+                        <b>Deskripsi Villa</b>
+                        <textarea name="deskripsiVila" id="deskripsi"></textarea>
+                        
+                        <button type="button" class="btn btn-success" id="advBtn">Tambahkan Villa</button>
+                    </div>
+                </div> -->
             </div>
         </main>
     </div>
-    <!-- end format buat nambahin page / halaman baru -->
+    <script src="../../Settings/js/dashboardAdmin.js"></script>
 </body>
 
 </html>
