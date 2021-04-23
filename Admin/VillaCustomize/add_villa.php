@@ -36,9 +36,14 @@
                         </div>
 
                         <div class="mb-3">
+                        <script type="text/javascript">
+                            tinymce.init({
+                                selector: '#deskripsi'
+                            });
+                        </script>
                             <label>Desripsi</label>
                             <div class="input-group">
-                                <textarea class="FV form-control" aria-label="With textarea"></textarea>
+                                <textarea class="FV form-control" id="deskripsi" aria-label="With textarea"></textarea>
                             </div>
                         </div>
 
@@ -333,13 +338,7 @@
                     <input type="checkbox" name="fasilitasVilla" class="FV" id="FVT_Wifi">
                     <br />
                     <div>
-                        <script type="text/javascript">
-                            tinymce.init({
-                                selector: '#deskripsi'
-                            });
-                        </script>
-                        <b>Deskripsi Villa</b>
-                        <textarea name="deskripsiVila" id="deskripsi"></textarea>
+                        
                         
                         <button type="button" class="btn btn-success" id="advBtn">Tambahkan Villa</button>
                     </div>
