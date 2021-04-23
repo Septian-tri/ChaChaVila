@@ -89,7 +89,7 @@ function messageNotification(Pesan, Mode) {
             var elemenDiv = document.createElement('div');
             elemenDiv.className = "notifikasi";
             elemenDiv.innerHTML =
-                '<div class="" tabindex="-1" role="dialog">' +
+                '<div class="dialog" style="z-index : 100;" role="dialog">' +
                     '<div class="modal-content">' +
                         '<div class="modal-header bg-success text-white">' +
                             '<h5 class="modal-title">Insert some Title</h5>' +
