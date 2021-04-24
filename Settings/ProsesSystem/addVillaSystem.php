@@ -73,7 +73,7 @@ if(cekSession() === false){
 
                                 if(strlen($_POST['NamaVilla']) > 100 || strlen($_POST['NamaVilla']) < 3){
 
-                                    sendErrorMessage("Panjang Nama Villa Tidak Valid", "notificationErrorField", "NamaVilla");
+                                    sendErrorMessage("Panjang Nama Villa Tidak Valid ".print_r($_POST), "notificationErrorField", "NamaVilla");
                                     return false;
     
                                 }else{
@@ -113,8 +113,73 @@ if(cekSession() === false){
                         
                                                     }else{
                 
-                                                        sendErrorMessage(htmlentities($_POST['HargaVilla'], ENT_QUOTES), "notificationErrorField", "NamaVilla");
-                                                        return false;
+                                                        if($_POST['HargaVilla'] < 10000){
+
+                                                            sendErrorMessage("Harga Villa Tidak Valid. masukan harga lebih dari 10.000 Rupiah", "notificationErrorField", "HargaVilla");
+                                                            return false;
+                            
+                                                        }else{
+
+                                                            if(preg_match('/^[\s]*$/', $_POST['deskripsi'])){
+
+                                                                sendErrorMessage("Silahkan Isi Deksripsi Villa".$_POST['deskripsi'], "notificationErrorField", "DSV");
+                                                                return false;
+                                
+                                                            }else{
+                        
+                                                                if(strlen($_POST['deskripsi']) > 600){
+
+                                                                    sendErrorMessage("Limit Deksripsi Villa Tercapai", "notificationErrorField", "DSV");
+                                                                    return false;
+                                    
+                                                                }else{
+                                                                    
+                                                                    $tempJumlahFVT  = 0;
+                                                                    $tempIdFVT      = 0;
+                                                                    $tempNonFVT     = 0;
+                                                                    $tempFVTKosong  = "";
+        
+                                                                    for($i = 0; $i < count($_POST); $i++){
+        
+                                                                        $tempNonFVT+=1;
+        
+                                                                        if(explode("_", array_keys($_POST)[$i])[0] === "FVT"){
+        
+                                                                            $tempIdFVT+=1;
+        
+                                                                            if(!preg_match('/^[\s]*$/',$_POST[array_keys($_POST)[$i]])){
+        
+                                                                               $tempJumlahFVT+=1;
+                                                                               
+                                                                           }else{
+        
+                                                                                $tempFVTKosong = "";
+                                                                                $tempFVTKosong = array_keys($_POST)[$tempNonFVT-$tempIdFVT];
+        
+                                                                           }
+        
+                                                                        }
+                                                                       
+                                                                    }
+        
+                                                                    
+        
+                                                                    if($tempJumlahFVT <= 0){
+        
+                                                                        sendErrorMessage("Silahkan isi minimal satu fasilitas ".$_POST['deskripsi'], "notificationErrorField", $tempFVTKosong);
+                                                                        return false;
+        
+                                                                    }else{
+        
+                                                                        sendErrorMessage(htmlentities($_POST['HargaVilla'], ENT_QUOTES)."||".count($_POST)."||".$tempJumlahFVT, "notificationErrorField", "NamaVilla");
+                                                                        return false;
+        
+                                                                    }
+                                                                }
+                                                            
+                                                            }
+                        
+                                                        }
                                                     
                                                     }
                 

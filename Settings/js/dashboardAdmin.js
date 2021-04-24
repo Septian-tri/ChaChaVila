@@ -39,11 +39,15 @@ btnAdd.onclick = function(e){
                 fileFormat.append(FV[i].id, FV[i].files[0]);
             }
         
-        }else if(FV[i].type === "text"){
+        }else if(FV[i].type === "text" || FV[i].type === "textarea"){
             
             if(FV[i].id === "HargaVilla"){
                 
                 fileFormat.append(FV[i].id, FV[i].value.split(".").join(""));
+            
+            }else if(FV[i].id === "deskripsi"){
+
+                fileFormat.append(FV[i].id, tinymce.activeEditor.getContent());
             
             }else{
 
