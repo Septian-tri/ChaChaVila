@@ -460,7 +460,7 @@ if(!(include $urlKosong."Settings/ProsesSystem/mainsystem.php")){
                                         <a href="VillaCustomize/list_villa_admin.php">Lists villa</a>
                                     </li>
                                     <li>
-                                        <a href="#">Orders</a>
+                                        <a href="OrdersCustomize/order_list.php">Orders</a>
                                     </li>
                                     <li>
                                         <a href="#">Credit cart</a>

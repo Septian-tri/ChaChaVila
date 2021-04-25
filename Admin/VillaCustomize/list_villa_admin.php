@@ -50,7 +50,7 @@
                             Ini bisa di isi deskripsi atau enggak juga gk masalah lore
                         </p>
                         <div class="m-auto pb-3">
-                            <a href="" class="btn btn-warning">
+                            <a href="update_villa.php" class="btn btn-warning">
                                 <i class="fa fa-cog text-white"></i>
                             </a>
                             <a href="" class="btn btn-danger">

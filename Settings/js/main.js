@@ -87,9 +87,9 @@ function messageNotification(Pesan, Mode) {
         if (modeDiv === null && PesanDiv != null) {
 
             var elemenDiv = document.createElement('div');
-            elemenDiv.className = "notifikasi";
+            elemenDiv.className = "notifikasi d-flex justify-content-center";
             elemenDiv.innerHTML =
-                '<div class="dialog fixed-top" role="dialog">' +
+                '<div class="mx-auto" style="position:fixed; top:0; " >' +
                     '<div class="modal-content">' +
                         '<div class="modal-header bg-success text-white">' +
                             '<h5 class="modal-title">Insert some Title</h5>' +
@@ -238,16 +238,18 @@ function deleteObjectElement(objectElement, tipeElemen) {
 //posisikan notifikasi
 function notificationPosition() {
 
-    var elemenNotifikasi2 = document.getElementsByClassName('notifikasi')[0];
+    // posisi nya udah fix ketengah ini fungsi bisa dimatiin karna ngerusak posisi aslinya
 
-    if (elemenNotifikasi2 != undefined) {
+    // var elemenNotifikasi2 = document.getElementsByClassName('notifikasi')[0];
 
-        var ukuranLayar = window.innerWidth;
-        var ukuranNotifikasi = elemenNotifikasi2.clientWidth;
-        var kalkulasiPosisi = Math.ceil((ukuranLayar - ukuranNotifikasi) / 2);
-        elemenNotifikasi2.style.cssText = "left: " + kalkulasiPosisi + "px;";
+    // if (elemenNotifikasi2 != undefined) {
 
-    }
+    //     var ukuranLayar = window.innerWidth;
+    //     var ukuranNotifikasi = elemenNotifikasi2.clientWidth;
+    //     var kalkulasiPosisi = Math.ceil((ukuranLayar - ukuranNotifikasi) / 2);
+    //     elemenNotifikasi2.style.cssText = "left: " + kalkulasiPosisi + "px;";
+
+    // }
 
 }
 

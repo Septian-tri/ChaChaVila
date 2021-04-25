@@ -48,20 +48,22 @@
                 width: auto;
                 height: auto;
                 position: fixed;
-                top: 30px;
+                /* top: 30px; */
                 /* left: 0;
                 right: 0; */
                 /* background-color: #007bff;
                 border: 2px solid #2687b5; */
                 z-index: 2000;
-                max-width: 70%;
-                min-width: 30%;
+                width: 100%;
+                height: 10%;
+                /* max-width: 70%;
+                min-width: 30%; */
                 text-align: center;
                 /* color: white; */
                 /* border-radius: 3px;
                 box-shadow: #2b2b2b 0px 0px 9px 2px; */
                 font-size: auto;
-                display: table;
+                display: block;
             }
         </style>
         

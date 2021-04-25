@@ -8,7 +8,6 @@
     <title>Document</title>
 
     <style>
-        /* biar deskripsi iput width 100% */
         .tox {
             width: 100%;
         }
@@ -23,7 +22,9 @@
             <div class="container-fluid">
                 <!-- format isi buat nambahin page / halaman baru -->
 
-                <h2 class="border-bottom border-gray mb-4">Add New Villa</h2>
+                <h2 class="border-bottom border-gray mb-4">Update Villa</h2>
+
+                <!-- NOTE VALUE NANTI DI SHOW PER INPUTAN NYA -->
 
                 <div class=" pl-0">
                     <form class="needs-validation" novalidate="">
@@ -278,89 +279,24 @@
 
 
                         <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" type="submit" id="advBtn">tambah</button>
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <!-- NOTE BILA CANCEL/BATAL REDIRECT KE LIST VILLA -->
+
+                                <button class="btn btn-warning btn-lg btn-block" type="submit" id="advBtn">Batal</button>
+                            </div>
+                            <div class="col-md-6">
+
+                                <!-- NOTE SEELAH UPDATE LANGSUNG REDIRECT KE LIST VILLA -->
+
+                                <button class="btn btn-info btn-lg btn-block" type="submit" id="advBtn">Update</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
 
                 <!-- end format isi buat nambahin page / halaman baru -->
-
-                <!-- <div>
-                    <input type="text" class="FV" maxlength="100" id="NamaVilla" placeholder="Nama Villa"><br />
-                    <input type="text" class="FV" maxlength="300" id="AlamatVilla" placeholder="Lokasi / Alamat Villa"><br />
-                    <input type="text" class="FV" maxlength="20" id="HargaVilla" placeholder="HargaVilla / Malam"></br />
-                    <label for="ThumbnailVilla">Thumbnail / Gambar depan Villa</label>
-                    <input type="file" class="FV" accept="image/*" id="ThumbnailVilla">
-
-                    <h5>Fasilitas Villa Yang tersedia</h5>
-
-                    <label for="FVT_RuangTamu">Ruang Tamu</label>
-                    <input type="text" class="FV" maxlength="2" id="FVT_RuangTamu" placeholder="Total Ruang Tamu">
-                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_RuangTamu_IMG">
-                    <br />
-
-                    <label for="FVT_KamarTidur">Kamar Tidur</label>
-                    <input type="text" class="FV" maxlength="2" id="FVT_KamarTidur" placeholder="Total Kamar Tidur">
-                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_KamarTidur_IMG">
-                    <br />
-
-                    <label for="FVT_RuangKeluarga">Ruang Keluarga</label>
-                    <input type="text" class="FV" maxlength="2" id="FVT_RuangKeluarga" placeholder="Total Ruang Keluarga">
-                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_RuangKeluarga_IMG">
-                    <br />
-
-                    <label for="FVT_KamarMandi">Kamar Mandi</label>
-                    <input type="text" class="FV" maxlength="2" id="FVT_KamarMandi" placeholder="Kamar Mandi">
-                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_KamarMandi_IMG">
-                    <br />
-
-                    <label for="FVT_Mushola">Mushola</label>
-                    <input type="text" name="fasilitasVilla" class="FV" maxlength="2" id="FVT_Mushola">
-                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_Mushola_IMG">
-                    <br />
-
-                    <label for="FVT_Dapur">Dapur</label>
-                    <input type="text" name="fasilitasVilla" class="FV" maxlength="2" id="FVT_Dapur">
-                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_Dapur_IMG">
-                    <br />
-
-                    <label for="FVT_RuangKerja">Ruang Kerja</label>
-                    <input type="text" name="fasilitasVilla" class="FV" maxlength="2" id="FVT_RuangKerja">
-                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_RuangKerja_IMG">
-                    <br />
-
-                    <label for="FVT_Garasi">Garasi</label>
-                    <input type="text" name="fasilitasVilla" class="FV" maxlength="2" id="FVT_Garasi">
-                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_Garasi_IMG">
-                    <br />
-
-                    <label for="FVT_Garasi">Area Parkir</label>
-                    <input type="text" name="fasilitasVilla" class="FV" maxlength="2" id="FVT_AreaParkir">
-                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_AreaParkir_IMG">
-                    <br />
-
-                    <label for="FVT_Taman">Taman</label>
-                    <input type="text" name="fasilitasVilla" class="FV" maxlength="2" id="FVT_Taman">
-                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_Taman_IMG">
-                    <br />
-
-                    <label for="FVT_KolamRenang">Kolam Renang</label>
-                    <input type="text" name="fasilitasVilla" class="FV" maxlength="2" id="FVT_KolamRenang">
-                    <input type="file" accept="image/*" class="FV" maxlength="2" id="FVT_KolamRenang_IMG">
-                    <br />
-
-                    <label for="FVT_Televisi">Televisi</label>
-                    <input type="checkbox" name="fasilitasVilla" class="FV" id="FVT_Televisi">
-                    <br />
-
-                    <label for="FVT_Wifi">Wifi</label>
-                    <input type="checkbox" name="fasilitasVilla" class="FV" id="FVT_Wifi">
-                    <br />
-                    <div>
-                        
-                        
-                        <button type="button" class="btn btn-success" id="advBtn">Tambahkan Villa</button>
-                    </div>
-                </div> -->
             </div>
         </main>
     </div>
