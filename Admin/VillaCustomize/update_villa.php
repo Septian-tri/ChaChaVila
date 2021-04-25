@@ -8,7 +8,6 @@
     <title>Document</title>
 
     <style>
-        /* biar deskripsi iput width 100% */
         .tox {
             width: 100%;
         }
@@ -23,7 +22,9 @@
             <div class="container-fluid">
                 <!-- format isi buat nambahin page / halaman baru -->
 
-                <h2 class="border-bottom border-gray mb-4">Add New Villa</h2>
+                <h2 class="border-bottom border-gray mb-4">Update Villa</h2>
+
+                <!-- NOTE VALUE NANTI DI SHOW PER INPUTAN NYA -->
 
                 <div class=" pl-0">
                     <form class="needs-validation" novalidate="">
@@ -43,27 +44,13 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="address">Harga Permalam</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="btn bg-success text-white">
-                                        Rp.
-                                    </span>
-                                </div>
-                                <input type="text" class="FV form-control" id="HargaVilla" placeholder="Total harga permalam">
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
                         <script type="text/javascript">
                             tinymce.init({
-                                selector: '#deskripsi',
-                                plugins : 'autoresize',
-                                width: '100%'
+                                selector: '#deskripsi'
                             });
                         </script>
                             <label>Desripsi</label>
-                            <div class="input-group DSV">
+                            <div class="input-group">
                                 <textarea class="FV form-control" id="deskripsi" aria-label="With textarea"></textarea>
                             </div>
                         </div>
@@ -125,7 +112,18 @@
                                         <input type="text" class="FV form-control border-0" id="FVT_RuangKeluarga" placeholder="jumlah ruang multiguna">
                                     </div>
                                 </li>
-                                
+
+                                <li class="list-group-item">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="btn bg-success">
+                                                <i class="fa fa-moon-o text-white"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="FV form-control border-0" id="FVT_Mushola" placeholder="Mushola">
+                                    </div>
+                                </li>
+
                                 <li class="list-group-item">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -141,26 +139,13 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="btn bg-success">
-                                                <i class="fa fa-moon-o text-white"></i>
-                                            </span>
-                                        </div>
-                                        <div class="custom-control custom-checkbox my-auto ml-5" style="left:1.8px;">
-                                            <input type="checkbox" class="FV custom-control-input" id="FVC_KamarIbadah" aria-label="...">
-                                            <label class="custom-control-label text-secondary" for="FVC_KamarIbadah">Kamar Ibadah yes/no</label>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="list-group-item">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="btn bg-success">
                                                 <i class="fa fa-snowflake-o text-white"></i>
                                             </span>
                                         </div>
+                                        <!-- <input type="text" class="FV form-control border-0" id="FVT_Ac" placeholder="AC yes/no"> -->
                                         <div class="custom-control custom-checkbox my-auto ml-5" style="left:1.8px;">
-                                            <input type="checkbox" class="FV custom-control-input" id="FVC_Ac" aria-label="...">
-                                            <label class="custom-control-label text-secondary" for="FVC_Ac">AC yes/no</label>
+                                            <input type="checkbox" class="FV custom-control-input" id="FVT_Ac" aria-label="...">
+                                            <label class="custom-control-label text-secondary" for="FVT_Ac">AC yes/no</label>
                                         </div>
                                     </div>
                                 </li>
@@ -172,9 +157,10 @@
                                                 <i class="fa fa-shower text-white"></i>
                                             </span>
                                         </div>
+                                        <!-- <input type="text" class="FV form-control border-0" id="FVT_AirPanas" placeholder="Air panas yes/no"> -->
                                         <div class="custom-control custom-checkbox my-auto ml-5">
-                                            <input type="checkbox" class="FV custom-control-input" id="FVC_AirPanas" aria-label="...">
-                                            <label class="custom-control-label text-secondary" for="FVC_AirPanas">Air panas yes/no</label>
+                                            <input type="checkbox" class="FV custom-control-input" id="FVT_AirPanas" aria-label="...">
+                                            <label class="custom-control-label text-secondary" for="FVT_AirPanas">Air panas yes/no</label>
                                         </div>
                                     </div>
                                 </li>
@@ -186,9 +172,10 @@
                                                 <i class="fa fa-wifi text-white"></i>
                                             </span>
                                         </div>
+                                        <!-- <input type="text" class="FV form-control border-0" id="FVT_Wifi" placeholder="Wifi ya/tidak"> -->
                                         <div class="custom-control custom-checkbox my-auto ml-5">
-                                            <input type="checkbox" class="FV custom-control-input" id="FVC_Wifi" aria-label="...">
-                                            <label class="custom-control-label text-secondary" for="FVC_Wifi">Wifi</label>
+                                            <input type="checkbox" class="FV custom-control-input" id="FVT_Wifi" aria-label="...">
+                                            <label class="custom-control-label text-secondary" for="FVT_Wifi">Air panas yes/no</label>
                                         </div>
                                     </div>
                                 </li>
@@ -202,8 +189,8 @@
                                         </div>
                                         <!-- <input type="text" class="FV form-control border-0" id="FVT_Televisi" placeholder="Tv ya/tidak"> -->
                                         <div class="custom-control custom-checkbox my-auto ml-5">
-                                            <input type="checkbox" class="FV custom-control-input" id="FVC_Televisi" aria-label="...">
-                                            <label class="custom-control-label text-secondary" for="FVC_Televisi">Tv yes/no</label>
+                                            <input type="checkbox" class="FV custom-control-input" id="FVT_Televisi" aria-label="...">
+                                            <label class="custom-control-label text-secondary" for="FVT_Televisi">Tv yes/no</label>
                                         </div>
                                     </div>
                                 </li>
@@ -217,8 +204,8 @@
                                         </div>
                                         <!-- <input type="text" class="FV form-control border-0" id="FVT_AreaParkir" placeholder="Area parkir ya/tidak"> -->
                                         <div class="custom-control custom-checkbox my-auto ml-5">
-                                            <input type="checkbox" class="FV custom-control-input" id="FVC_AreaParkir" aria-label="...">
-                                            <label class="custom-control-label text-secondary" for="FVC_AreaParkir">Area parkir yes/no</label>
+                                            <input type="checkbox" class="FV custom-control-input" id="FVT_AreaParkir" aria-label="...">
+                                            <label class="custom-control-label text-secondary" for="FVT_AreaParkir">Area parkir yes/no</label>
                                         </div>
                                     </div>
                                 </li>
@@ -226,9 +213,23 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="address">Harga Permalam</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="btn bg-success text-white">
+                                        Rp.
+                                    </span>
+                                </div>
+                                <input type="text" class="FV form-control" id="HargaVilla" placeholder="Total harga permalam">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
                             <label for="address2">Tumbnail</label>
+
                             <ul class="list-group">
                                 <li class="list-group-item">
+                                    <!-- <input type="file" class="form-control-file" id="exampleFormControlFile1"> -->
                                     <input type="file" class="FV" accept="image/*" id="ThumbnailVilla">
                                 </li>
                             </ul>
@@ -276,10 +277,26 @@
                             </ul>
                         </div>
 
+
                         <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" type="submit" id="advBtn">tambah</button>
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <!-- NOTE BILA CANCEL/BATAL REDIRECT KE LIST VILLA -->
+
+                                <button class="btn btn-warning btn-lg btn-block" type="submit" id="advBtn">Batal</button>
+                            </div>
+                            <div class="col-md-6">
+
+                                <!-- NOTE SEELAH UPDATE LANGSUNG REDIRECT KE LIST VILLA -->
+
+                                <button class="btn btn-info btn-lg btn-block" type="submit" id="advBtn">Update</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
+
+                <!-- end format isi buat nambahin page / halaman baru -->
             </div>
         </main>
     </div>
