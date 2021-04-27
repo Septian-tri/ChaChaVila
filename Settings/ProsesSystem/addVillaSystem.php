@@ -127,9 +127,9 @@ if(cekSession() === false){
                                 
                                                             }else{
                         
-                                                                if(strlen($_POST['deskripsi']) > 600){
+                                                                if(strlen($_POST['deskripsi']) > 3000){
 
-                                                                    sendErrorMessage("Limit Deksripsi Villa Tercapai", "notificationErrorField", "DSV");
+                                                                    sendErrorMessage("Limit Deksripsi Villa Tercapai".strlen($_POST['deskripsi']), "notificationErrorField", "DSV");
                                                                     return false;
                                     
                                                                 }else{
@@ -149,7 +149,16 @@ if(cekSession() === false){
         
                                                                             if(!preg_match('/^[\s]*$/',$_POST[array_keys($_POST)[$i]])){
         
-                                                                               $tempJumlahFVT+=1;
+                                                                                if(!preg_match('/^[1-9]{1,2}$/', $_POST[array_keys($_POST)[$i]])){
+                                                                                    
+                                                                                    sendErrorMessage("Data yang di masukan pada Vasilitas villa tidak valid", "notificationErrorField",  array_keys($_POST)[$i]);
+                                                                                    return false;
+                                                                                    
+                                                                                }else{
+
+                                                                                    $tempJumlahFVT+=1;
+                                                                                
+                                                                                }
                                                                                
                                                                            }else{
         
@@ -166,13 +175,106 @@ if(cekSession() === false){
         
                                                                     if($tempJumlahFVT <= 0){
         
-                                                                        sendErrorMessage("Silahkan isi minimal satu fasilitas ".$_POST['deskripsi'], "notificationErrorField", $tempFVTKosong);
+                                                                        sendErrorMessage("Silahkan isi minimal satu fasilitas ", "notificationErrorField", $tempFVTKosong);
                                                                         return false;
         
                                                                     }else{
         
-                                                                        sendErrorMessage(htmlentities($_POST['HargaVilla'], ENT_QUOTES)."||".count($_POST)."||".$tempJumlahFVT, "notificationErrorField", "NamaVilla");
-                                                                        return false;
+                                                                        if(!isset($_FILES['ThumbnailVilla'])){
+        
+                                                                            sendErrorMessage("Silahkan isi Thumbnail Villa ", "notificationErrorField", 'ThumbnailVilla');
+                                                                            return false;
+            
+                                                                        }else{
+                
+                                                                            if(preg_match('/^[\s]*$/', $_FILES['ThumbnailVilla']['name'])){
+        
+                                                                                sendErrorMessage("Thumbnail Villa Masih Kosong", "notificationErrorField", 'ThumbnailVilla');
+                                                                                return false;
+                
+                                                                            }else{
+
+
+                                                                                if($_FILES['ThumbnailVilla']['size'] > 1048576){
+        
+                                                                                    sendErrorMessage("Maksimal Ukuran Gambar Thumbnail 1 Mb", "notificationErrorField", 'ThumbnailVilla');
+                                                                                    return false;
+                    
+                                                                                }else{
+                        
+                                                                                    if(exif_imagetype($_FILES['ThumbnailVilla']['tmp_name']) !== IMAGETYPE_JPEG && exif_imagetype($_FILES['ThumbnailVilla']['tmp_name']) !== IMAGETYPE_PNG){
+        
+                                                                                        sendErrorMessage("Maaf Gambar Tidak Support", "notificationErrorField", 'ThumbnailVilla');
+                                                                                        return false;
+                        
+                                                                                    }else{
+                            
+                                                                                        if(exif_imagetype($_FILES['ThumbnailVilla']['tmp_name']) !== IMAGETYPE_JPEG && exif_imagetype($_FILES['ThumbnailVilla']['tmp_name']) !== IMAGETYPE_PNG){
+        
+                                                                                            sendErrorMessage("Maaf Gambar Tidak Support", "notificationErrorField", 'ThumbnailVilla');
+                                                                                            return false;
+                            
+                                                                                        }else{
+                                                                                            
+                                                                                            if(count($_FILES) <= 1){
+
+                                                                                                sendErrorMessage("Silhakan Masukan 1 atau lebih foto pendukung", "notificationErrorField", "a");
+                                                                                                return false;
+
+                                                                                            }else{
+
+                                                                                                for($j = 0; $j < count($_FILES); $j++){
+
+                                                                                                    if(explode("_", array_keys($_FILES)[$j])[0] === "FVG"){
+
+                                                                                                        if(count($_FILES[array_keys($_FILES)[$j]]['name']) > 5){
+
+                                                                                                            sendErrorMessage('Maaf Batas multiple hanya sampai 5 gambar', "notificationErrorField", array_keys($_FILES)[$j]);
+                                                                                                            return false;
+
+                                                                                                        }else{
+
+                                                                                                            for($k = 0; $k < count($_FILES[array_keys($_FILES)[$j]]['size']); $k++){
+
+                                                                                                                if($_FILES[array_keys($_FILES)[$j]]['size'][$k] > 1048576){
+    
+                                                                                                                    sendErrorMessage('Gambar Dengan nama '.$_FILES[array_keys($_FILES)[$j]]['name'][$k].' melebihin 1 MB Proses di hentikan' , "notificationErrorField", array_keys($_FILES)[$j]);
+                                                                                                                    return false;
+    
+                                                                                                                }else{
+    
+                                                                                                                    if(exif_imagetype($_FILES[array_keys($_FILES)[$j]]['tmp_name'][$k]) !== IMAGETYPE_JPEG && exif_imagetype($_FILES[array_keys($_FILES)[$j]]['tmp_name'][$k]) !==  IMAGETYPE_PNG){
+    
+                                                                                                                        sendErrorMessage('Gambar Dengan nama '.$_FILES[array_keys($_FILES)[$j]]['name'][$k].' Bukan merupakan format gambar yang di support' , "notificationErrorField", array_keys($_FILES)[$j]);
+                                                                                                                        return false;
+        
+                                                                                                                    }else{
+        
+                                                                                                                        
+        
+                                                                                                                    }
+    
+                                                                                                                }
+    
+                                                                                                            }
+
+                                                                                                        }
+
+                                                                                                    }
+
+                                                                                                }
+
+                                                                                            }
+                                                                                    
+                                                                                        }
+            
+                                                                                    }
+        
+                                                                                }
+    
+                                                                            }
+
+                                                                        }
         
                                                                     }
                                                                 }

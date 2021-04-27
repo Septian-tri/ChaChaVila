@@ -59,13 +59,22 @@
                             tinymce.init({
                                 selector: '#deskripsi',
                                 plugins : 'autoresize',
-                                width: '100%'
+                                width   : '98%'
                             });
                         </script>
                             <label>Desripsi</label>
                             <div class="input-group DSV">
                                 <textarea class="FV form-control" id="deskripsi" aria-label="With textarea"></textarea>
                             </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address2">Thumbnail</label>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <input type="file" class="FV" accept="image/*" id="ThumbnailVilla">
+                                </li>
+                            </ul>
                         </div>
 
                         <div class="mb-3">
@@ -226,40 +235,26 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="address2">Tumbnail</label>
+                            <label>Foto Villa dan ruangan lain nya</label>
                             <ul class="list-group">
-                                <li class="list-group-item">
-                                    <input type="file" class="FV" accept="image/*" id="ThumbnailVilla">
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="mb-3">
-                            <label>Foto-foto</label>
-                            <ul class="list-group">
-                                <label class="mb-2 ml-4">Bangunan</label>
+                                <label class="mb-2 ml-4">Bangunan Luar / Luar Villa</label>
                                 <li class="list-group-item ml-4 mb-2">
-                                    <input type="file" class="FV form-control-file" id="exampleFormControlFile1" multiple>
+                                    <input type="file" class="FV form-control-file" id="FVG_BagunanLuar" multiple accept="image/*" maxlength="4">
                                 </li>
 
-                                <label class="mb-2 ml-4">Kamar Tidur</label>
+                                <label class="mb-2 ml-4">Foto Ruangan Villa, E.g Kamar Mandi, kamar tidur Dll</label>
                                 <li class="list-group-item ml-4 mb-2">
-                                    <input type="file" class="FV form-control-file" id="exampleFormControlFile1" multiple>
-                                </li>
-
-                                <label class="mb-2 ml-4">Kamar Mandi</label>
-                                <li class="list-group-item ml-4 mb-2">
-                                    <input type="file" class="FV form-control-file" id="exampleFormControlFile1" multiple>
+                                    <input type="file" class="FV form-control-file" id="FVG_BagunanDalam" multiple accept="image/*">
                                 </li>
 
                                 <label class="mb-2 ml-4">Fasilitas Tambahan</label>
                                 <li class="list-group-item ml-4 mb-2">
-                                    <input type="file" class="FV form-control-file" id="exampleFormControlFile1" multiple>
+                                    <input type="file" class="FV form-control-file" id="FVG_FasilitasTambahan" multiple accept="image/*">
                                 </li>
 
-                                <label class="mb-2 ml-4">Area Rekreasi</label>
+                                <label class="mb-2 ml-4">Area Rekreasi, E.g Taman Bermain, Taman Bungan, kolam renang dll</label>
                                 <li class="list-group-item ml-4 mb-2">
-                                    <input type="file" class="FV form-control-file" id="exampleFormControlFile1" multiple>
+                                    <input type="file" class="FV form-control-file" id="FVG_AreaRekreasi" multiple accept="image/*">
                                 </li>
                             </ul>
                         </div>
@@ -270,7 +265,7 @@
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <span>
-                                        admin bisa input lokasi dengan maps
+                                        cOMING sOON admin bisa input lokasi dengan maps
                                     </span>
                                 </li>
                             </ul>

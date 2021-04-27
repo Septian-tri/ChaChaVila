@@ -134,7 +134,6 @@ if(count($_GET) === 0){
 
     }
 
-
     function cekValidasiEmail($koneksi, $namadatabase){
         $queryCekVerifikasi = mysqli_query($koneksi, "SELECT * FROM $namadatabase WHERE idrandom = BINARY('".base64_decode($_SESSION['IR'])."') and email = BINARY('".base64_decode($_SESSION['EM'])."')"); 
         
@@ -169,6 +168,30 @@ if(count($_GET) === 0){
 
             }
         }
+    }
+
+    function cekGambar($gambar){
+        
+        switch(exif_imagetype($gambar)){
+
+            case 'IMAGETYPE_JPEG' :
+                return true;
+            break;
+
+            case 'IMAGETYPE_PNG' : 
+                return true;
+            break;
+
+            case 'IMAGETYPE_BMP' :
+                return true;
+            break;
+
+            default :
+                return false;
+            break;
+
+        }
+
     }
 }
 

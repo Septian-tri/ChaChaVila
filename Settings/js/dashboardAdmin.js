@@ -34,9 +34,42 @@ btnAdd.onclick = function(e){
         
         }else if(FV[i].type === "file"){
             
-            if(FV[i].files[0] === undefined){
+            if(FV[i].files[0] !== undefined){
                 
-                fileFormat.append(FV[i].id, FV[i].files[0]);
+                if(FV[i].id.split("_")[0] === "FVG"){
+
+                    if(FV[i].files.length > 5){
+
+                        alert("Maaf Batas Maksimal Memasukan Gambar Pada Fasilitas Vilaa, Maksimal 5 gambar");
+                        styleWrong(FV[i].id);
+                        return false;
+
+                    }else{
+
+                        for(var j = 0; j < FV[i].files.length; j++){
+
+                            if(FV[i].files[j].size > 1048576){
+
+                                alert("Maaf Proses tidak dapat di lanjut kan file dengan nama " + FV[i].files[j].name + " Memiliki Ukuran lebih dari 1 MB");
+                                styleWrong(FV[i].id);
+                                return false;
+
+                            }else{
+
+                                fileFormat.append(FV[i].id + "[]", FV[i].files[j]);
+
+                            }
+
+                        }
+
+                    }
+
+                }else{
+
+                    fileFormat.append(FV[i].id, FV[i].files[0]);
+
+                }
+
             }
         
         }else if(FV[i].type === "text" || FV[i].type === "textarea"){
@@ -47,8 +80,16 @@ btnAdd.onclick = function(e){
             
             }else if(FV[i].id === "deskripsi"){
 
-                fileFormat.append(FV[i].id, tinymce.activeEditor.getContent());
-            
+                // if(tinymce.activeEditor.getContent()){
+
+                    fileFormat.append(FV[i].id, tinymce.activeEditor.getContent());
+
+                // }else{
+
+                //     fileFormat.append(FV[i].id, FV[i].value);
+
+                // }
+
             }else{
 
                 fileFormat.append(FV[i].id, FV[i].value);
@@ -62,11 +103,10 @@ btnAdd.onclick = function(e){
         $.ajax({
             url         : document.location.origin + "/settings/ProsesSystem/addVillaSystem.php",
             data        : fileFormat,
-            accepts     : "text/html",
             method      : "POST",
             contentType : false,
+            cache       : false,
             processData : false,
-            crossDomain : false,
             beforeSend  : function(){
                     
                 boolAddVilla = true;
