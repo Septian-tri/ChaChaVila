@@ -73,6 +73,8 @@ function disabledButtonSend(type, button, action, buttonValue) {
 //fungsi menampilkan floating notifkasi
 function messageNotification(Pesan, Mode) {
 
+    console.log(Pesan);
+
     function buatDiv(PesanDiv, modeDiv) {
 
         var elemenNotifikasi = document.getElementsByClassName('notifikasi')[0];

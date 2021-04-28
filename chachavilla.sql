@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Apr 2021 pada 00.34
+-- Waktu pembuatan: 28 Apr 2021 pada 17.41
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.3.13
 
@@ -45,13 +45,6 @@ CREATE TABLE `admindata` (
   `kodeverifikasi` text CHARACTER SET utf8mb4 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
 
---
--- Dumping data untuk tabel `admindata`
---
-
-INSERT INTO `admindata` (`primkey_data_admin`, `namapengguna`, `namapanggilan`, `nikktp`, `email`, `idrandom`, `statusakun`, `durasiterkunci`, `typeakun`, `password`, `phonenumber`, `tanggalbergabung`, `typepengguna`, `kodeverifikasi`) VALUES
-(1, 'U2VwdGlhbiBUcml3aWRpYW50byBQdXRyYQ==', 'Septian', 'MTIzNDU2Nzg5MDEyMzQ1Ng==', 'c2VwdGlhbnRyaXdpZGlhbkBnbWFpbC5jb20=', '856974D69F', 'Terbuka', '0', 'Master_Admin', '905f943efb68abe45e3405a74adb18a2', 'MDgzODc0NDU0ODg0', '10-04-2021 21:09:38', 'Non_Customer', 'Terverifikasi.b8ec7eb002c65207dc6a0885fb763ed7');
-
 -- --------------------------------------------------------
 
 --
@@ -81,13 +74,6 @@ CREATE TABLE `temptokenmasuk` (
   `typeDataMasuk` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` text COLLATE latin1_general_cs NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
-
---
--- Dumping data untuk tabel `temptokenmasuk`
---
-
-INSERT INTO `temptokenmasuk` (`idToken`, `tanggalLogin`, `token`, `idrandom`, `typeDataMasuk`, `email`) VALUES
-(1, 1618869994, '6400ab9a5fc46470965760a91d8c0d06', '856974D69F', 'Non_Customer', 'c2VwdGlhbnRyaXdpZGlhbkBnbWFpbC5jb20=');
 
 -- --------------------------------------------------------
 
@@ -125,7 +111,9 @@ CREATE TABLE `villa` (
   `statusvilla` text COLLATE latin1_general_cs NOT NULL,
   `idunikvilla` text COLLATE latin1_general_cs NOT NULL,
   `fasilitasvilla` text COLLATE latin1_general_cs NOT NULL,
-  `hargavilla` varchar(100) COLLATE latin1_general_cs NOT NULL
+  `hargavilla` varchar(100) COLLATE latin1_general_cs NOT NULL,
+  `deskripsi` text COLLATE latin1_general_cs NOT NULL,
+  `thumbnail` text COLLATE latin1_general_cs NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
 
 --
@@ -170,7 +158,7 @@ ALTER TABLE `villa`
 -- AUTO_INCREMENT untuk tabel `admindata`
 --
 ALTER TABLE `admindata`
-  MODIFY `primkey_data_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `primkey_data_admin` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `logresetpassword`
@@ -182,7 +170,7 @@ ALTER TABLE `logresetpassword`
 -- AUTO_INCREMENT untuk tabel `temptokenmasuk`
 --
 ALTER TABLE `temptokenmasuk`
-  MODIFY `idToken` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idToken` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `userdata`

@@ -171,7 +171,7 @@ if(count($_GET) === 0){
     }
 
     function cekGambar($gambar){
-        
+
         switch(exif_imagetype($gambar)){
 
             case 'IMAGETYPE_JPEG' :
@@ -191,6 +191,25 @@ if(count($_GET) === 0){
             break;
 
         }
+
+    }
+
+    function hapusFolder($folderUtama){
+
+        foreach(glob(rtrim($folderUtama, "/")."/*") as $fileDalemFolder){
+            
+            if(is_file($fileDalemFolder)){
+
+                unlink($fileDalemFolder);
+
+            }else if(is_dir($fileDalemFolder)){
+                
+                hapusFolder($fileDalemFolder);
+
+            }
+        }
+
+        rmdir($folderUtama);
 
     }
 }

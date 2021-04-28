@@ -48,6 +48,7 @@ btnAdd.onclick = function(e){
 
                         for(var j = 0; j < FV[i].files.length; j++){
 
+                            
                             if(FV[i].files[j].size > 1048576){
 
                                 alert("Maaf Proses tidak dapat di lanjut kan file dengan nama " + FV[i].files[j].name + " Memiliki Ukuran lebih dari 1 MB");
@@ -57,6 +58,8 @@ btnAdd.onclick = function(e){
                             }else{
 
                                 fileFormat.append(FV[i].id + "[]", FV[i].files[j]);
+                                console.log(FV[i].files.length);
+
 
                             }
 
@@ -79,17 +82,9 @@ btnAdd.onclick = function(e){
                 fileFormat.append(FV[i].id, FV[i].value.split(".").join(""));
             
             }else if(FV[i].id === "deskripsi"){
-
-                // if(tinymce.activeEditor.getContent()){
-
-                    fileFormat.append(FV[i].id, tinymce.activeEditor.getContent());
-
-                // }else{
-
-                //     fileFormat.append(FV[i].id, FV[i].value);
-
-                // }
-
+                
+                fileFormat.append(FV[i].id, tinymce.activeEditor.getContent());
+                
             }else{
 
                 fileFormat.append(FV[i].id, FV[i].value);

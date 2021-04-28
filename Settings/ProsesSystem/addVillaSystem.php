@@ -134,10 +134,11 @@ if(cekSession() === false){
                                     
                                                                 }else{
                                                                     
-                                                                    $tempJumlahFVT  = 0;
-                                                                    $tempIdFVT      = 0;
-                                                                    $tempNonFVT     = 0;
-                                                                    $tempFVTKosong  = "";
+                                                                    $tempJumlahFVT      = 0;
+                                                                    $tempIdFVT          = 0;
+                                                                    $tempNonFVT         = 0;
+                                                                    $tempFVTKosong      = "";
+                                                                    $dataJsonFasilitas  = [];
         
                                                                     for($i = 0; $i < count($_POST); $i++){
         
@@ -157,6 +158,7 @@ if(cekSession() === false){
                                                                                 }else{
 
                                                                                     $tempJumlahFVT+=1;
+                                                                                    array_push($dataJsonFasilitas, array(array_keys($_POST)[$i] => $_POST[array_keys($_POST)[$i]]));
                                                                                 
                                                                                 }
                                                                                
@@ -167,6 +169,20 @@ if(cekSession() === false){
         
                                                                            }
         
+                                                                        }else if(explode("_", array_keys($_POST)[$i])[0] === "FVC"){
+
+                                                                
+                                                                            if($_POST[array_keys($_POST)[$i]] === "true" XOR $_POST[array_keys($_POST)[$i]] === "false"){
+
+                                                                                array_push($dataJsonFasilitas, array(array_keys($_POST)[$i] => $_POST[array_keys($_POST)[$i]]));
+
+                                                                            }else{
+
+                                                                                sendErrorMessage("Data yang di masukan pada Vasilitas villa tidak valid", "notificationErrorField",  array_keys($_POST)[$i]);
+                                                                                return false;
+
+                                                                            }
+
                                                                         }
                                                                        
                                                                     }
@@ -218,51 +234,161 @@ if(cekSession() === false){
                                                                                             
                                                                                             if(count($_FILES) <= 1){
 
-                                                                                                sendErrorMessage("Silhakan Masukan 1 atau lebih foto pendukung", "notificationErrorField", "a");
+                                                                                                sendErrorMessage("Silhakan Masukan 1 atau lebih foto pendukung", "notificationErrorField", "FVG_BagunanLuar");
                                                                                                 return false;
 
                                                                                             }else{
 
-                                                                                                for($j = 0; $j < count($_FILES); $j++){
-
-                                                                                                    if(explode("_", array_keys($_FILES)[$j])[0] === "FVG"){
-
-                                                                                                        if(count($_FILES[array_keys($_FILES)[$j]]['name']) > 5){
-
-                                                                                                            sendErrorMessage('Maaf Batas multiple hanya sampai 5 gambar', "notificationErrorField", array_keys($_FILES)[$j]);
-                                                                                                            return false;
-
+                                                                                                function cekIDRandom($koneksi, $idRandom){
+                                                                                                    $queryIdRandom = mysqli_query($koneksi, "SELECT * FROM villa WHERE  idunikvilla = BINARY('".$idRandom."') ");
+                
+                                                                                                    if(!$queryIdRandom){
+                                                                                                        
+                                                                                                        return  false;
+                                                                                                    
+                                                                                                    }else{
+                
+                                                                                                        if(mysqli_num_rows($queryIdRandom) > 0){
+                                                                                                            
+                                                                                                            return $idRandom.(mysqli_num_rows($queryIdRandom) + 1);
+                                                                                                        
                                                                                                         }else{
+                
+                                                                                                            return $idRandom;
+                
+                                                                                                        }
+                
+                                                                                                    }
+                                                                                                }
+                                                                                                
+                                                                                                $queryJumlahVilla   = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM villa"));
+                                                                                                $namaVillaFolder    = md5(htmlentities($_POST['NamaVilla'], ENT_QUOTES));
+                                                                                                $namaVilla          = htmlentities($_POST['NamaVilla'], ENT_QUOTES);
+                                                                                                $alamatVilla        = htmlentities($_POST['AlamatVilla'], ENT_QUOTES);
+                                                                                                $hargaVilla         = $_POST['HargaVilla'];
+                                                                                                $deskripsiVilla     = htmlentities($_POST['deskripsi'], ENT_QUOTES);
+                                                                                                $admin              = base64_decode(mysqli_fetch_array($queryCekDataAdmin)['namapengguna']);
+                                                                                                $tanggalDiBuat      = date("d-m-Y H:i:s", strtotime("today ".date("H:i:s")));
+                                                                                                $idUnikVilla        = strtoupper(substr(md5($namaVilla." ".$tanggalDiBuat." ".$queryJumlahVilla), 0, 15));
+                                                                                                $finalIdRandom      = cekIDRandom($koneksi, $idUnikVilla);
+                                                                                                $linkDefaultVilla   = "../../Villa/"; 
+                                                                                                $objekJsonGambar    = [];
 
-                                                                                                            for($k = 0; $k < count($_FILES[array_keys($_FILES)[$j]]['size']); $k++){
+                                                                                                if(!is_dir($linkDefaultVilla.$finalIdRandom)){
+                                                                                                    
+                                                                                                    if(!mkdir($linkDefaultVilla.$finalIdRandom)){
+                                                                                                        
+                                                                                                        sendErrorMessage('Pembuatan Direktori nama Vila Gagal Di buat Proses Di hentikan' , "notificationErrorField", array_keys($_FILES)[$j]);
+                                                                                                        return false;
 
-                                                                                                                if($_FILES[array_keys($_FILES)[$j]]['size'][$k] > 1048576){
-    
-                                                                                                                    sendErrorMessage('Gambar Dengan nama '.$_FILES[array_keys($_FILES)[$j]]['name'][$k].' melebihin 1 MB Proses di hentikan' , "notificationErrorField", array_keys($_FILES)[$j]);
-                                                                                                                    return false;
-    
-                                                                                                                }else{
-    
-                                                                                                                    if(exif_imagetype($_FILES[array_keys($_FILES)[$j]]['tmp_name'][$k]) !== IMAGETYPE_JPEG && exif_imagetype($_FILES[array_keys($_FILES)[$j]]['tmp_name'][$k]) !==  IMAGETYPE_PNG){
-    
-                                                                                                                        sendErrorMessage('Gambar Dengan nama '.$_FILES[array_keys($_FILES)[$j]]['name'][$k].' Bukan merupakan format gambar yang di support' , "notificationErrorField", array_keys($_FILES)[$j]);
+                                                                                                    }
+                                                                                                
+                                                                                                }
+
+                                                                                                if(!move_uploaded_file($_FILES['ThumbnailVilla']['tmp_name'], $linkDefaultVilla.$finalIdRandom."/".$finalIdRandom."_"."Thumbnail".substr($_FILES['ThumbnailVilla']['name'], strlen($_FILES['ThumbnailVilla']['name'])-4, strlen($_FILES['ThumbnailVilla']['name'])))){
+
+                                                                                                    hapusFolder($linkDefaultVilla.$finalIdRandom);
+                                                                                                    sendErrorMessage("Gagal Menyimpan data Villa Thumnail gagal di upload", "notificationErrorField", null);
+                                                                                                    return false;
+
+                                                                                                }else{
+
+                                                                                                    for($j = 0; $j < count($_FILES); $j++){
+
+                                                                                                        if(explode("_", array_keys($_FILES)[$j])[0] === "FVG"){
+
+                                                                                                            if(count($_FILES[array_keys($_FILES)[$j]]['name']) > 5){
+
+                                                                                                                sendErrorMessage('Maaf Batas multiple hanya sampai 5 gambar', "notificationErrorField", array_keys($_FILES)[$j]);
+                                                                                                                return false;
+
+                                                                                                            }else{
+
+                                                                                                                $nomorUrutGambar = 1;
+                                                                                        
+                                                                                                                for($k = 0; $k < count($_FILES[array_keys($_FILES)[$j]]['name']); $k++){
+
+                                                                                                                    $namaGambarVilla = $_FILES[array_keys($_FILES)[$j]]['name'][$k];
+                                                                                                                    
+                                                                                                                    if($_FILES[array_keys($_FILES)[$j]]['size'][$k] > 1048576){
+        
+                                                                                                                        sendErrorMessage('Gambar Dengan nama '.$namaGambarVilla.' melebihin 1 MB Proses di hentikan' , "notificationErrorField", array_keys($_FILES)[$j]);
                                                                                                                         return false;
         
                                                                                                                     }else{
         
-                                                                                                                        
+                                                                                                                        if(exif_imagetype($_FILES[array_keys($_FILES)[$j]]['tmp_name'][$k]) !== "IMAGETYPE_JPEG" XOR exif_imagetype($_FILES[array_keys($_FILES)[$j]]['tmp_name'][$k]) !==  "IMAGETYPE_PNG"){
+        
+                                                                                                                            sendErrorMessage('Gambar Dengan nama '.$namaGambarVilla.' Bukan merupakan format gambar yang di support' , "notificationErrorField", array_keys($_FILES)[$j]);
+                                                                                                                            return false;
+            
+                                                                                                                        }else{
+
+                                                                                                                            $direktoriNamaVilla     = $linkDefaultVilla.$finalIdRandom;
+                                                                                                                            $subDirektoriNamaVilla  = $linkDefaultVilla.$finalIdRandom."/".array_keys($_FILES)[$j];
+                                                                                                                            
+                                                                                                                            if(!is_dir($subDirektoriNamaVilla)){
+                                                                                                                                
+                                                                                                                                if(!mkdir($subDirektoriNamaVilla)){
+                                                                                                                                    
+                                                                                                                                    hapusFolder($subDirektoriNamaVilla);
+                                                                                                                                    sendErrorMessage('Pembuatan Sub Direktori nama Vila Gagal Di buat Proses Di hentikan. folder Di Cleanup' , "notificationErrorField", array_keys($_FILES)[$j]);
+                                                                                                                                    return false;
+
+                                                                                                                                }
+        
+                                                                                                                            }
+                                                                                                                            
+                                                                                                                            if(!move_uploaded_file($_FILES[array_keys($_FILES)[$j]]['tmp_name'][$k], $subDirektoriNamaVilla."/".$namaGambarVilla)){
+
+                                                                                                                                sendErrorMessage('Pembuatan Sub Direktori nama Vila Gagal Di buat Proses Di hentikan. folder Di Cleanup' , "notificationErrorField", array_keys($_FILES)[$j]);
+                                                                                                                                return false;
+
+                                                                                                                            }else{
+
+                                                                                                                                $namaGambarRename = $idUnikVilla."_".array_keys($_FILES)[$j]."_".$nomorUrutGambar.substr($namaGambarVilla, strlen($namaGambarVilla)-4, strlen($namaGambarVilla));
+                                                                                                                                if(rename($subDirektoriNamaVilla."/".$namaGambarVilla, $subDirektoriNamaVilla."/".$namaGambarRename)){
+
+                                                                                                                                    array_push($objekJsonGambar, array("typeGambar" => array_keys($_FILES)[$j], "namaGambar" => $namaGambarRename, "urlGambar" => $subDirektoriNamaVilla."/"));
+
+                                                                                                                                }else{
+                                                                                                                                    
+                                                                                                                                    sendErrorMessage('File Dengan nama '.$_FILES[array_keys($_FILES)[$j]]['name'][$k]." Gagal Di upload", "notificationErrorField", array_keys($_FILES)[$j]);
+
+                                                                                                                                }
+
+                                                                                                                            }
+
+                                                                                                                        }
         
                                                                                                                     }
-    
+
+                                                                                                                    $nomorUrutGambar++;
+        
                                                                                                                 }
-    
+
                                                                                                             }
 
                                                                                                         }
 
                                                                                                     }
 
+                                                                                                    $queryInputDataVilla = mysqli_query($koneksi, "INSERT INTO villa (namavilla, lokasivilla, statusvilla, idunikvilla, fasilitasvilla, hargavilla, deskripsi, thumbnail) VALUES ('$namaVilla', '$alamatVilla', 'KOSONG', '$finalIdRandom', '".json_encode(array("fotoVilla" => $objekJsonGambar, "fasilitasVilla" => $dataJsonFasilitas))."', '$hargaVilla', '$deskripsiVilla', '".$finalIdRandom."_"."Thumbnail".substr($_FILES['ThumbnailVilla']['name'], strlen($_FILES['ThumbnailVilla']['name'])-4, strlen($_FILES['ThumbnailVilla']['name']))."')  ");
+
+                                                                                                    if(!$queryInputDataVilla){
+                                                                                                        
+                                                                                                        hapusFolder($linkDefaultVilla.$finalIdRandom);
+                                                                                                        sendErrorMessage("Gagal Menyimpan data Villa ".mysqli_error($koneksi), "notificationErrorField", null);
+                                                                                                        return false;
+                                                                                                        
+                                                                                                    }else{
+
+                                                                                                        sendErrorMessage("Vila dengan IDUNIK ".$finalIdRandom." Berhasil Di Simpan !", "notificationErrorField", null);
+                                                                                                        return false;
+
+                                                                                                    }
                                                                                                 }
+
 
                                                                                             }
                                                                                     

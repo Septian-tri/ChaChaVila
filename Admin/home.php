@@ -571,6 +571,7 @@ if(!(include $urlKosong."Settings/ProsesSystem/mainsystem.php")){
         </nav>
         <!-- sidebar-wrapper  -->
         <?php
+
             $homePage = explode("/", $_SERVER['REQUEST_URI'])[count(explode("/", $_SERVER['REQUEST_URI']))-1];
             if($homePage === "home.php"){
                 
