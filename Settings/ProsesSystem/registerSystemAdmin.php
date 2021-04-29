@@ -1,5 +1,10 @@
 <?php
+if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 
+    die("JANGAN DI MASUKAN YANG ENGGAK2");
+    return false;
+
+}else{
 //include main sistem untuk mengambil function
 include("mainSystem.php");
 
@@ -392,7 +397,7 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                                                         /* text-shadow: #fbdf03 1px 1px 0px; */
                                                                                                                         font-weight: none;">
 
-                                                                                                                        Terima Kasih '.$namaPengguna.' Pendaftaran Kamu Berhasil
+                                                                                                                        Terima Kasih '.base64_decode($namaPengguna).' Pendaftaran Kamu Berhasil
                                                                                                                     </h1>
 
                                                                                                                     <hr style="
@@ -433,11 +438,6 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                                                             text-align:left;
                                                                                                                             /* color: white; */
                                                                                                                             ">
-
-                                                                                                                            Salam Hangat CEO & OWNER,
-                                                                                                                            <br/>
-                                                                                                                            <br>
-                                                                                                                            Septian & Ahmad 
                                                                                                                             <hr style="width: 140px;margin-left:0px;">
                                                                                                                         </div>
                                                                                                                         <br>
@@ -523,5 +523,6 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
     
     }
 
+}
 }
 ?>

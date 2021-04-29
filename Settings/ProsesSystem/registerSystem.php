@@ -1,5 +1,10 @@
 <?php
+if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 
+    die("JANGAN DI MASUKAN YANG ENGGAK2");
+    return false;
+
+}else{
 //include main sistem untuk mengambil function
 include("mainSystem.php");
 
@@ -500,5 +505,6 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
     
     }
 
+}
 }
 ?>

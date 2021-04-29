@@ -1,50 +1,38 @@
 <?php
+if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 
-$urlHalaman     = $_SERVER['REQUEST_URI'];
-$explodeUrl     = explode("/", $urlHalaman);
-$hitungHalaman  = count($explodeUrl)-1;
-$urlKosong      = ""; 
-
-for($i = 1; $i < $hitungHalaman; $i++){
-
-    $urlKosong.="../";
-
-}
-
-if(!(include $urlKosong."Settings/ProsesSystem/mainsystem.php")){
-
+    die("JANGAN DI MASUKAN YANG ENGGAK2");
     return false;
 
 }else{
 
-    if(!(include $urlKosong."Settings/ConfigDB/index.php")){
+        $urlHalaman     = $_SERVER['REQUEST_URI'];
+        $explodeUrl     = explode("/", $urlHalaman);
+        $hitungHalaman  = count($explodeUrl)-1;
+        $urlKosong      = ""; 
 
-        return false;
+        for($i = 1; $i < $hitungHalaman; $i++){
 
-    }else{
-    
-        session_name("_lgn");
-        session_start();
+            $urlKosong.="../";
 
-        if(cekSession() === false){
+        }
 
-            session_destroy();
-            header("location:index.php");
+        if(!(include $urlKosong."Settings/ProsesSystem/mainsystem.php")){
+
             return false;
 
         }else{
 
-            if(!preg_match('/^[a-zA-Z0-9\.\*\_\-\?]{135}$/', $_SESSION['TokenSementara'])){
+            if(!(include $urlKosong."Settings/ConfigDB/index.php")){
 
-                session_destroy();
-                header("location:index.php");
                 return false;
 
             }else{
+            
+                session_name("_lgn");
+                session_start();
 
-                $queryCekDataSession = mysqli_query($koneksi, "SELECT * FROM temptokenmasuk WHERE idrandom = BINARY('".base64_decode($_SESSION['IR'])."') and token = BINARY('".md5(explode('?', $_SESSION['TokenSementara'])[0])."') and email = BINARY('".base64_decode($_SESSION['EM'])."')");
-
-                if(!$queryCekDataSession){
+                if(cekSession() === false){
 
                     session_destroy();
                     header("location:index.php");
@@ -52,7 +40,7 @@ if(!(include $urlKosong."Settings/ProsesSystem/mainsystem.php")){
 
                 }else{
 
-                    if(mysqli_num_rows($queryCekDataSession) !== 1){
+                    if(!preg_match('/^[a-zA-Z0-9\.\*\_\-\?]{135}$/', $_SESSION['TokenSementara'])){
 
                         session_destroy();
                         header("location:index.php");
@@ -60,43 +48,63 @@ if(!(include $urlKosong."Settings/ProsesSystem/mainsystem.php")){
 
                     }else{
 
-                        $queryCekDataAdmin = mysqli_query($koneksi, "SELECT * FROM admindata WHERE idrandom = BINARY('".base64_decode($_SESSION['IR'])."') and email = BINARY('".base64_decode($_SESSION['EM'])."')");
+                        $queryCekDataSession = mysqli_query($koneksi, "SELECT * FROM temptokenmasuk WHERE idrandom = BINARY('".base64_decode($_SESSION['IR'])."') and token = BINARY('".md5(explode('?', $_SESSION['TokenSementara'])[0])."') and email = BINARY('".base64_decode($_SESSION['EM'])."')");
 
-                        if(!$queryCekDataAdmin){
-                
+                        if(!$queryCekDataSession){
+
                             session_destroy();
                             header("location:index.php");
                             return false;
-                
+
                         }else{
 
-                            if(cekValidasiEmail($koneksi, 'admindata') === false){
+                            if(mysqli_num_rows($queryCekDataSession) !== 1){
 
-                                header("location:verifikasiEmailAdmin.php");
-                        
+                                session_destroy();
+                                header("location:index.php");
+                                return false;
+
                             }else{
 
-                                if(mysqli_num_rows($queryCekDataAdmin) !== 1){
-                
+                                $queryCekDataAdmin = mysqli_query($koneksi, "SELECT * FROM admindata WHERE idrandom = BINARY('".base64_decode($_SESSION['IR'])."') and email = BINARY('".base64_decode($_SESSION['EM'])."')");
+
+                                if(!$queryCekDataAdmin){
+                        
                                     session_destroy();
                                     header("location:index.php");
                                     return false;
-                    
+                        
                                 }else{
-                    
-                                $dataAdmin       = mysqli_fetch_array($queryCekDataAdmin);
-                                $namaPengguna    = base64_decode($dataAdmin['namapengguna']);
-                                $namaPanggilan   = $dataAdmin['namapanggilan'];
-                                $typeAkun        = $dataAdmin['typeakun'];
-                    
+
+                                    if(cekValidasiEmail($koneksi, 'admindata') === false){
+
+                                        header("location:".$urlKosong."admin/verifikasiEmailAdmin.php");
+                                
+                                    }else{
+
+                                        if(mysqli_num_rows($queryCekDataAdmin) !== 1){
+                        
+                                            session_destroy();
+                                            header("location:index.php");
+                                            return false;
+                            
+                                        }else{
+                            
+                                        $dataAdmin       = mysqli_fetch_array($queryCekDataAdmin);
+                                        $namaPengguna    = base64_decode($dataAdmin['namapengguna']);
+                                        $namaPanggilan   = $dataAdmin['namapanggilan'];
+                                        $typeAkun        = $dataAdmin['typeakun'];
+                            
+                                        }
+                                    }        
                                 }
-                            }        
+                            }
                         }
                     }
                 }
             }
         }
-    }
+
 }
 ?>
 <!DOCTYPE html>

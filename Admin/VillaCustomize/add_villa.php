@@ -1,3 +1,11 @@
+<?php
+if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
+
+    die("JANGAN DI MASUKAN YANG ENGGAK2");
+    return false;
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
