@@ -111,7 +111,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 
                                                         if(mysqli_num_rows($queryCekIDVilla) !== 1){
 
-                                                            sendErrorMessage("Tidak Dapat Menghapus, Terjadi Error Database Hubungi Pengembang !", "notificationErrorField", $_POST['IDUV']);
+                                                            sendErrorMessage("Data Villa Mungkin Sudah Di Hapus, jika ini terus Terjadi Refresh Halaman !", "notificationErrorField", $_POST['IDUV']);
                                                             return false;
 
                                                         }else{
@@ -156,15 +156,37 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 
                                                 }
 
+                                                function UPDATE($koneksi){
+
+                                                    $queryCekIDVilla = mysqli_query($koneksi, "SELECT * FROM villa WHERE idunikvilla = BINARY('".$_POST['IDUV']."') ");
+
+                                                    if(!$queryCekIDVilla){
+
+                                                        sendErrorMessage("Maaf Kami Gagal Menemukan Data Yang Di minta ".mysqli_error($koneksi), "notificationErrorField", $_POST['IDUV']);
+                                                        return false;
+
+                                                    }else{
+
+                                                        if(mysqli_num_rows($queryCekIDVilla) !== 1){
+
+                                                            sendErrorMessage("Data Villa Mungkin Sudah Di Hapus, jika ini terus Terjadi Refresh Halaman !", "notificationErrorField", $_POST['IDUV']);
+                                                            return false;
+
+                                                        }else{
+
+
+
+                                                        }
+
+                                                    }
+
+                                                }
+
                                                 switch($_POST['KODE']){
 
                                                     case 'HAPUS'  :
                                                         HAPUS($koneksi, $_POST['IDUV']);
                                                         return false;
-                                                    break;
-
-                                                    case 'UPDATE' :
-                                                        UPDATE();
                                                     break;
 
                                                     default :

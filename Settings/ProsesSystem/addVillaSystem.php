@@ -193,8 +193,6 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                                                         
                                                                         }
             
-                                                                        
-            
                                                                         if($tempJumlahFVT <= 0){
             
                                                                             sendErrorMessage("Silahkan isi minimal satu fasilitas ", "notificationErrorField", $tempFVTKosong);
@@ -240,8 +238,16 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                                                                                 
                                                                                                 if(count($_FILES) <= 1){
 
-                                                                                                    sendErrorMessage("Silhakan Masukan 1 atau lebih foto pendukung", "notificationErrorField", "FVG_BagunanLuar");
-                                                                                                    return false;
+                                                                                                    for($ha = 0; $ha < count($_POST); $ha++){
+
+                                                                                                        if(explode("_", array_keys($_POST)[$ha])[0] === "FVG"){
+
+                                                                                                            sendErrorMessage("Silhakan isi terlebih dahulu 1 atau lebih file pendukung", "notificationErrorField", array_keys($_POST)[$ha]);
+                                                                                                            return false;
+
+                                                                                                        }
+
+                                                                                                    }
 
                                                                                                 }else{
 
@@ -279,6 +285,19 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                                                                                     $finalIdRandom      = cekIDRandom($koneksi, $idUnikVilla);
                                                                                                     $linkDefaultVilla   = "../../Villa/"; 
                                                                                                     $objekJsonGambar    = [];
+                                                                                                    $fasilitasGambarKSG = [];
+                                                                                                    $totalPost          = count($_POST);
+
+                                                                                                    for($h = 0; $h < $totalPost; $h++){
+
+                                                                                                        if(explode("_", array_keys($_POST)[$h])[0] === "FVG"){
+                                                                                                            
+                                                                                                            array_push($fasilitasGambarKSG, array_keys($_POST)[$h]);
+
+                                                                                                        }
+
+                                                                                                    }
+
 
                                                                                                     if(!is_dir($linkDefaultVilla.$finalIdRandom)){
                                                                                                         
@@ -379,7 +398,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 
                                                                                                         }
 
-                                                                                                        $queryInputDataVilla = mysqli_query($koneksi, "INSERT INTO villa (namavilla, lokasivilla, statusvilla, idunikvilla, fasilitasvilla, hargavilla, deskripsi, thumbnail) VALUES ('$namaVilla', '$alamatVilla', 'KOSONG', '$finalIdRandom', '".json_encode(array("fotoVilla" => $objekJsonGambar, "fasilitasVilla" => $dataJsonFasilitas))."', '$hargaVilla', '$deskripsiVilla', '".$finalIdRandom."_"."Thumbnail".substr($_FILES['ThumbnailVilla']['name'], strlen($_FILES['ThumbnailVilla']['name'])-4, strlen($_FILES['ThumbnailVilla']['name']))."')  ");
+                                                                                                        $queryInputDataVilla = mysqli_query($koneksi, "INSERT INTO villa (primkey_data_villa, namavilla, lokasivilla, statusvilla, idunikvilla, fasilitasvilla, hargavilla, deskripsi, thumbnail) VALUES ('".($queryJumlahVilla + 1)."', '$namaVilla', '$alamatVilla', 'KOSONG', '$finalIdRandom', '".json_encode(array("fotoVilla" => $objekJsonGambar, "fasilitasVilla" => $dataJsonFasilitas, "fotoTidakDiSet" => $fasilitasGambarKSG))."', '$hargaVilla', '$deskripsiVilla', '".$finalIdRandom."_"."Thumbnail".substr($_FILES['ThumbnailVilla']['name'], strlen($_FILES['ThumbnailVilla']['name'])-4, strlen($_FILES['ThumbnailVilla']['name']))."')  ");
 
                                                                                                         if(!$queryInputDataVilla){
                                                                                                             

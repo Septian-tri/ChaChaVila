@@ -7,6 +7,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 }else{
 
         $urlHalaman     = $_SERVER['REQUEST_URI'];
+        $hostHalaman    = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/";
         $explodeUrl     = explode("/", $urlHalaman);
         $hitungHalaman  = count($explodeUrl)-1;
         $urlKosong      = ""; 
@@ -465,10 +466,10 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="VillaCustomize/list_villa_admin.php">Lists villa</a>
+                                        <a href="<?php echo $hostHalaman; ?>Admin/VillaCustomize/list_villa_admin.php">Lists villa</a>
                                     </li>
                                     <li>
-                                        <a href="OrdersCustomize/order_list.php">Orders</a>
+                                        <a href="<?php echo $hostHalaman; ?>Admin/OrdersCustomize/order_list.php">Orders</a>
                                     </li>
                                     <li>
                                         <a href="#">Credit cart</a>

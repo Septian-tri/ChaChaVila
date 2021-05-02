@@ -247,22 +247,22 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                             <ul class="list-group">
                                 <label class="mb-2 ml-4">Bangunan Luar / Luar Villa</label>
                                 <li class="list-group-item ml-4 mb-2">
-                                    <input type="file" class="FV form-control-file" id="FVG_BagunanLuar" multiple accept="image/*" maxlength="4">
+                                    <input type="file" class="FV form-control-file" id="FVG_Bangunan_Luar_Villa" multiple accept="image/*" maxlength="4">
                                 </li>
 
                                 <label class="mb-2 ml-4">Foto Ruangan Villa, E.g Kamar Mandi, kamar tidur Dll</label>
                                 <li class="list-group-item ml-4 mb-2">
-                                    <input type="file" class="FV form-control-file" id="FVG_BagunanDalam" multiple accept="image/*">
+                                    <input type="file" class="FV form-control-file" id="FVG_Bagunan_Dalam_Villa" multiple accept="image/*">
                                 </li>
 
                                 <label class="mb-2 ml-4">Fasilitas Tambahan</label>
                                 <li class="list-group-item ml-4 mb-2">
-                                    <input type="file" class="FV form-control-file" id="FVG_FasilitasTambahan" multiple accept="image/*">
+                                    <input type="file" class="FV form-control-file" id="FVG_Fasilitas_Tambahan_Villa" multiple accept="image/*">
                                 </li>
 
                                 <label class="mb-2 ml-4">Area Rekreasi, E.g Taman Bermain, Taman Bungan, kolam renang dll</label>
                                 <li class="list-group-item ml-4 mb-2">
-                                    <input type="file" class="FV form-control-file" id="FVG_AreaRekreasi" multiple accept="image/*">
+                                    <input type="file" class="FV form-control-file" id="FVG_Area_Rekreasi_Villa" multiple accept="image/*">
                                 </li>
                             </ul>
                         </div>

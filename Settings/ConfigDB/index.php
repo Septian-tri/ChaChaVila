@@ -8,10 +8,10 @@ $namaDataBase       = "chachavilla";
 
 
 //jika terdapat parameter pada alamat URL maka akan di alihkan ke halaman beranda
-if(count($_GET) !== 0){
+if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 
-    header("location:../../");
-    exit;
+    die("JANGAN DI MASUKAN YANG ENGGAK2");
+    return false;
 
 }else{
 

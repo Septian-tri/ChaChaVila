@@ -89,7 +89,8 @@ function messageNotification(Pesan, Mode) {
         if (modeDiv === null && PesanDiv != null) {
 
             var elemenDiv = document.createElement('div');
-            elemenDiv.className = "notifikasi d-flex justify-content-center";
+            elemenDiv.className         = "notifikasi d-flex justify-content-center";
+            elemenDiv.style.cssText     = "z-index : 30000; text-align:center; position: fixed; left: 0; right: 0;";
             elemenDiv.innerHTML =
                 '<div class="mx-auto" style="position:fixed; top:0; " >' +
                     '<div class="modal-content">' +

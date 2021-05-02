@@ -5,6 +5,65 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 die("JANGAN DI MASUKAN YANG ENGGAK2");
 return false;
 
+}else{
+
+    include "../../Settings/ConfigDB/index.php";
+
+    if(!isset($_POST['IDUV'], $_POST['KODE'])){
+
+        header("location:list_villa_admin.php");
+        return false;
+
+    }else{
+
+        
+        if(preg_match('/^[\s]*$/', $_POST['KODE'])){
+
+            header("location:list_villa_admin.php");
+            return false;
+
+        }else{
+
+            if(preg_match('/^[\s]*$/', $_POST['IDUV'])){
+
+                header("location:list_villa_admin.php");
+                return false;
+
+            }else{
+                
+                if(!preg_match('/^[0-9a-fA-F]*$/', $_POST['IDUV'])){
+
+                    header("location:list_villa_admin.php");
+                    return false;
+
+                }else{
+
+                    $queryCekIDVilla = mysqli_query($koneksi, "SELECT * FROM villa WHERE idunikvilla = BINARY('".$_POST['IDUV']."') ");
+                    
+                    if(!$queryCekIDVilla){
+                        
+                        die("Maaf Kami Gagal Menemukan Data Yang Di minta ".mysqli_error($koneksi));
+                        return false;
+                    
+                    }else{
+                        
+                        if(mysqli_num_rows($queryCekIDVilla) !== 1){
+                            
+                            die("Data Villa tidak di temukan, data Mungkin Sudah Di Hapus, jika ini terus Terjadi Refresh Halaman !");
+                            return false;
+                        
+                        }else{
+
+                            $dataVilla = mysqli_fetch_array($queryCekIDVilla);
+
+                        }
+                    }
+                }
+            }
+        }
+
+    }  
+
 }
 
 ?>
@@ -32,7 +91,7 @@ return false;
             <div class="container-fluid">
                 <!-- format isi buat nambahin page / halaman baru -->
 
-                <h2 class="border-bottom border-gray mb-4">Update Villa</h2>
+                <h2 class="border-bottom border-gray mb-4">Update Data <?php echo $dataVilla['namavilla']; ?></h2>
 
                 <!-- NOTE VALUE NANTI DI SHOW PER INPUTAN NYA -->
 
@@ -40,7 +99,7 @@ return false;
                     <form class="needs-validation" novalidate="">
                         <div class="mb-3">
                             <label>Nama Villa</label>
-                            <input type="text" class="FV form-control" id="NamaVilla" required>
+                            <input type="text" class="FV form-control" id="NamaVilla" value="<?php echo $dataVilla['namavilla']; ?>">
                             <div class="invalid-feedback">
                                 Valid first name is required.
                             </div>
@@ -49,7 +108,7 @@ return false;
                         <div class="mb-3">
                             <label>Alamat</label>
                             <div class="input-group">
-                                <textarea class="FV form-control" id="AlamatVilla" aria-label="With textarea"></textarea>
+                                <textarea class="FV form-control" id="AlamatVilla" aria-label="With textarea"><?php echo $dataVilla['lokasivilla']; ?></textarea>
                             </div>
                         </div>
 
@@ -61,8 +120,18 @@ return false;
                         </script>
                             <label>Desripsi</label>
                             <div class="input-group">
-                                <textarea class="FV form-control" id="deskripsi" aria-label="With textarea"></textarea>
+                                <textarea class="FV form-control" id="deskripsi" aria-label="With textarea"><?php echo $dataVilla['deskripsi']; ?></textarea>
                             </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address2">Tumbnail</label>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <?php echo '<img style="width:30%;" src="../../villa/'.$dataVilla['idunikvilla'].'/'.$dataVilla['thumbnail'].'" />'; ?>
+                                    <input type="file" class="FV" accept="image/*" id="ThumbnailVilla">
+                                </li>
+                            </ul>
                         </div>
 
                         <div class="mb-3">
@@ -235,46 +304,73 @@ return false;
                         </div>
 
                         <div class="mb-3">
-                            <label for="address2">Tumbnail</label>
-
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <!-- <input type="file" class="form-control-file" id="exampleFormControlFile1"> -->
-                                    <input type="file" class="FV" accept="image/*" id="ThumbnailVilla">
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="mb-3">
                             <label>Foto-foto</label>
-                            <ul class="list-group">
-                                <label class="mb-2 ml-4">Bangunan</label>
-                                <li class="list-group-item ml-4 mb-2">
-                                    <input type="file" class="FV form-control-file" id="exampleFormControlFile1" multiple>
-                                </li>
+                            <?php 
 
-                                <label class="mb-2 ml-4">Kamar Tidur</label>
-                                <li class="list-group-item ml-4 mb-2">
-                                    <input type="file" class="FV form-control-file" id="exampleFormControlFile1" multiple>
-                                </li>
+                            $fasilitasEncode    = json_decode($dataVilla['fasilitasvilla']);
+                            $fotoVilla          = $fasilitasEncode -> fotoVilla;
+                            $fasilitas          = $fasilitasEncode -> fasilitasVilla;
+                            $fotoTidakDiSet     = $fasilitasEncode -> fotoTidakDiSet;
+                            $totalFotoTDS       = count($fotoTidakDiSet);
+                            $typeGambar         = [];
 
-                                <label class="mb-2 ml-4">Kamar Mandi</label>
-                                <li class="list-group-item ml-4 mb-2">
-                                    <input type="file" class="FV form-control-file" id="exampleFormControlFile1" multiple>
-                                </li>
+                            for($i = 0; $i < count($fotoVilla); $i++){
 
-                                <label class="mb-2 ml-4">Fasilitas Tambahan</label>
-                                <li class="list-group-item ml-4 mb-2">
-                                    <input type="file" class="FV form-control-file" id="exampleFormControlFile1" multiple>
-                                </li>
+                                if(!in_array($fotoVilla[$i] -> typeGambar, $typeGambar)){
 
-                                <label class="mb-2 ml-4">Area Rekreasi</label>
-                                <li class="list-group-item ml-4 mb-2">
-                                    <input type="file" class="FV form-control-file" id="exampleFormControlFile1" multiple>
-                                </li>
-                            </ul>
-                        </div>
+                                    array_push($typeGambar, $fotoVilla[$i] -> typeGambar);
 
+                                }
+
+                            }
+
+                            for($j = 0; $j < count($typeGambar); $j++){
+
+                                echo '<div id="'.$typeGambar[$j].'" style="display: flex; margin:20px auto;  flex-flow: wrap;align-items: center;justify-content: center;background-color: #d9fbd9;padding: 5px;border-radius: 5px;">';    
+                                echo '<h6 style="width:100%;">FASILITAS '.str_replace("_", " ", str_replace("FVG_", "", $typeGambar[$j])).'</h6>';
+
+                                    for($k = 0; $k < count($fotoVilla); $k++){
+
+                                        if($fotoVilla[$k] -> typeGambar === $typeGambar[$j]){
+                                            
+                                            //EDIT GAMBAR DISINI
+                                            echo '<img style="width :20%; margin:5px;" src="'.$fotoVilla[$k] -> urlGambar.$fotoVilla[$k] -> namaGambar.'">';
+
+                                        }
+
+                                    } 
+                               
+                                //eDIT FILE INPUT DISINI
+                               echo '<ul class="list-group" style="width:100%;">
+                                        <label class="mb-2 ml-4">'.str_replace("_", " ", str_replace("FVG_", "", $typeGambar[$j])).'</label>
+                                        <li class="list-group-item ml-4 mb-2">
+                                            <input type="file" class="FV form-control-file" id="'.$typeGambar[$j].'" multiple accept="image/*">
+                                        </li>
+                                     </ul>';
+                               echo '</div>';
+
+                            }
+
+                            if($totalFotoTDS > 0){
+                                //eDIT FILE INPUT DISINI, hanya akan menampilkan field file yang tidak di isi foto pada saat add villa
+                                echo '<ul class="list-group">';
+
+                                    for($l = 0; $l < $totalFotoTDS; $l++){
+
+                                        
+                                        echo '<label class="mb-2 ml-4">'.str_replace("_", " ", str_replace("FVG_", "", $fotoTidakDiSet[$l])).'</label>
+                                                <li class="list-group-item ml-4 mb-2">
+                                                    <input type="file" class="FV form-control-file" id="'.$fotoTidakDiSet[$l].'" multiple accept="image/*">
+                                                </li>';
+                                            
+
+                                    }   
+                                    
+                                echo '</ul>';
+
+                            }
+
+                            ?>
                         <div class="mb-3">
                             <label for="address2">Alamat maps</label>
 
@@ -310,7 +406,7 @@ return false;
             </div>
         </main>
     </div>
-    <script src="../../Settings/js/dashboardAdmin.js"></script>
+    <script src="../../Settings/js/updateVillaSystem.js"></script>
 </body>
 
 </html>

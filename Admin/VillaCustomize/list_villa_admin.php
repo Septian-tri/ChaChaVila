@@ -78,12 +78,19 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                                     ID VILLA : '.$dataVilla['idunikvilla'].' || STATUS VILLA : '.$dataVilla['statusvilla'].'
                                                 </p>
                                                 <div class="m-auto pb-3">
-                                                    <a href="update_villa.php" class="btn btn-warning">
-                                                        <i class="fa fa-cog text-white"></i>
-                                                    </a>
-                                                    <button type="button" id="'.$dataVilla['idunikvilla'].'" class="HVilla btn btn-danger">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
+                                                    <form name="'.$dataVilla['idunikvilla'].'" method="POST" action="update_villa.php">
+
+                                                        <input type="hidden" value="'.$dataVilla['idunikvilla'].'" name="IDUV" />
+                                                        <input type="hidden" value="UPDATE" name="KODE" />
+
+                                                        <button id="U.'.$dataVilla['idunikvilla'].'" type="submit" class="UVilla btn btn-warning">
+                                                            <i class="fa fa-cog text-white"></i>
+                                                        </button>
+                                                    
+                                                        <button type="button" id="'.$dataVilla['idunikvilla'].'" class="HVilla btn btn-danger">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>';
 

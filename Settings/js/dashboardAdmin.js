@@ -58,8 +58,6 @@ btnAdd.onclick = function(e){
                             }else{
 
                                 fileFormat.append(FV[i].id + "[]", FV[i].files[j]);
-                                console.log(FV[i].files.length);
-
 
                             }
 
@@ -70,8 +68,12 @@ btnAdd.onclick = function(e){
                 }else{
 
                     fileFormat.append(FV[i].id, FV[i].files[0]);
-
+                    
                 }
+
+            }else{
+
+                fileFormat.append(FV[i].id, FV[i].files[0]);
 
             }
         
@@ -84,7 +86,7 @@ btnAdd.onclick = function(e){
             }else if(FV[i].id === "deskripsi"){
                 
                 fileFormat.append(FV[i].id, tinymce.activeEditor.getContent());
-                
+
             }else{
 
                 fileFormat.append(FV[i].id, FV[i].value);
