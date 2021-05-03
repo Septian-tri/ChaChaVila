@@ -120,7 +120,19 @@ return false;
                         </script>
                             <label>Desripsi</label>
                             <div class="input-group">
-                                <textarea class="FV form-control" id="deskripsi" aria-label="With textarea"><?php echo $dataVilla['deskripsi']; ?></textarea>
+                                <textarea class="FV form-control" id="deskripsi" aria-label="With textarea"><?php echo $dataVilla['deskripsi'];?></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address">Harga Permalam</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="btn bg-success text-white">
+                                        Rp.
+                                    </span>
+                                </div>
+                                <input type="text" class="FV form-control" id="HargaVilla" placeholder="Total harga permalam" value="<?php echo preg_replace('/\B(?<!\.)(?=(\d{3})+(?!\d))/', ".", $dataVilla['hargavilla']); ?>">
                             </div>
                         </div>
 
@@ -137,180 +149,94 @@ return false;
                         <div class="mb-3">
                             <label>Fasilitas</label>
                             <ul class="list-group">
-                                <li class="list-group-item">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="btn bg-success">
-                                                <i class="fa fa-bed text-white"></i>
-                                            </span>
-                                        </div>
-                                        <input type="text" class="FV form-control border-0" id="FVT_KamarTidur" placeholder="Jumlah kamar">
-                                    </div>
-                                </li>
 
-                                <li class="list-group-item">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="btn bg-success">
-                                                <i class="fa fa-bath text-white"></i>
-                                            </span>
-                                        </div>
-                                        <input type="text" class="FV form-control border-0" id="FVT_KamarMandi" placeholder="jumlah kamar mandi">
-                                    </div>
-                                </li>
+                                <?php
 
-                                <li class="list-group-item">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="btn bg-success">
-                                                <i class="fa fa-coffee text-white"></i>
-                                            </span>
-                                        </div>
-                                        <input type="text" class="FV form-control border-0" id="FVT_RuangTamu" placeholder="jumlah ruang tamu">
-                                    </div>
-                                </li>
+                                    $fasilitasEncode    = json_decode($dataVilla['fasilitasvilla']);
+                                    $fotoVilla          = $fasilitasEncode -> fotoVilla;
+                                    $fasilitas          = $fasilitasEncode -> fasilitasVilla;
+                                    $fotoTidakDiSet     = $fasilitasEncode -> fotoTidakDiSet;
+                                    $jumlahFasilitas    = count($fasilitas);
+                                    $arrayFasilitas     = [];
 
-                                <li class="list-group-item">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="btn bg-success">
-                                                <i class="fa fa-cutlery text-white"></i>
-                                            </span>
-                                        </div>
-                                        <input type="text" class="FV form-control border-0" id="FVT_Dapur" placeholder="jumlah dapur">
-                                    </div>
-                                </li>
+                                    for($a = 0; $a < $jumlahFasilitas; $a++){
 
-                                <li class="list-group-item">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="btn bg-success">
-                                                <i class="fa fa-suitcase text-white"></i>
-                                            </span>
-                                        </div>
-                                        <input type="text" class="FV form-control border-0" id="FVT_RuangKeluarga" placeholder="jumlah ruang multiguna">
-                                    </div>
-                                </li>
+                                        foreach((array) $fasilitas[$a] as $nomorUrut => $text){
 
-                                <li class="list-group-item">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="btn bg-success">
-                                                <i class="fa fa-moon-o text-white"></i>
-                                            </span>
-                                        </div>
-                                        <input type="text" class="FV form-control border-0" id="FVT_Mushola" placeholder="Mushola">
-                                    </div>
-                                </li>
+                                            $arrayFasilitas[$nomorUrut] = $text;
 
-                                <li class="list-group-item">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="btn bg-success">
-                                                <i class="fa fa-pagelines text-white"></i>
-                                            </span>
-                                        </div>
-                                        <input type="text" class="FV form-control border-0" id="FVT_TempatHiburan" placeholder="tempat hiburan seperti taman/kolam renang/area bermain">
-                                    </div>
-                                </li>
+                                        }
 
-                                <li class="list-group-item">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="btn bg-success">
-                                                <i class="fa fa-snowflake-o text-white"></i>
-                                            </span>
-                                        </div>
-                                        <!-- <input type="text" class="FV form-control border-0" id="FVT_Ac" placeholder="AC yes/no"> -->
-                                        <div class="custom-control custom-checkbox my-auto ml-5" style="left:1.8px;">
-                                            <input type="checkbox" class="FV custom-control-input" id="FVT_Ac" aria-label="...">
-                                            <label class="custom-control-label text-secondary" for="FVT_Ac">AC yes/no</label>
-                                        </div>
-                                    </div>
-                                </li>
+                                    }
 
-                                <li class="list-group-item">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="btn bg-success">
-                                                <i class="fa fa-shower text-white"></i>
-                                            </span>
-                                        </div>
-                                        <!-- <input type="text" class="FV form-control border-0" id="FVT_AirPanas" placeholder="Air panas yes/no"> -->
-                                        <div class="custom-control custom-checkbox my-auto ml-5">
-                                            <input type="checkbox" class="FV custom-control-input" id="FVT_AirPanas" aria-label="...">
-                                            <label class="custom-control-label text-secondary" for="FVT_AirPanas">Air panas yes/no</label>
-                                        </div>
-                                    </div>
-                                </li>
+                                    for($b = 0; $b < count($arrayFasilitas); $b++){
+                                        
+                                    $namaIdFasilitas = array_keys($arrayFasilitas)[$b];
+                                    
 
-                                <li class="list-group-item">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="btn bg-success">
-                                                <i class="fa fa-wifi text-white"></i>
-                                            </span>
-                                        </div>
-                                        <!-- <input type="text" class="FV form-control border-0" id="FVT_Wifi" placeholder="Wifi ya/tidak"> -->
-                                        <div class="custom-control custom-checkbox my-auto ml-5">
-                                            <input type="checkbox" class="FV custom-control-input" id="FVT_Wifi" aria-label="...">
-                                            <label class="custom-control-label text-secondary" for="FVT_Wifi">Air panas yes/no</label>
-                                        </div>
-                                    </div>
-                                </li>
+                                        if(explode("_", $namaIdFasilitas)[0] === "FVT"){
 
-                                <li class="list-group-item">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="btn bg-success">
-                                                <i class="fa fa-television text-white"></i>
-                                            </span>
-                                        </div>
-                                        <!-- <input type="text" class="FV form-control border-0" id="FVT_Televisi" placeholder="Tv ya/tidak"> -->
-                                        <div class="custom-control custom-checkbox my-auto ml-5">
-                                            <input type="checkbox" class="FV custom-control-input" id="FVT_Televisi" aria-label="...">
-                                            <label class="custom-control-label text-secondary" for="FVT_Televisi">Tv yes/no</label>
-                                        </div>
-                                    </div>
-                                </li>
+                                                if($arrayFasilitas[$namaIdFasilitas] === "TIDAK DI ISI"){
 
-                                <li class="list-group-item">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="btn bg-success">
-                                                <i class="fa fa-car text-white"></i>
-                                            </span>
-                                        </div>
-                                        <!-- <input type="text" class="FV form-control border-0" id="FVT_AreaParkir" placeholder="Area parkir ya/tidak"> -->
-                                        <div class="custom-control custom-checkbox my-auto ml-5">
-                                            <input type="checkbox" class="FV custom-control-input" id="FVT_AreaParkir" aria-label="...">
-                                            <label class="custom-control-label text-secondary" for="FVT_AreaParkir">Area parkir yes/no</label>
-                                        </div>
-                                    </div>
-                                </li>
+                                                    $statusBidangText= "";
+
+                                                }else{
+
+                                                    $statusBidangText = $arrayFasilitas[$namaIdFasilitas];
+
+                                                }
+
+                                                echo'
+                                                <li class="list-group-item">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="btn bg-success">
+                                                                <i class="fa fa-bed text-white"></i>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" class="FV form-control border-0" id="'.$namaIdFasilitas.'" placeholder="'.explode("_", $namaIdFasilitas)[1].'" value="'.$statusBidangText.'">
+                                                    </div>
+                                                </li>';
+
+                                        }else if(explode("_", $namaIdFasilitas)[0] === "FVC"){
+
+                                            if($arrayFasilitas[$namaIdFasilitas] === "true"){
+
+                                                $statusCentang = "checked";
+
+                                            }else{
+
+                                                $statusCentang = "";
+
+                                            }
+
+                                            echo'
+                                            <li class="list-group-item">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="btn bg-success">
+                                                            <i class="fa fa-snowflake-o text-white"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="custom-control custom-checkbox my-auto ml-5" style="left:1.8px;">
+                                                        <input type="checkbox" class="FV custom-control-input" id="'.$namaIdFasilitas.'" aria-label="..." '.$statusCentang.'>
+                                                        <label class="custom-control-label text-secondary" for="'.$namaIdFasilitas.'">'.explode("_", $namaIdFasilitas)[1].'</label>
+                                                    </div>
+                                                </div>
+                                            </li>';
+
+                                        }
+
+                                    }
+
+                                ?>
                             </ul>
                         </div>
 
                         <div class="mb-3">
-                            <label for="address">Harga Permalam</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="btn bg-success text-white">
-                                        Rp.
-                                    </span>
-                                </div>
-                                <input type="text" class="FV form-control" id="HargaVilla" placeholder="Total harga permalam">
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
                             <label>Foto-foto</label>
-                            <?php 
+                            <?php
 
-                            $fasilitasEncode    = json_decode($dataVilla['fasilitasvilla']);
-                            $fotoVilla          = $fasilitasEncode -> fotoVilla;
-                            $fasilitas          = $fasilitasEncode -> fasilitasVilla;
-                            $fotoTidakDiSet     = $fasilitasEncode -> fotoTidakDiSet;
                             $totalFotoTDS       = count($fotoTidakDiSet);
                             $typeGambar         = [];
 
@@ -326,7 +252,7 @@ return false;
 
                             for($j = 0; $j < count($typeGambar); $j++){
 
-                                echo '<div id="'.$typeGambar[$j].'" style="display: flex; margin:20px auto;  flex-flow: wrap;align-items: center;justify-content: center;background-color: #d9fbd9;padding: 5px;border-radius: 5px;">';    
+                                echo '<div id="'.$typeGambar[$j].'" style="display: flex; margin:20px auto;  flex-flow: wrap;align-items: center;justify-content: center;background-color: #ebf9eb;padding: 5px;border-radius: 5px;">';    
                                 echo '<h6 style="width:100%;">FASILITAS '.str_replace("_", " ", str_replace("FVG_", "", $typeGambar[$j])).'</h6>';
 
                                     for($k = 0; $k < count($fotoVilla); $k++){
@@ -358,8 +284,8 @@ return false;
                                     for($l = 0; $l < $totalFotoTDS; $l++){
 
                                         
-                                        echo '<label class="mb-2 ml-4">'.str_replace("_", " ", str_replace("FVG_", "", $fotoTidakDiSet[$l])).'</label>
-                                                <li class="list-group-item ml-4 mb-2">
+                                        echo '<label class="mb-2">'.str_replace("_", " ", str_replace("FVG_", "", $fotoTidakDiSet[$l])).'</label>
+                                                <li class="list-group-item mb-2">
                                                     <input type="file" class="FV form-control-file" id="'.$fotoTidakDiSet[$l].'" multiple accept="image/*">
                                                 </li>';
                                             

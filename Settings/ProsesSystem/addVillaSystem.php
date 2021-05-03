@@ -168,12 +168,13 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                                                                     
                                                                                     }
                                                                                 
-                                                                            }else{
-            
-                                                                                    $tempFVTKosong = "";
-                                                                                    $tempFVTKosong = array_keys($_POST)[$tempNonFVT-$tempIdFVT];
-            
-                                                                            }
+                                                                                }else{
+                
+                                                                                        $tempFVTKosong = "";
+                                                                                        $tempFVTKosong = array_keys($_POST)[$tempNonFVT-$tempIdFVT];
+                                                                                        array_push($dataJsonFasilitas, array(array_keys($_POST)[$i] => "TIDAK DI ISI"));
+                
+                                                                                }
             
                                                                             }else if(explode("_", array_keys($_POST)[$i])[0] === "FVC"){
 
