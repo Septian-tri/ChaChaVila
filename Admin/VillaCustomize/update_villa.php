@@ -115,7 +115,8 @@ return false;
                         <div class="mb-3">
                         <script type="text/javascript">
                             tinymce.init({
-                                selector: '#deskripsi'
+                                selector    : '#deskripsi',
+                                plugins     : 'autoresize, table, emoticons'
                             });
                         </script>
                             <label>Desripsi</label>
@@ -240,6 +241,7 @@ return false;
                             $totalFotoTDS       = count($fotoTidakDiSet);
                             $typeGambar         = [];
 
+
                             for($i = 0; $i < count($fotoVilla); $i++){
 
                                 if(!in_array($fotoVilla[$i] -> typeGambar, $typeGambar)){
@@ -251,29 +253,51 @@ return false;
                             }
 
                             for($j = 0; $j < count($typeGambar); $j++){
-
+                                
+                                $hitungJumlahAddFile = 0;
+                                
                                 echo '<div id="'.$typeGambar[$j].'" style="display: flex; margin:20px auto;  flex-flow: wrap;align-items: center;justify-content: center;background-color: #ebf9eb;padding: 5px;border-radius: 5px;">';    
                                 echo '<h6 style="width:100%;">FASILITAS '.str_replace("_", " ", str_replace("FVG_", "", $typeGambar[$j])).'</h6>';
 
                                     for($k = 0; $k < count($fotoVilla); $k++){
+                                        
 
                                         if($fotoVilla[$k] -> typeGambar === $typeGambar[$j]){
-                                            
                                             //EDIT GAMBAR DISINI
-                                            echo '<img style="width :20%; margin:5px;" src="'.$fotoVilla[$k] -> urlGambar.$fotoVilla[$k] -> namaGambar.'">';
+                                            echo '<div class="boxGambar" style="margin :10px; display:flex;align-content: center; width:20%; align-items: center;flex-wrap: wrap;justify-content: center;">';
 
+                                                echo '<input type="checkbox" class="FV CKH custom-checkbox" id="HCK_'.$fotoVilla[$k] -> namaGambar.'"><label for="'.$fotoVilla[$k] -> namaGambar.'">HAPUS</label>';
+                                                echo '<img class="FV" style="width :100%;   margin:5px;" src="'.$fotoVilla[$k] -> urlGambar.$fotoVilla[$k] -> namaGambar.'">';
+                                                echo '<input type="file" style="width:200px; text-align:center; font-size:12px;" id="'.$fotoVilla[$k] -> namaGambar.'" class="FV UPG form-control-file" accept="image/*">';
+
+                                            echo '</div>';
+
+                                            $hitungJumlahAddFile+=1;
+
+                                        } 
+                                        
+                                    }
+                                    
+                                    echo '<ul class="list-group">';
+                                    
+                                    if(abs(5 -  $hitungJumlahAddFile) > 0){
+
+                                            
+                                        for($n = 1; $n <= abs(5 -  $hitungJumlahAddFile); $n++){
+                                            
+                                            echo '<label class="mb-2">Tambah FASILITAS '.str_replace("_", " ", str_replace("FVG_", "", $typeGambar[$j])).' '.$n.'</label>
+                                                  <li class="list-group-item mb-2">
+                                                    
+                                                    <input type="file" class="FV form-control-file" id="'.$typeGambar[$j].'" accept="image/*">
+                                                  
+                                                  </li>';
                                         }
 
-                                    } 
-                               
-                                //eDIT FILE INPUT DISINI
-                               echo '<ul class="list-group" style="width:100%;">
-                                        <label class="mb-2 ml-4">'.str_replace("_", " ", str_replace("FVG_", "", $typeGambar[$j])).'</label>
-                                        <li class="list-group-item ml-4 mb-2">
-                                            <input type="file" class="FV form-control-file" id="'.$typeGambar[$j].'" multiple accept="image/*">
-                                        </li>
-                                     </ul>';
-                               echo '</div>';
+
+                                    }   
+                                    
+                                    echo '</ul>';
+                                    echo '</div>';
 
                             }
 
@@ -294,7 +318,27 @@ return false;
                                     
                                 echo '</ul>';
 
+                                
                             }
+                            echo '<script>
+                                
+                                    function IDUV(){
+
+                                        var IDUV;
+
+                                        return IDUV = "'.$dataVilla['idunikvilla'].'";
+
+                                    }
+
+                                    function KODE(){
+
+                                        var KODE;
+
+                                        return KODE = "UPDATE";
+
+                                    }
+
+                                </script>';
 
                             ?>
                         <div class="mb-3">
@@ -303,7 +347,7 @@ return false;
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <span>
-                                        admin bisa input lokasi dengan maps
+                                       COMIING SOOOON admin bisa input lokasi dengan maps
                                     </span>
                                 </li>
                             </ul>
@@ -316,13 +360,13 @@ return false;
 
                                 <!-- NOTE BILA CANCEL/BATAL REDIRECT KE LIST VILLA -->
 
-                                <button class="btn btn-warning btn-lg btn-block" type="submit" id="advBtn">Batal</button>
+                                <!-- <button class="btn btn-warning btn-lg btn-block" type="submit" id="advBtn">Batal</button> -->
                             </div>
                             <div class="col-md-6">
 
                                 <!-- NOTE SEELAH UPDATE LANGSUNG REDIRECT KE LIST VILLA -->
 
-                                <button class="btn btn-info btn-lg btn-block" type="submit" id="advBtn">Update</button>
+                                <button class="btn btn-info btn-lg btn-block" type="button" id="updBtn">Update</button>
                             </div>
                         </div>
                     </form>
