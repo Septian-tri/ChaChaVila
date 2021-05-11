@@ -116,6 +116,6 @@
                 </ul>
             </div>
         </nav>
-        <div class="notifikasi"></div>
+        <!-- <div class="notifikasi"></div> -->
     </body>
 </html>

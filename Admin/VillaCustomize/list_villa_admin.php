@@ -51,7 +51,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                             </div>
                         </div>
                     </div>
-
+                    
                     <?php
                     
                     $queryDataVilla = mysqli_query($koneksi, "SELECT * FROM villa  WHERE primkey_data_villa <= 6 order by primkey_data_villa desc");
@@ -65,7 +65,12 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 
                                 if(mysqli_num_rows($queryDataVilla) <= 0){
 
-                                    echo "BELUM TERDAPAT DATA VILLA !";
+                                    // echo "BELUM TERDAPAT DATA VILLA !";
+                                    echo '  
+                                        <div class="border rounded text-center py-5 px-2 h4">
+                                            Belum Terdapat Data Villa
+                                        </div>
+                                    ';
 
                                 }else{
 

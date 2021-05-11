@@ -138,21 +138,21 @@
             </a>
             <div class="btn-group">
                 <a class="lightbox" href="#1">
-                    <img src="http://placehold.it/700x400"/>
+                    <img src="http://placehold.it/700x400" class="img-fluid" alt="Responsive image"/>
                 </a> 
                 <a class="lightbox" href="#2">
-                    <img src="http://placehold.it/400x400"/>
+                    <img src="http://placehold.it/400x400" class="img-fluid" alt="Responsive image"/>
                 </a> 
             </div>
             <div class="btn-group">
                 <a class="lightbox" href="#3">
-                    <img src="http://placehold.it/700x400"/>
+                    <img src="http://placehold.it/700x400" class="img-fluid" alt="Responsive image"/>
                 </a> 
                 <a class="lightbox" href="#4">
-                    <img src="http://placehold.it/400x400"/>
+                    <img src="http://placehold.it/400x400" class="img-fluid" alt="Responsive image"/>
                 </a>
                 <a class="lightbox" href="#5">
-                    <img src="http://placehold.it/400x400"/>
+                    <img src="http://placehold.it/400x400" class="img-fluid" alt="Responsive image"/>
                 </a>
             </div>
 
