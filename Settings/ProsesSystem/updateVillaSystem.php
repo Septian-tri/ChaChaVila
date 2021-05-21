@@ -309,7 +309,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                                                                                             $hargaVilla         = $_POST['HargaVilla'];
                                                                                                             $deskripsiVilla     = addslashes(htmlentities($_POST['deskripsi'], ENT_QUOTES));
                                                                                                             $admin              = base64_decode(mysqli_fetch_array($queryCekDataAdmin)['namapengguna']);
-                                                                                                            $fotoVIllaJson      = json_decode($dataVilla['fasilitasvilla']) -> fotoVilla;
+                                                                                                            $originalFotoVilla  = json_decode($dataVilla['fasilitasvilla']) -> fotoVilla;
                                                                                                             $tanggalDiBuat      = date("d-m-Y H:i:s", strtotime("today ".date("H:i:s")));
                                                                                                             $idUnikVilla        = $dataVilla['idunikvilla'];
                                                                                                             $linkDefaultVilla   = "../../Villa/"; 
@@ -349,85 +349,205 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                                                                                                 }
 
                                                                                                             }
-                                                                                                            
-                                                                                                            // for($j = 0; $j < count($_FILES); $j++){
-                                                                
-                                                                                                            //     if(explode("_", array_keys($_FILES)[$j])[0] === "FVG"){
-                                                                
-                                                                                                            //         if(count($_FILES[array_keys($_FILES)[$j]]['name']) > 5){
-                                                                
-                                                                                                            //             sendErrorMessage('Maaf Batas multiple hanya sampai 5 gambar', "notificationErrorField", array_keys($_FILES)[$j]);
-                                                                                                            //             return false;
+
+                                                                                                            // if(isset($_FILES['UpdateFoto'])){
+
+                                                                                                            //     if(count($_FILES['UpdateFoto']) > 0){
                                                                                                                     
-                                                                                                            //         }else{
+                                                                                                            //         for($q = 0; $q < count($_FILES['UpdateFoto']['name']); $q++){
+
+                                                                                                                       
                                                                                                                         
-                                                                                                            //             $nomorUrutGambar = 1;
-                                                                                                                        
-                                                                                                            //             for($k = 0; $k < count($_FILES[array_keys($_FILES)[$j]]['name']); $k++){
-                                                                                                                            
-                                                                                                            //                 $namaGambarVilla = $_FILES[array_keys($_FILES)[$j]]['name'][$k];
-                                                                                                                            
-                                                                                                            //                 if($_FILES[array_keys($_FILES)[$j]]['size'][$k] > 1048576){
-                                                                                                                                
-                                                                                                            //                     sendErrorMessage('Gambar Dengan nama '.$namaGambarVilla.' melebihin 1 MB Proses di hentikan' , "notificationErrorField", array_keys($_FILES)[$j]);
-                                                                                                            //                     return false;
-                                                                                                                            
-                                                                                                            //                 }else{
-                                                                                                                                
-                                                                                                            //                     if(exif_imagetype($_FILES[array_keys($_FILES)[$j]]['tmp_name'][$k]) !== "IMAGETYPE_JPEG" XOR exif_imagetype($_FILES[array_keys($_FILES)[$j]]['tmp_name'][$k]) !==  "IMAGETYPE_PNG"){
-                                                                
-                                                                                                            //                         sendErrorMessage('Gambar Dengan nama '.$namaGambarVilla.' Bukan merupakan format gambar yang di support' , "notificationErrorField", array_keys($_FILES)[$j]);
-                                                                                                            //                         return false;
-                                                                
-                                                                                                            //                     }else{
-                                                                                                                                    
-                                                                                                            //                         $direktoriNamaVilla     = $linkDefaultVilla.$idUnikVilla;
-                                                                                                            //                         $subDirektoriNamaVilla  = $linkDefaultVilla.$idUnikVilla."/".array_keys($_FILES)[$j];
-                                                                                                                                                            
-                                                                                                            //                         if(!is_dir($subDirektoriNamaVilla)){
-                                                                                                                                        
-                                                                                                            //                             if(!mkdir($subDirektoriNamaVilla)){
-                                                                                                                                            
-                                                                                                            //                                 hapusFolder($subDirektoriNamaVilla);
-                                                                                                            //                                 sendErrorMessage('Pembuatan Sub Direktori nama Vila Gagal Di buat Proses Di hentikan. folder Di Cleanup' , "notificationErrorField", array_keys($_FILES)[$j]);
-                                                                                                            //                                 return false;
-                                                                                                                                        
-                                                                                                            //                             }
-                                                                                                                                    
-                                                                                                            //                         }
-                                                                                                                                    
-                                                                                                            //                         if(!move_uploaded_file($_FILES[array_keys($_FILES)[$j]]['tmp_name'][$k], $subDirektoriNamaVilla."/".$namaGambarVilla)){
-                                                                
-                                                                                                            //                             sendErrorMessage('Pembuatan Sub Direktori nama Vila Gagal Di buat Proses Di hentikan. folder Di Cleanup' , "notificationErrorField", array_keys($_FILES)[$j]);
-                                                                                                            //                             return false;
-                                                                                                                                    
-                                                                                                            //                         }else{
-                                                                                                                                        
-                                                                                                            //                             $namaGambarRename = $idUnikVilla."_".array_keys($_FILES)[$j]."_".$nomorUrutGambar.substr($namaGambarVilla, strlen($namaGambarVilla)-4, strlen($namaGambarVilla));
-                                                                                                                                        
-                                                                                                            //                             if(rename($subDirektoriNamaVilla."/".$namaGambarVilla, $subDirektoriNamaVilla."/".$namaGambarRename)){
-                                                                
-                                                                                                            //                                 array_push($objekJsonGambar, array("typeGambar" => array_keys($_FILES)[$j], "namaGambar" => $namaGambarRename, "urlGambar" => $subDirektoriNamaVilla."/"));
-                                                                
-                                                                                                            //                             }else{
-                                                                                                                                            
-                                                                                                            //                                 sendErrorMessage('File Dengan nama '.$_FILES[array_keys($_FILES)[$j]]['name'][$k]." Gagal Di upload", "notificationErrorField", array_keys($_FILES)[$j]);
-                                                                
-                                                                                                            //                             }
-                                                                                                                                    
-                                                                                                            //                         }
-                                                                                                                                
-                                                                                                            //                     }
-                                                                                                                            
-                                                                                                            //                 } $nomorUrutGambar++;
-                                                                                                                        
-                                                                                                            //             }
-                                                                                                                    
                                                                                                             //         }
-                                                                                                                
+                                                                                                                    
                                                                                                             //     }
-                                                                                                            
+                                                                                                                
                                                                                                             // }
+                                                                                                            for($j = 0; $j < count($_FILES); $j++){
+                                                                                                                
+                                                                                                                $explodeTypeGambar = explode("_", array_keys($_FILES)[$j])[0];
+
+                                                                                                                if($explodeTypeGambar === "FVG"){
+                                                                
+                                                                                                                    if(count($_FILES[array_keys($_FILES)[$j]]['name']) > 5){
+                                                                
+                                                                                                                        sendErrorMessage('Maaf Batas multiple hanya sampai 5 gambar', "notificationErrorField", array_keys($_FILES)[$j]);
+                                                                                                                        return false;
+                                                                                                                    
+                                                                                                                    }else{
+                                                                                                                        
+                                                                                                                        $nomorUrutGambar = 1;
+                                                                                                                        
+                                                                                                                        for($k = 0; $k < count($_FILES[array_keys($_FILES)[$j]]['name']); $k++){
+                                                                                                                            
+                                                                                                                            $namaGambarVilla = $_FILES[array_keys($_FILES)[$j]]['name'][$k];
+                                                                                                                            
+                                                                                                                            if($_FILES[array_keys($_FILES)[$j]]['size'][$k] > 1048576){
+                                                                                                                                
+                                                                                                                                sendErrorMessage('Gambar Dengan nama '.$namaGambarVilla.' melebihin 1 MB Proses di hentikan' , "notificationErrorField", array_keys($_FILES)[$j]);
+                                                                                                                                return false;
+                                                                                                                            
+                                                                                                                            }else{
+                                                                                                                                
+                                                                                                                                if(exif_imagetype($_FILES[array_keys($_FILES)[$j]]['tmp_name'][$k]) !== 2 && exif_imagetype($_FILES[array_keys($_FILES)[$j]]['tmp_name'][$k]) !==  3){
+                                                                
+                                                                                                                                    sendErrorMessage('Gambar Dengan nama '.$namaGambarVilla.' Bukan merupakan format gambar yang di support' , "notificationErrorField", array_keys($_FILES)[$j]);
+                                                                                                                                    return false;
+                                                                
+                                                                                                                                }else{
+                                                                                                                                    
+                                                                                                                                    $direktoriNamaVilla     = $linkDefaultVilla.$idUnikVilla;
+                                                                                                                                    $subDirektoriNamaVilla  = $linkDefaultVilla.$idUnikVilla."/".array_keys($_FILES)[$j];
+                                                                                                                                                            
+                                                                                                                                    if(!is_dir($subDirektoriNamaVilla)){
+                                                                                                                                        
+                                                                                                                                        if(!mkdir($subDirektoriNamaVilla)){
+                                                                                                                                            
+                                                                                                                                            hapusFolder($subDirektoriNamaVilla);
+                                                                                                                                            sendErrorMessage('Pembuatan Sub Direktori nama Vila Gagal Di buat Proses Di hentikan. folder Di Cleanup' , "notificationErrorField", array_keys($_FILES)[$j]);
+                                                                                                                                            return false;
+                                                                                                                                        
+                                                                                                                                        }
+                                                                                                                                    
+                                                                                                                                    }
+                                                                                                                                    
+                                                                                                                                    if(!move_uploaded_file($_FILES[array_keys($_FILES)[$j]]['tmp_name'][$k], $subDirektoriNamaVilla."/".$namaGambarVilla)){
+                                                                
+                                                                                                                                        sendErrorMessage('Pembuatan Sub Direktori nama Vila Gagal Di buat Proses Di hentikan. folder Di Cleanup' , "notificationErrorField", array_keys($_FILES)[$j]);
+                                                                                                                                        return false;
+                                                                                                                                    
+                                                                                                                                    }else{
+                                                                                                                                        
+                                                                                                                                        if($nomorUrutGambar <= 5){
+                                                                                                                                            
+                                                                                                                                            $namaGambarRename = $idUnikVilla."_".array_keys($_FILES)[$j]."_".$nomorUrutGambar.substr($namaGambarVilla, strlen($namaGambarVilla)-4, strlen($namaGambarVilla));
+                                                                                                                                            
+                                                                                                                                            if(rename($subDirektoriNamaVilla."/".$namaGambarVilla, $subDirektoriNamaVilla."/".$namaGambarRename)){
+                                                                    
+                                                                                                                                                array_push($objekJsonGambar, array("typeGambar" => array_keys($_FILES)[$j], "namaGambar" => $namaGambarRename, "urlGambar" => $subDirektoriNamaVilla."/"));
+                                                                    
+                                                                                                                                            }else{
+                                                                                                                                                
+                                                                                                                                                sendErrorMessage('File Dengan nama '.$_FILES[array_keys($_FILES)[$j]]['name'][$k]." Gagal Di upload", "notificationErrorField", array_keys($_FILES)[$j]);
+                                                                    
+                                                                                                                                            }
+
+                                                                                                                                        }
+                                                                                                                                    
+                                                                                                                                    }
+                                                                                                                                
+                                                                                                                                }
+                                                                                                                            
+                                                                                                                            } $nomorUrutGambar++;
+                                                                                                                        
+                                                                                                                        }
+                                                                                                                    
+                                                                                                                    }
+                                                                                                                
+                                                                                                                }else if($explodeTypeGambar === "Update"){
+
+                                                                                                                    //update foto villa
+                                                                                                                    if($_FILES[array_keys($_FILES)[$j]]['size'] > 1048576){
+                                                                                                                            
+                                                                                                                        sendErrorMessage('Gambar Dengan nama '.$_FILES[array_keys($_FILES)[$j]]['name'].' melebihin 1 MB Proses di hentikan' , "notificationErrorField", null);
+                                                                                                                        return false;
+                                                                                                                        
+                                                                                                                    }else{
+
+                                                                                                                        if(exif_imagetype($_FILES[array_keys($_FILES)[$j]]['tmp_name']) !== 2 && exif_imagetype($_FILES[array_keys($_FILES)[$j]]['tmp_name']) !==  3){
+                                                                                                                            
+                                                                                                                            sendErrorMessage('Gambar Dengan nama '.$_FILES[array_keys($_FILES)[$j]]['name'].' Bukan merupakan format gambar yang di support' , "notificationErrorField", null);
+                                                                                                                            return false;
+                                                            
+                                                                                                                        }else{
+                                                                                                                            
+                                                                                                                            for($r = 0; $r < count($originalFotoVilla); $r++){
+                                                                                                                                
+                                                                                                                                if($originalFotoVilla[$r] -> namaGambar === str_replace("Update", $idUnikVilla, str_replace("-", ".", array_keys($_FILES)[$j]))){
+                                                                                                                                    
+                                                                                                                                    $alamatGambar       = $originalFotoVilla[$r] -> urlGambar;
+                                                                                                                                    $gambarLama         = $alamatGambar.$originalFotoVilla[$r] -> namaGambar;
+                                                                                                                                    $gambarUploadBaru   = $alamatGambar.$_FILES[array_keys($_FILES)[$j]]['name'];
+                                                                                                                                    $tmpName            = $_FILES[array_keys($_FILES)[$j]]['tmp_name'];
+
+                                                                                                                                    if(move_uploaded_file($tmpName, $gambarUploadBaru)){
+
+                                                                                                                                        if(file_exists($gambarLama)){
+
+                                                                                                                                            if(unlink($gambarLama)){
+            
+                                                                                                                                            }
+            
+                                                                                                                                        }
+                                                                                                                                        
+                                                                                                                                        rename($gambarUploadBaru, $gambarLama);
+                                                                                                                                    }
+
+                                                                                                                                }
+
+                                                                                                                            }
+                                                                                                                        
+                                                                                                                        }
+                                                                                                                    
+                                                                                                                    }
+
+                                                                                                                }else if($explodeTypeGambar === "UFVG"){
+
+                                                                                                                    if($_FILES[array_keys($_FILES)[$j]]['size'] > 1048576){
+                                                                                                                            
+                                                                                                                        sendErrorMessage('Gambar Dengan nama '.$_FILES[array_keys($_FILES)[$j]]['name'].' melebihin 1 MB Proses di hentikan' , "notificationErrorField", null);
+                                                                                                                        return false;
+                                                                                                                        
+                                                                                                                    }else{
+
+                                                                                                                        if(exif_imagetype($_FILES[array_keys($_FILES)[$j]]['tmp_name']) !== 2 && exif_imagetype($_FILES[array_keys($_FILES)[$j]]['tmp_name']) !==  3){
+                                                                                                                            
+                                                                                                                            sendErrorMessage('Gambar Dengan nama '.$_FILES[array_keys($_FILES)[$j]]['name'].' Bukan merupakan format gambar yang di support' , "notificationErrorField", null);
+                                                                                                                            return false;
+                                                            
+                                                                                                                        }else{
+
+                                                                                                                            $namaVillaTambah         = $_FILES[array_keys($_FILES)[$j]]['name'];
+                                                                                                                            $replaceUFVG             = str_replace("UFVG", "FVG", array_keys($_FILES)[$j]);
+                                                                                                                            $typeGambarBaru          = preg_replace('/[\_0-9]*$/', "", $replaceUFVG);
+                                                                                                                            $namaVillaTambahBaru     = $idUnikVilla."_".$replaceUFVG.substr($namaVillaTambah, strlen($namaVillaTambah)-4, strlen($namaVillaTambah));
+
+                                                                                                                            if(!file_exists($linkDefaultVilla.$idUnikVilla."/".$typeGambarBaru."/".$namaVillaTambahBaru)){
+
+                                                                                                                                if(move_uploaded_file($_FILES[array_keys($_FILES)[$j]]['tmp_name'], $linkDefaultVilla.$idUnikVilla."/".$typeGambarBaru."/".$namaVillaTambah)){
+                                                                                                                                    
+                                                                                                                                    if(rename($linkDefaultVilla.$idUnikVilla."/".$typeGambarBaru."/".$namaVillaTambah, $linkDefaultVilla.$idUnikVilla."/".$typeGambarBaru."/".$namaVillaTambahBaru)){
+
+                                                                                                                                        if(count($originalFotoVilla) > 0){
+                                                                                                                                            
+                                                                                                                                            if(in_array($namaVillaTambahBaru, array_column($originalFotoVilla, 'namaGambar'), true) === false){
+                    
+                                                                                                                                                array_push($objekJsonGambar, array('typeGambar' => $typeGambarBaru, 'namaGambar' => $namaVillaTambahBaru, 'urlGambar' => $linkDefaultVilla.$idUnikVilla."/".$typeGambarBaru."/"));
+                    
+                                                                                                                                            }
+                    
+                                                                                                                                        
+                                                                                                                                    }
+
+                                                                                                                                    }else{
+
+                                                                                                                                        if(file_exists($linkDefaultVilla.$idUnikVilla."/".$typeGambarBaru."/".$namaVillaTambah)){
+                                                                                                                                        
+                                                                                                                                            unlink($linkDefaultVilla.$idUnikVilla."/".$typeGambarBaru."/".$namaVillaTambah);
+
+                                                                                                                                        } 
+
+                                                                                                                                    }
+
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                        
+                                                                                                                    }
+                                                                                                                    
+                                                                                                                }
+                                                                                                                
+                                                                                                            }
 
                                                                                                             //update hapus villa
                                                                                                             if(isset($_POST['HAPUS'])){
@@ -443,10 +563,13 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 
                                                                                                                         $arrayHapusFotoVilla    = explode(",", $_POST['HAPUS']);
                                                                                                                         $jumlahHapusFotoVilla   = count($arrayHapusFotoVilla);
+                                                                                                                        $original               = json_decode($dataVilla['fasilitasvilla']) -> fotoVilla;
                                                                                                                         $fotoVIllaJson          = json_decode($dataVilla['fasilitasvilla']) -> fotoVilla;
+                                                                                                                        $fototidakDiSet         = json_decode($dataVilla['fasilitasvilla']) -> fotoTidakDiSet;
                                                                                                                         $jumlahFotoVilla        = count($fotoVIllaJson);
                                                                                                                         $typeGambarArray        = [];
-                                                                                                                        $fotoVIllaJsonBaru      = [];
+                                                                                                                        $totalDiHapus           = [];
+                                                                                                                        $totalFotoDiSet         = [];
 
                                                                                                                         foreach($fotoVIllaJson as $typeGambar){
                                                                                                                             
@@ -458,37 +581,110 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                                                                                                             
                                                                                                                         }
                                                                                                                         
-                                                                                                                        for($l = 0; $l < $jumlahHapusFotoVilla; $l++){
+                                                                                                                        foreach($typeGambarArray as $type){
+                                                                                                                            
+                                                                                                                            $test =0;
 
-                                                                                                                            $original = json_decode($dataVilla['fasilitasvilla']) -> fotoVilla;
+                                                                                                                            for($m = 0; $m < count($original); $m++){
+                                                                                                                                
+                                                                                                                                if($type === $original[$m] -> typeGambar){
+                                                                                                                                    
+                                                                                                                                    $test++;
+                                                                                                                                    
+                                                                                                                                }
+                                                                                                                            }
+
+                                                                                                                            $totalFotoDiSet[$type] = $test;
+                                                                                                                        }
+                                                                                                                        
+                                                                                                                        for($l = 0; $l < $jumlahHapusFotoVilla; $l++){
 
                                                                                                                             for($m = 0; $m < count($original); $m++){
                                                                                                                                 
                                                                                                                                 $fotoListHapus = substr($arrayHapusFotoVilla[$l],4 ,strlen($arrayHapusFotoVilla[$l]));
                                                                                                                                 
+
                                                                                                                                 if($original[$m] -> namaGambar === $fotoListHapus){
                                                                                                                                     
                                                                                                                                     unset($fotoVIllaJson[$m]);
 
                                                                                                                                     if(file_exists($original[$m] -> urlGambar.$original[$m] -> namaGambar)){
                                                                                                                                         
-                                                                                                                                        unlink($original[$m] -> urlGambar.$original[$m] -> namaGambar);
+                                                                                                                                        if(unlink($original[$m] -> urlGambar.$original[$m] -> namaGambar)){
+
+
+                                                                                                                                        }
                                                                                                                                         
                                                                                                                                     }
 
-                                                                                                                                }
+                                                                                                                                    array_push($totalDiHapus, $original[$m] -> typeGambar);
                                                                                                                                 
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        }
+
+                                                                                                                        $vipotTypeGambar = array_count_values($totalDiHapus);
+
+                                                                                                                        foreach(array_keys($vipotTypeGambar) as $o){
+            
+                                                                                                                            if($vipotTypeGambar[$o] >= $totalFotoDiSet[$o]){
+                                                                                                                                
+                                                                                                                                if(!in_array($o, $fasilitasGambarKSG)){
+                                                                                                                                    
+                                                                                                                                    array_push($fasilitasGambarKSG, $o);
+                                                                                                                                
+                                                                                                                                }
+            
                                                                                                                             }
                                                                                                                             
                                                                                                                         }
-                                                                                                                        
+
                                                                                                                     }
                                                                                                                     
                                                                                                                 }
                                                                                                                 
                                                                                                             }
+
+
+                                                                                                            if(isset($fotoVIllaJson)){
+
+                                                                                                                $jumlahObjekJsonGambar = count($objekJsonGambar);
+
+                                                                                                                if($jumlahObjekJsonGambar > 0){
+
+                                                                                                                    for($q = 0; $q < $jumlahObjekJsonGambar; $q++){
+
+                                                                                                                        if(in_array($objekJsonGambar[$q]['namaGambar'], array_column($originalFotoVilla, 'namaGambar'), true) === false){
+
+                                                                                                                            array_push($fotoVIllaJson, $objekJsonGambar[$q]);
+
+                                                                                                                        }
+
+                                                                                                                    }   
+
+                                                                                                                }
+
+                                                                                                            }else{
+
+                                                                                                                $fotoVIllaJson = $originalFotoVilla;
+
+                                                                                                                if(count($objekJsonGambar) > 0){
+
+                                                                                                                    for($r = 0; $r < count($objekJsonGambar); $r++){
+                                                                                                                     
+                                                                                                                        if(in_array($objekJsonGambar[$r]['namaGambar'], array_column($originalFotoVilla, 'namaGambar'), true) === false){
+
+                                                                                                                            array_push($fotoVIllaJson, $objekJsonGambar[$r]);
+
+                                                                                                                        }
+
+                                                                                                                    } 
+                                                                                                                }
+
+                                                                                                            }
+
                                                                                                             
-                                                                                                            $queryInputDataVilla = mysqli_query($koneksi, "UPDATE villa SET namavilla = '".$namaVilla."', lokasivilla = '".$alamatVilla."', statusvilla = 'KOSONG', fasilitasvilla = '".json_encode(array("fotoVilla" => array_values($fotoVIllaJson), "fasilitasVilla" => $dataJsonFasilitas, "fotoTidakDiSet" => $fasilitasGambarKSG))."', hargavilla = '".$hargaVilla."', deskripsi = '".$deskripsiVilla."' $Villa WHERE idunikvilla = BINARY('".$idUnikVilla."') ");
+                                                                                                            $queryInputDataVilla = mysqli_query($koneksi, "UPDATE villa SET namavilla = '".$namaVilla."', lokasivilla = '".$alamatVilla."', statusvilla = 'KOSONG', fasilitasvilla = '".json_encode(array("fotoVilla" => array_values($fotoVIllaJson), "fasilitasVilla" => $dataJsonFasilitas, "fotoTidakDiSet" => array_values($fasilitasGambarKSG)))."', hargavilla = '".$hargaVilla."', deskripsi = '".$deskripsiVilla."' $Villa WHERE idunikvilla = BINARY('".$idUnikVilla."') ");
                                                                 
                                                                                                             if(!$queryInputDataVilla){
 
@@ -497,7 +693,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                                                                                             
                                                                                                             }else{
                                                                                                                 
-                                                                                                                sendErrorMessage("DATA BERHASIL DI SIMPAN !", "notificationErrorField", null);
+                                                                                                                sendErrorMessage("DATA BERHASIL DI SIMPAN !", "OKE", null);
                                                                                                                 return false;
                                                                                                             
                                                                                                             }
@@ -507,7 +703,6 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                                                                                     }
                                                                                                 
                                                                                                 // }
-
                                                                                         
                                                                                         }
                                                             
