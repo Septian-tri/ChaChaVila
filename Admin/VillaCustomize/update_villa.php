@@ -355,20 +355,12 @@ return false;
                                 </li>
                             </ul>
                         </div>
-
-
                         <hr class="mb-4">
                         <div class="row">
                             <div class="col-md-6">
-
-                                <!-- NOTE BILA CANCEL/BATAL REDIRECT KE LIST VILLA -->
-
-                                <!-- <button class="btn btn-warning btn-lg btn-block" type="submit" id="advBtn">Batal</button> -->
+                                <a href="list_villa_admin.php" class="btn btn-warning btn-lg btn-block" type="submit" >Batal</a>
                             </div>
                             <div class="col-md-6">
-
-                                <!-- NOTE SEELAH UPDATE LANGSUNG REDIRECT KE LIST VILLA -->
-
                                 <button class="btn btn-info btn-lg btn-block" type="button" id="updBtn">Update</button>
                             </div>
                         </div>

@@ -684,7 +684,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                                                                                             }
 
                                                                                                             
-                                                                                                            $queryInputDataVilla = mysqli_query($koneksi, "UPDATE villa SET namavilla = '".$namaVilla."', lokasivilla = '".$alamatVilla."', statusvilla = 'KOSONG', fasilitasvilla = '".json_encode(array("fotoVilla" => array_values($fotoVIllaJson), "fasilitasVilla" => $dataJsonFasilitas, "fotoTidakDiSet" => array_values($fasilitasGambarKSG)))."', hargavilla = '".$hargaVilla."', deskripsi = '".$deskripsiVilla."' $Villa WHERE idunikvilla = BINARY('".$idUnikVilla."') ");
+                                                                                                            $queryInputDataVilla = mysqli_query($koneksi, "UPDATE villa SET namavilla = '".$namaVilla."', lokasivilla = '".$alamatVilla."', fasilitasvilla = '".json_encode(array("fotoVilla" => array_values($fotoVIllaJson), "fasilitasVilla" => $dataJsonFasilitas, "fotoTidakDiSet" => array_values($fasilitasGambarKSG)))."', hargavilla = '".$hargaVilla."', deskripsi = '".$deskripsiVilla."' $Villa WHERE idunikvilla = BINARY('".$idUnikVilla."') ");
                                                                 
                                                                                                             if(!$queryInputDataVilla){
 

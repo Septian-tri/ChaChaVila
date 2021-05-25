@@ -141,7 +141,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 
                                                                     }else{
 
-                                                                        sendErrorMessage("Villa Berhasil Di hapus :)", "notificationErrorField", $_POST['IDUV']);
+                                                                        sendErrorMessage("Villa Berhasil Di hapus :)", "OKE", $_POST['IDUV']);
                                                                         return false;
 
                                                                     }
@@ -191,7 +191,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 
                                                     default :
 
-                                                        sendErrorMessage("JANGAN DI WOY !", "notificationErrorField", null);
+                                                        sendErrorMessage("JANGAN DI EDIT WOY !", "notificationErrorField", null);
                                                         return false;
 
                                                     break;
