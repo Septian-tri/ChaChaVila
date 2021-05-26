@@ -1,3 +1,8 @@
+<?php
+
+include "Settings/ConfigDB/index.php";
+
+?>
 <!DOCTYPE html>
 <html>
     <head>

@@ -22,220 +22,57 @@
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
-            
-
             <div class="row">
-                <div class="col-sm-6 col-lg-4">
-                    <div class="card mb-5 mx-auto" style="max-width: 20rem;">
-                        <div class="card-header bg-behance content-center p-0">
-                            <img class="card-img-top" src="http://placehold.it/700x400" alt="First slide">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Villa Name</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Location</h6>
-                            <p class="card-text">
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star-half text-warning"></i>
-                            </p>
-                            <small class="card-subtitle mb-2 text-muted">
-                                <s>Rp 2.000.000</s>
-                            </small>
-                            <p class="card-text">
-                                Rp 1.000.000
-                                <small class="card-subtitle mb-2 text-muted">/ Night</small>
-                            </p>
-                            <a href="/Detail_villa.php" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-<!--        DELETEABLE JUST FOR TEMPLATE            -->
-                <div class="col-sm-6 col-lg-4">
-                    <div class="card mb-5 mx-auto" style="max-width: 20rem;">
-                        <div class="card-header bg-behance content-center p-0">
-                            <img class="card-img-top" src="http://placehold.it/700x400" alt="First slide">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Villa Name</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Location</h6>
-                            <p class="card-text">
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star-half text-warning"></i>
-                            </p>
-                            <small class="card-subtitle mb-2 text-muted">
-                                <s>Rp 2.000.000</s>
-                            </small>
-                            <p class="card-text">
-                                Rp 1.000.000
-                                <small class="card-subtitle mb-2 text-muted">/ Night</small>
-                            </p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="card mb-5 mx-auto" style="max-width: 20rem;">
-                        <div class="card-header bg-behance content-center p-0">
-                            <img class="card-img-top" src="http://placehold.it/700x400" alt="First slide">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Villa Name</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Location</h6>
-                            <p class="card-text">
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star-half text-warning"></i>
-                            </p>
-                            <small class="card-subtitle mb-2 text-muted">
-                                <s>Rp 2.000.000</s>
-                            </small>
-                            <p class="card-text">
-                                Rp 1.000.000
-                                <small class="card-subtitle mb-2 text-muted">/ Night</small>
-                            </p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="card mb-5 mx-auto" style="max-width: 20rem;">
-                        <div class="card-header bg-behance content-center p-0">
-                            <img class="card-img-top" src="http://placehold.it/700x400" alt="First slide">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Villa Name</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Location</h6>
-                            <p class="card-text">
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star-half text-warning"></i>
-                            </p>
-                            <small class="card-subtitle mb-2 text-muted">
-                                <s>Rp 2.000.000</s>
-                            </small>
-                            <p class="card-text">
-                                Rp 1.000.000
-                                <small class="card-subtitle mb-2 text-muted">/ Night</small>
-                            </p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="card mb-5 mx-auto" style="max-width: 20rem;">
-                        <div class="card-header bg-behance content-center p-0">
-                            <img class="card-img-top" src="http://placehold.it/700x400" alt="First slide">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Villa Name</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Location</h6>
-                            <p class="card-text">
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star-half text-warning"></i>
-                            </p>
-                            <small class="card-subtitle mb-2 text-muted">
-                                <s>Rp 2.000.000</s>
-                            </small>
-                            <p class="card-text">
-                                Rp 1.000.000
-                                <small class="card-subtitle mb-2 text-muted">/ Night</small>
-                            </p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="card mb-5 mx-auto" style="max-width: 20rem;">
-                        <div class="card-header bg-behance content-center p-0">
-                            <img class="card-img-top" src="http://placehold.it/700x400" alt="First slide">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Villa Name</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Location</h6>
-                            <p class="card-text">
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star-half text-warning"></i>
-                            </p>
-                            <small class="card-subtitle mb-2 text-muted">
-                                <s>Rp 2.000.000</s>
-                            </small>
-                            <p class="card-text">
-                                Rp 1.000.000
-                                <small class="card-subtitle mb-2 text-muted">/ Night</small>
-                            </p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="card mb-5 mx-auto" style="max-width: 20rem;">
-                        <div class="card-header bg-behance content-center p-0">
-                            <img class="card-img-top" src="http://placehold.it/700x400" alt="First slide">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Villa Name</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Location</h6>
-                            <p class="card-text">
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star-half text-warning"></i>
-                            </p>
-                            <small class="card-subtitle mb-2 text-muted">
-                                <s>Rp 2.000.000</s>
-                            </small>
-                            <p class="card-text">
-                                Rp 1.000.000
-                                <small class="card-subtitle mb-2 text-muted">/ Night</small>
-                            </p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="card mb-5 mx-auto" style="max-width: 20rem;">
-                        <div class="card-header bg-behance content-center p-0">
-                            <img class="card-img-top" src="http://placehold.it/700x400" alt="First slide">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Villa Name</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Location</h6>
-                            <p class="card-text">
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star-half text-warning"></i>
-                            </p>
-                            <small class="card-subtitle mb-2 text-muted">
-                                <s>Rp 2.000.000</s>
-                            </small>
-                            <p class="card-text">
-                                Rp 1.000.000
-                                <small class="card-subtitle mb-2 text-muted">/ Night</small>
-                            </p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-<!--       END DELETEABLE JUST FOR TEMPLATE             -->
-            </div>
+            <?php
+
+                $queryVilla      = mysqli_query($koneksi, "SELECT idunikvilla, namavilla, hargavilla, thumbnail, lokasivilla FROM villa order by RAND() ");
+                $hitungVilla     = mysqli_num_rows($queryVilla);
+
+                if(!$queryVilla){
+
+                    die("MAAF KAMI MENGALAMI KEGAGALAN SISTEM ! ");
+                    return false;
+
+                }else{
+
+                    while($dataVilla = mysqli_fetch_array($queryVilla)){
+
+                        echo  '
+                    
+                            <div class="col-sm-6 col-lg-4">
+                                <a href="/Detail_villa.php">
+                                    <div class="card mb-5 mx-auto" style="max-width: 20rem;">
+                                        <div class="card-header bg-behance content-center p-0">
+                                            <img class="card-img-top" src="/Villa/'.$dataVilla['idunikvilla']."/".$dataVilla['thumbnail'].'" alt="First slide">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">'.$dataVilla['namavilla'].'</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">'.$dataVilla['lokasivilla'].'</h6>
+                                            <p class="card-text">
+                                                <i class="fa fa-star text-warning"></i>
+                                                <i class="fa fa-star text-warning"></i>
+                                                <i class="fa fa-star text-warning"></i>
+                                                <i class="fa fa-star text-warning"></i>
+                                                <i class="fa fa-star-half text-warning"></i>
+                                            </p>
+                                            <small class="card-subtitle mb-2 text-muted">
+                                                <s>Rp 2.000.000</s>
+                                            </small>
+                                            <p class="card-text">
+                                                Rp '.preg_replace('/\B(?<!\.)(?=(\d{3})+(?!\d))/', ".", $dataVilla['hargavilla']).' ,-
+                                                <small class="card-subtitle mb-2 text-muted">/ Night</small>
+                                            </p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>';
+
+                }
+
+                
+            }
+            ?>
+            </div>    
         </div>
         <script src="Settings/js/main.js"></script>
     </body>
