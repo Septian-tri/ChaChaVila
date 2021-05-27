@@ -8,7 +8,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 
     include "mainSystem.php";
     
-    session_name("_lgn");
+    session_name("_lgnUs");
     session_start();
 
     if(base64_decode($_SESSION['TPG']) === "Non_Customer"){

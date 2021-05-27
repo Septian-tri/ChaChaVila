@@ -1,22 +1,8 @@
-<?php
-
-include "Settings/ConfigDB/index.php";
-
-?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
 
         <link rel="stylesheet" href="/settings/font-awesome/css/font-awesome.min.css">        
         <link rel="stylesheet" href="/Settings/css/bootstrap.min.css">
         <script src="/Settings/js/jquery-3.2.1.slim.min.js"></script>
         <script src="/Settings/js/main.js"></script>
-        <!-- <script src="Settings/js/registerSystem.js"></script> -->
-        <!-- <script src="Settings/js/popper.min.1.12.9.js"></script> -->
         <script src="/Settings/js/bootstrap.min.js"></script>
 
         <style>
@@ -71,9 +57,6 @@ include "Settings/ConfigDB/index.php";
                 display: block;
             }
         </style>
-        
-    </head>
-    <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-transparent mb-5">
             <a class="navbar-brand" href="/">
                 <i class="fa fa-tree text-success"></i>
@@ -91,36 +74,44 @@ include "Settings/ConfigDB/index.php";
                     <li class="nav-item">
                         <a class="nav-link" href="List_villa.php">List Villa</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link disabled" href="#">Disabled</a>
-                    </li>
+                    </li> -->
                 </ul>
                 
                 <ul class="nav navbar-nav mt-2 ml-auto">
                     <li class="nav-item dropdown">
-                        
-                        <!-- NOTE USE THIS WHEN NOT LOGIN -->
-                        <a href="Login.php" class="nav-link h5">
-                            Login
-                        </a>
+                        <?php
+                        if(isset($data)){
 
-                        <!-- NOTE use this when login -->
-                        <!-- <a href="#" class="nav-link h5 dropdown-toggle" data-toggle="dropdown">
+                            echo'
+                        <a href="#" class="nav-link h5 dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-user" aria-hidden="true"></i>
-                            username
+                            '.$data['namaPanggilan'].'
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right">
                             <a href="#" class="dropdown-item">Reports</a>
                             <a href="#" class="dropdown-item">Settings</a>
                             <div class="dropdown-divider"></div>
-                            <a href="#"class="dropdown-item">Logout</a>
-                        </div> -->
+                            <a href="Settings/ProsesSystem/logoutSystemUs.php"class="dropdown-item">Logout</a>
+                        </div>';
 
+                        }else{
+
+                            echo'
+                            <a href="Register.php" class="nav-link h5">
+                                Daftar
+                            </a>
+                            <a href="Login.php" class="nav-link h5">
+                                Login
+                            </a>';
+                        
+                        }
+                        ?>
+
+                        
                     </li>
                 </ul>
             </div>
         </nav>
-        <div class="notifikasi"></div>
-    </body>
-</html>

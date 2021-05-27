@@ -1,3 +1,37 @@
+<?php
+if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
+
+    die("JANGAN DI MASUKAN YANG ENGGAK2");
+    return false;
+
+}else{
+
+    include "Settings/ProsesSystem/MainSystem.php";
+    session_name('_lgnUs');
+    session_start();
+    session_regenerate_id(true);
+
+    if(cekSession() === false){
+        
+        session_destroy();
+        
+    }else{
+        
+        if(!preg_match('/^[a-zA-Z0-9\.\*\_\-\?]{135}$/', $_SESSION['TokenSementara'])){
+
+            session_destroy();
+
+        }else{
+
+            header("location:/");
+            return false;
+        
+        }
+
+    }
+
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -31,44 +65,39 @@
                             </h3>
                             <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>
                         </div>
-                        <form action="#" method="post">
-                            <div class="form-group first">
-                                <label for="username">Username</label>
-                                <input type="text" class="form-control" id="username">
-                                <div id="ErrorMessage"></div>
+                        <div class="form-group first flg">
+                            <div class="form-group last mb-4">
+                                <label for="Email">Email</label>
+                                <input type="text" class="form-control" placeholder="Email" id="email"></br>
                             </div>
                             <div class="form-group last mb-4">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password">
-                                <div id="ErrorMessage"></div>
+                                <input type="password" class="form-control" placeholder="Password" id="password"></br>
                             </div>
                             <div class="d-flex mb-5 align-items-center">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="customCheck1">
                                     <label class="custom-control-label" for="customCheck1">Remember Me</label>
                                 </div>
-
-                                    <div class="control__indicator"></div>
-                                </label>
                                 <span class="ml-auto"><a href="Forget_password.php" class="forgot-pass">Forgot Password</a></span>
                             </div>
-                            <input type="submit" value="Log In" class="btn btn-pill text-white btn-block btn-primary">
-                            <span class="d-block text-center my-4 text-muted"> or log in with</span>
+                            <button type="button" id="lgnBtnUs" class="btn btn-pill text-white btn-block btn-primary">LOGIN</button>
+                            <!-- <span class="d-block text-center my-4 text-muted"> or log in with</span>
                             <div class="text-center">
                                 <a href="" class="btn btn-block text-white" style="background-color:#1DA1F2;"> <i class="fa fa-twitter"></i>   Login via Twitter</a>
                                 <a href="" class="btn btn-block text-white" style="background-color:#4267B2;"> <i class="fa fa-facebook-f"></i>   Login via facebook</a>
                                 <a href="" class="btn btn-block btn-danger "> <i class="fa fa-google"></i>   Login via Google</a>
                                 <br>    
                                 <a href="Register.php">Register</a>
-                            </div>
-                        </form>
+                            </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <script src="Settings/js/main.js"></script>
+    <script src="Settings/js/loginSystemUs.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,37 @@
+<?php
+if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
+
+    die("JANGAN DI MASUKAN YANG ENGGAK2");
+    return false;
+
+}else{
+
+    include "Settings/ProsesSystem/MainSystem.php";
+    session_name('_lgnUs');
+    session_start();
+    session_regenerate_id(true);
+
+    if(cekSession() === false){
+        
+        session_destroy();
+        
+    }else{
+        
+        if(!preg_match('/^[a-zA-Z0-9\.\*\_\-\?]{135}$/', $_SESSION['TokenSementara'])){
+
+            session_destroy();
+
+        }else{
+
+            header("location:/");
+            return false;
+        
+        }
+
+    }
+
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>

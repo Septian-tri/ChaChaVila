@@ -21,7 +21,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 
     if(!$koneksi){
 
-        echo "gagal melakukan koneksi ".mysqli_error();
+        echo "gagal melakukan koneksi ".mysqli_error($koneksi);
         exit;
 
     }
