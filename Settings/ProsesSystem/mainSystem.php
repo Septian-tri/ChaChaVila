@@ -1,12 +1,5 @@
 <?php
 
-if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
-
-    die("JANGAN DI MASUKAN YANG ENGGAK2");
-    return false;
-
-}else{
-
     //rubah tanggal sistem menjadi utc +7 bangkok, hanoi, jakarta
     date_default_timezone_set("Asia/Jakarta");
 
@@ -220,5 +213,4 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
         return true;
 
     }
-}
 ?>

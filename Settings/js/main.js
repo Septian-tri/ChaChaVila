@@ -19,6 +19,7 @@ var sendToHome = {
         return window.document.location = window.document.location.origin;
     }
 }
+var kembali   = document.getElementsByClassName('kembali')[0];
 
 // Fungsi matikan tombol ketika pengiriman data berlangsung, ganti style element pada bari 88 kode 22
 function disabledButtonSend(type, button, action, buttonValue) {
@@ -239,22 +240,20 @@ function deleteObjectElement(objectElement, tipeElemen) {
 }
 
 //posisikan notifikasi
-function notificationPosition() {
+// function notificationPosition() {
 
-    // posisi nya udah fix ketengah ini fungsi bisa dimatiin karna ngerusak posisi aslinya
+//     var elemenNotifikasi2 = document.getElementsByClassName('notifikasi')[0];
 
-    // var elemenNotifikasi2 = document.getElementsByClassName('notifikasi')[0];
+//     if (elemenNotifikasi2 != undefined) {
 
-    // if (elemenNotifikasi2 != undefined) {
+//         var ukuranLayar = window.innerWidth;
+//         var ukuranNotifikasi = elemenNotifikasi2.clientWidth;
+//         var kalkulasiPosisi = Math.ceil((ukuranLayar - ukuranNotifikasi) / 2);
+//         elemenNotifikasi2.style.cssText = "left: " + kalkulasiPosisi + "px;";
 
-    //     var ukuranLayar = window.innerWidth;
-    //     var ukuranNotifikasi = elemenNotifikasi2.clientWidth;
-    //     var kalkulasiPosisi = Math.ceil((ukuranLayar - ukuranNotifikasi) / 2);
-    //     elemenNotifikasi2.style.cssText = "left: " + kalkulasiPosisi + "px;";
+//     }
 
-    // }
-
-}
+// }
 
 //fungsi untuk styleWrong field error data
 function styleWrong(object) {
@@ -357,4 +356,16 @@ function muatDivAja(metode, div, lokasi, fungsiSukses){
         }
 
     mintaXML.send();
+}
+
+if(kembali !== undefined && kembali !== null){
+
+    kembali.onclick = function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        window.history.go(-1);
+
+    }
+
 }
