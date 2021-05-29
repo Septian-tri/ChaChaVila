@@ -407,7 +407,7 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                                                     /* text-shadow: #fbdf03 1px 1px 0px; */
                                                                                                                     font-weight: none;">
 
-                                                                                                                    Terima Kasih '.$namaPengguna.' Pendaftaran Kamu Berhasil
+                                                                                                                    Terima Kasih '.base64_decode($namaPengguna).' Pendaftaran Kamu Berhasil
                                                                                                                 </h1>
 
                                                                                                                 <hr style="

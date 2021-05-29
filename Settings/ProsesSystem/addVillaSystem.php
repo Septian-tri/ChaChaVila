@@ -79,7 +79,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 
                                     if(strlen($_POST['NamaVilla']) > 100 || strlen($_POST['NamaVilla']) < 3){
 
-                                        sendErrorMessage("Panjang Nama Villa Tidak Valid ".print_r($_POST), "notificationErrorField", "NamaVilla");
+                                        sendErrorMessage("Panjang Nama Villa Tidak Valid ", "notificationErrorField", "NamaVilla");
                                         return false;
         
                                     }else{

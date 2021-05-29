@@ -398,7 +398,20 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                    <?php 
                         for($d = 0; $d < count($fasilitasVillaText); $d++){
 
-                        
+                            $fasilitasArray = (array)$fasilitasVillaText[$d];
+
+                            for($e =0; $e < count(array_keys($fasilitasArray)); $e++){
+
+                                $valueFasilitasArray = $fasilitasArray[array_keys($fasilitasArray)[$e]];
+                                $labelFasilitas      = array_keys($fasilitasArray)[$e]; 
+                                    
+                                if($valueFasilitasArray !== "TIDAK DI ISI"){
+
+                                    echo  $labelFasilitas." : ".$valueFasilitasArray."<br />";
+                                    
+                                }
+
+                            }
 
                         }
                    ?>
