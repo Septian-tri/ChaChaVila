@@ -6,7 +6,7 @@
 
 <style>
     .navbar{
-        background: rgba(255, 255, 255, 2);
+        background: rgba(255, 255, 255, 0.5);
     }
     .navbar-nav {
         font-size: 1.5rem;
@@ -104,16 +104,24 @@
                 } else {
 
                     echo '
-                        <div class"row">
-                            <a href="Register.php" class="nav-link h5">
-                                Daftar
-                            </a>
-                            <a href="Login.php" class="nav-link h5">
-                                Login
-                            </a>
-                        </div>
-                            
-                            ';
+
+                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                            <li class="nav-item active">
+                                <a href="Register.php" class="nav-link h5">
+                                    Daftar
+                                </a>
+                            </li>
+                            <li class="nav-item active">
+                                |
+                            </li>
+                            <li class="nav-item">
+                                <a href="Login.php" class="nav-link h5">
+                                    Login
+                                </a>
+                            </li>
+                        </ul>
+
+                        ';
                 }
                 ?>
 
