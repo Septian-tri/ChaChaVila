@@ -14,7 +14,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 
 }else{
 
-    include "Settings/ProsesSystem/MainSystem.php";
+    include "Settings/ProsesSystem/mainSystem.php";
     session_name('_lgnUs');
     session_start();
     session_regenerate_id(true);
