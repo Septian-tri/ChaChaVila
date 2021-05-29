@@ -240,7 +240,7 @@ function deleteObjectElement(objectElement, tipeElemen) {
 }
 
 //posisikan notifikasi
-// function notificationPosition() {
+function notificationPosition() {
 
 //     var elemenNotifikasi2 = document.getElementsByClassName('notifikasi')[0];
 
@@ -253,7 +253,7 @@ function deleteObjectElement(objectElement, tipeElemen) {
 
 //     }
 
-// }
+}
 
 //fungsi untuk styleWrong field error data
 function styleWrong(object) {
