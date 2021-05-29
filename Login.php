@@ -66,7 +66,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                             <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>
                         </div>
                         <div class="form-group first flg">
-                            <div class="form-group last mb-4">
+                            <div class="form-group last mb-3">
                                 <label for="Email">Email</label>
                                 <input type="text" class="form-control" placeholder="Email" id="email"></br>
                             </div>
