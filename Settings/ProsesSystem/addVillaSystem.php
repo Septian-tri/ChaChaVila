@@ -276,10 +276,10 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                                                                                     
                                                                                                     $queryJumlahVilla   = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM villa"));
                                                                                                     $namaVillaFolder    = md5(htmlentities($_POST['NamaVilla'], ENT_QUOTES));
-                                                                                                    $namaVilla          = htmlentities($_POST['NamaVilla'], ENT_QUOTES);
-                                                                                                    $alamatVilla        = htmlentities($_POST['AlamatVilla'], ENT_QUOTES);
+                                                                                                    $namaVilla          = addslashes(htmlentities($_POST['NamaVilla'], ENT_QUOTES));
+                                                                                                    $alamatVilla        = addslashes(htmlentities($_POST['AlamatVilla'], ENT_QUOTES));
                                                                                                     $hargaVilla         = $_POST['HargaVilla'];
-                                                                                                    $deskripsiVilla     = htmlentities($_POST['deskripsi'], ENT_QUOTES);
+                                                                                                    $deskripsiVilla     = addslashes(htmlentities($_POST['deskripsi'], ENT_QUOTES));
                                                                                                     $admin              = base64_decode(mysqli_fetch_array($queryCekDataAdmin)['namapengguna']);
                                                                                                     $tanggalDiBuat      = date("d-m-Y H:i:s", strtotime("today ".date("H:i:s")));
                                                                                                     $idUnikVilla        = strtoupper(substr(md5($namaVilla." ".$tanggalDiBuat." ".$queryJumlahVilla), 0, 15));
@@ -399,7 +399,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 
                                                                                                         }
 
-                                                                                                        $queryInputDataVilla = mysqli_query($koneksi, "INSERT INTO villa (primkey_data_villa, namavilla, lokasivilla, statusvilla, idunikvilla, fasilitasvilla, hargavilla, deskripsi, thumbnail) VALUES ('".($queryJumlahVilla + 1)."', '$namaVilla', '$alamatVilla', 'KOSONG', '$finalIdRandom', '".json_encode(array("fotoVilla" => $objekJsonGambar, "fasilitasVilla" => $dataJsonFasilitas, "fotoTidakDiSet" => $fasilitasGambarKSG))."', '$hargaVilla', '$deskripsiVilla', '".$finalIdRandom."_"."Thumbnail".substr($_FILES['ThumbnailVilla']['name'], strlen($_FILES['ThumbnailVilla']['name'])-4, strlen($_FILES['ThumbnailVilla']['name']))."')  ");
+                                                                                                        $queryInputDataVilla = mysqli_query($koneksi, "INSERT INTO villa (namavilla, lokasivilla, statusvilla, idunikvilla, fasilitasvilla, hargavilla, deskripsi, thumbnail) VALUES ('$namaVilla', '$alamatVilla', 'KOSONG', '$finalIdRandom', '".json_encode(array("fotoVilla" => $objekJsonGambar, "fasilitasVilla" => $dataJsonFasilitas, "fotoTidakDiSet" => $fasilitasGambarKSG))."', '$hargaVilla', '$deskripsiVilla', '".$finalIdRandom."_"."Thumbnail".substr($_FILES['ThumbnailVilla']['name'], strlen($_FILES['ThumbnailVilla']['name'])-4, strlen($_FILES['ThumbnailVilla']['name']))."')  ");
 
                                                                                                         if(!$queryInputDataVilla){
                                                                                                             

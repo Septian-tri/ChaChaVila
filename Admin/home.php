@@ -569,7 +569,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
             <!-- sidebar-content  -->
             <div class="sidebar-footer">
                 <div class="container">
-                    <a href="../Settings/ProsesSystem/logoutSystem.php">
+                    <a href="<?php echo $hostHalaman; ?>Settings/ProsesSystem/logoutSystem.php">
                         <span class="footer h6">
                             Logout &nbsp;
                             <i class="fa fa-sign-out"></i>

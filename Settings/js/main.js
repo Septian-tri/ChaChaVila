@@ -341,3 +341,20 @@ function createElement(tagElement, attribute){
     return buatElement;
 
 }
+
+function muatDivAja(metode, div, lokasi, fungsiSukses){
+    
+    var mintaXML = new XMLHttpRequest();
+    var parseDOM = new DOMParser();
+
+    mintaXML.open(metode, lokasi, true);
+    mintaXML.onreadystatechange = function(){
+    
+        if(mintaXML.readyState != 4 || mintaXML.status != 200) return false;
+
+            window.document.getElementsByClassName(div)[0].innerHTML =  parseDOM.parseFromString(mintaXML.responseText,"text/html").getElementsByClassName(div)[0].innerHTML;
+            fungsiSukses;
+        }
+
+    mintaXML.send();
+}

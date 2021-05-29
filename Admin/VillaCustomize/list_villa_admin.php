@@ -23,15 +23,91 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
     <!-- format buat nambahin page / halaman baru -->
     <div class="page-wrapper new-theme toggled">
         <main class="page-content">
-        <div class="container-fluid">
-                <!-- format isi buat nambahin page / halaman baru -->
+            <div class="container-fluid">
+                <?php
 
-                <!-- List vila -->
-                <!-- NOTE MAX LIST YANG DITAMPILKAN CUMA 6 -->
+                $limit            = 6;
+                $tempHalamanVilla = 0;
+                
+                for($a = 0; $a < count($_POST); $a++){
+                       
+                    $pecah = explode("_", array_keys($_POST)[$a]);
 
+                    if($pecah[0] === "bHalaman"){
+
+                        if(count($pecah) > 1){
+
+                            if(preg_match('/[0-9]{1,}/', $pecah[1])){
+
+                                if($tempHalamanVilla <= 1){
+
+                                    $tempHalamanVilla = 0;
+
+                                }
+                                
+                                $tempHalamanVilla = $pecah[1] - 1;
+
+                                
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+                if(isset($_POST['fieldCariVilla'])){
+
+                    $namaCariVilla = addslashes(htmlentities($_POST['fieldCariVilla'], ENT_QUOTES));
+
+                    if(preg_match('/^[\s]*$/', $namaCariVilla)){
+                    
+                        $notifFieldErr = "SILAHKAN ISI BIDANG PENCARIAN TERLEBIH DAHULU";
+                        goto SKIP;
+                        
+                    }else{
+                        
+                        $cariVilla      = "WHERE namavilla like '%".$namaCariVilla."%'";
+                        $notif          = "DENGAN NAMA ".$namaCariVilla." ";
+                        $field          = '<input type="hidden" class="form-control" name="fieldCariVilla" value="'.$namaCariVilla.'">'; 
+
+                    }
+
+                }else{
+
+                    SKIP:
+                    $cariVilla = "";
+                    $notif     = "";
+                    $field     = "";
+
+                }
+
+                $hitungJumlahVilla  = mysqli_query($koneksi, "SELECT * FROM villa $cariVilla");
+                
+                if(!$hitungJumlahVilla){
+                    
+                    die("Terjadi kegagalan Fungsi ".mysqli_error($koneksi));
+                    return false;
+                    
+                }else{
+                    
+                    $jumlahTotalVilla   = mysqli_num_rows($hitungJumlahVilla);
+                    $offset             = ceil($jumlahTotalVilla / $limit);
+                    $queryDataVilla     = mysqli_query($koneksi, "SELECT * FROM villa $cariVilla order by namavilla asc limit ".($tempHalamanVilla * $limit).",$limit ");
+                    
+                    if(!$queryDataVilla){
+                        
+                        die("Terjadi kegagalan Fungsi ".mysqli_error($koneksi));
+                        return false;
+                        
+                    }
+
+                }
+
+                ?>
                 <div class="bg-white rounded box-shadow">
-                    <h2 class="border-bottom border-gray ">List Villa</h2>
-
+                    <h2 class="border-bottom border-gray ">List Villa, <?php echo $jumlahTotalVilla; ?> Terdaftar</h2>
                     <!-- menu list -->
                     <div class="row">
                         <div class="col-md-6">
@@ -41,43 +117,30 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                             </a>
                         </div>
                         <div class="col-md-6">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Nama Villa" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <form class="input-group mb-3" name="carivilla" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                                <small><?php if(isset($notifFieldErr)){ echo $notifFieldErr; } ?></small>
+                                <input type="text" class="form-control" name="fieldCariVilla" placeholder="Nama Villa" aria-label="Recipient's username" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-success" type="button">
+                                    <button class="btn btn-outline-success" name="buttonFieldCV" type="submit">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     
                     <?php
+
+                    if(mysqli_num_rows($queryDataVilla) <= 0){
+                        
+                        echo "BELUM TERDAPAT DATA VILLA ".$notif."!";
                     
-                    $queryDataVilla = mysqli_query($koneksi, "SELECT * FROM villa  WHERE primkey_data_villa <= 6 order by primkey_data_villa desc");
-
-                            if(!$queryDataVilla){
-
-                                die("Terjadi kegagalan Fungsi ".mysqli_error($koneksi));
-                                return false;
-
-                            }else{
-
-                                if(mysqli_num_rows($queryDataVilla) <= 0){
-
-                                    // echo "BELUM TERDAPAT DATA VILLA !";
-                                    echo '  
-                                        <div class="border rounded text-center py-5 px-2 h4">
-                                            Belum Terdapat Data Villa
-                                        </div>
-                                    ';
-
-                                }else{
-
-                                    while($dataVilla = mysqli_fetch_array($queryDataVilla)){
-
-                                        echo '<div class="media text-muted pt-3">
-                                                <img src="../../../Villa/'.$dataVilla['idunikvilla']."/".$dataVilla['thumbnail'].'" alt=" 32x32 " class="mr-2 rounded" style="width: 32px; height: 32px;" data-holder-rendered="true">
+                    }else{
+                        
+                        while($dataVilla = mysqli_fetch_array($queryDataVilla)){
+                            
+                            echo '<div class="media text-muted pt-3">
+                                    <img src="../../../Villa/'.$dataVilla['idunikvilla']."/".$dataVilla['thumbnail'].'" alt=" 32x32 " class="mr-2 rounded" style="width: 32px; height: 32px;" data-holder-rendered="true">
                                                 <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                                                     <strong class="d-block text-gray-dark">'.$dataVilla['namavilla'].'</strong>
                                                     ID VILLA : '.$dataVilla['idunikvilla'].' || STATUS VILLA : '.$dataVilla['statusvilla'].'
@@ -93,7 +156,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                                         </button>
                                                     
                                                         <button type="button" id="'.$dataVilla['idunikvilla'].'" class="HVilla btn btn-danger">
-                                                            <i class="fa fa-trash"></i>
+                                                            <i id="'.$dataVilla['idunikvilla'].'" class="HVilla fa fa-trash"></i>
                                                         </button>
                                                     </form>
                                                 </div>
@@ -103,7 +166,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 
                                 }
 
-                            }
+                            
 
                     ?>
 
@@ -111,19 +174,181 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                     <small class="d-block text-right mt-3">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-end m-0">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1">
-                                        <i class="fa fa-arrow-left"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">
-                                        <i class="fa fa-arrow-right"></i>
-                                    </a>
-                                </li>
+                                <?php
+                                    function NomorHalaman($HalamanSaatini, $jumlahHalaman, $field){
+                                        
+                                        if($HalamanSaatini <= $jumlahHalaman && $HalamanSaatini >= 1){
+                                            
+                                            $link_Halaman = "";
+
+                                            if($HalamanSaatini >= 1){
+                                                
+                                                $sebelum = $HalamanSaatini-1;
+                                                
+                                                if($HalamanSaatini >= 4){
+                                                    
+                                                    $link_Halaman .= '<li class="page-item">
+                                                                        <form name="PAGE_1" method="POST" action="'.$_SERVER['PHP_SELF'].'">
+                                                                            '.$field.'
+                                                                            <button type="submit" name="bHalaman_1" value="bHalaman_1" class="page-link" id="PAGE_1">
+                                                                                <i class="fa fa-step-backward" aria-hidden="true"></i>
+                                                                            </button>
+                                                                        </form>
+                                                                      </li>
+                                                                      
+                                                                      <li class="page-item">
+                                                                        <form name="PAGE_'.$sebelum.'" method="POST" action="'.$_SERVER['PHP_SELF'].'">
+                                                                            '.$field.'
+                                                                            <button type="submit" name="bHalaman_'.$sebelum.'" value="bHalaman_'.$sebelum.'" class="page-link" id="PAGE_'.$sebelum.'">
+                                                                                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                                                            </button>
+                                                                        </form>
+                                                                      </li>';
+                                                
+                                                }else{
+                                                    
+                                                    $link_Halaman .= '<li class="page-item disabled">
+                                                                        <div class="page-link">
+                                                                            <i class="fa fa-step-backward" aria-hidden="true"></i>
+                                                                        </div>
+                                                                      </li>
+                                                                      
+                                                                      <li class="page-item disabled">
+                                                                        <div class="page-link">
+                                                                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                                                        </div>
+                                                                      </li>';
+                                                }
+
+                                            }
+                                            
+                                            if($HalamanSaatini > 3 ){
+                                                
+                                                $angka = '<li class="page-item disabled"><div class="page-link">...</div></li>';
+                                            
+                                            }else{
+                                                
+                                                $angka = ' ';
+                                            
+                                            }
+                                            
+                                            for($i=$HalamanSaatini-2; $i < $HalamanSaatini; $i++){
+                                                
+                                                if($i < 1){
+                                                    
+                                                    continue;
+                                                
+                                                }
+                                                
+                                                $angka .= '<li class="page-item">
+                                                        <form name="PAGE_'.$i.'" method="POST" action="'.$_SERVER['PHP_SELF'].'">
+                                                            '.$field.'
+                                                            <button type="submit" name="bHalaman_'.$i.'" value="bHalaman_'.$i.'" class="page-link" id="PAGE_'.$i.'">'
+                                                                .$i.
+                                                            '</button>
+                                                        </form>
+                                                       </li>';
+                                            }
+                                        
+                                            $angka .= '<li class="page-item active">
+                                                            <div class="page-link sama" title="'.$HalamanSaatini.'" id="NoHalaman">'
+                                                                .$HalamanSaatini.
+                                                            '</div>
+                                                        </li>';
+                                            
+                                            for($i=$HalamanSaatini+1; $i< ($HalamanSaatini+3); $i++){
+                                                
+                                                if($i > $jumlahHalaman){
+                                                    
+                                                    break;
+                                                
+                                                }
+                                                
+                                                $angka .= '<li class="page-item">
+                                                                <form name="PAGE_'.$i.'" method="POST" action="'.$_SERVER['PHP_SELF'].'">
+                                                                    '.$field.'
+                                                                    <button type="submit" name="bHalaman_'.$i.'" value="bHalaman_'.$i.'" class="page-link" id="PAGE_'.$i.'">'
+                                                                        .$i.
+                                                                    '</button>
+                                                                </form>
+                                                            </li>';
+                                            }
+                                            
+                                            if($HalamanSaatini+2 < $jumlahHalaman){
+                                                
+                                                $angka .= '<li class="page-item disabled">
+                                                                <div class="page-link">...
+                                                           </li>
+                                                           <li class="page-item">
+                                                               <form name="PAGE_'.$jumlahHalaman.'" method="POST" action="'.$_SERVER['PHP_SELF'].'">
+                                                                    '.$field.'
+                                                                    <button type="submit" name="bHalaman_'.$jumlahHalaman.'" value="bHalaman_'.$jumlahHalaman.'" class="page-link" id="PAGE_'.$jumlahHalaman.'">'
+                                                                        .$jumlahHalaman.
+                                                                    '</button>
+                                                                </form>
+                                                            </li>';
+                                            
+                                            }else{
+                                                
+                                                $angka .= ' ';
+                                            
+                                            }
+                                            
+                                            $link_Halaman .= $angka;
+                                            
+                                            if($HalamanSaatini <= $jumlahHalaman){
+                                                
+                                                if($HalamanSaatini < $jumlahHalaman){
+                                                    
+                                                    $berikutNya = $HalamanSaatini+1;
+                                                    
+                                                    $link_Halaman .= '<li class="page-item">
+                                                                        <form name="PAGE_'.$berikutNya.'" method="POST" action="'.$_SERVER['PHP_SELF'].'">
+                                                                            '.$field.'
+                                                                            <button type="submit" name="bHalaman_'.$berikutNya.'" value="bHalaman_'.$berikutNya.'" class="page-link" id="PAGE_'.$berikutNya.'">
+                                                                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                                                            </button>
+                                                                        </form>
+                                                                    </li>
+                                                                        
+                                                                    <li class="page-item">
+                                                                        <form name="PAGE_'.$jumlahHalaman.'" method="POST" action="'.$_SERVER['PHP_SELF'].'">
+                                                                            '.$field.'
+                                                                            <button type="submit" name="bHalaman_'.$jumlahHalaman.'" value="bHalaman_'.$jumlahHalaman.'" class="page-link" id="PAGE_'.$jumlahHalaman.'">
+                                                                                <i class="fa fa-step-forward" aria-hidden="true"></i>
+                                                                            </button>
+                                                                        </form>
+                                                                    </li>';
+                                                }else{
+
+                                                    $link_Halaman .= '<li class="page-item disabled">
+                                                                            <div class="page-link">
+                                                                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                                                            </div>
+                                                                      </li>
+                                                                      <li class="page-item disabled">
+                                                                            <div class="page-link">
+                                                                                <i class="fa fa-step-forward" aria-hidden="true"></i>
+                                                                            </div>
+                                                                      </li>';
+                
+                                                }
+                                        
+                                            }
+                                            
+                                            return $link_Halaman;
+                                        }
+
+                                    }
+
+                                    echo NomorHalaman(($tempHalamanVilla + 1), $offset, $field); 
+                                    
+                                    for($cp = 0; $cp < count(array_keys($_POST)); $cp++){
+                                        
+                                        unset($_POST[array_keys($_POST)[$cp]]);
+                                        
+                                    }
+                                ?>
                             </ul>
                         </nav>
                     </small>
@@ -135,5 +360,4 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
     </div>
     <script src="../../Settings/js/listVillaSystem.js"></script>
 </body>
-
 </html>

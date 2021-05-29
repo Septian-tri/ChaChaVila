@@ -66,7 +66,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                         <script type="text/javascript">
                             tinymce.init({
                                 selector: '#deskripsi',
-                                plugins : 'autoresize',
+                                plugins : 'autoresize, table, emoticons',
                                 width   : '98%'
                             });
                         </script>
