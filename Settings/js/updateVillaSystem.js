@@ -205,6 +205,10 @@ btnAdd.onclick = function(e){
 
                         }
                     }
+                }else if(FV[i].id === "ThumbnailVilla"){
+
+                    fileFormat.append(FV[i].id, FV[i].files[0]);
+
                 }
 
             }else{

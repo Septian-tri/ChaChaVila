@@ -406,7 +406,17 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                                 $labelFasilitas      = array_keys($fasilitasArray)[$e]; 
                                     
                                 if($valueFasilitasArray !== "TIDAK DI ISI"){
+                                    
+                                    if($valueFasilitasArray === "true"){
 
+                                        $valueFasilitasArray = "✓ Tersedia";
+
+                                    }else if($valueFasilitasArray === "false"){
+
+                                        $valueFasilitasArray = "X Tidak Tersedia";
+
+                                    }
+                                    
                                     echo  $labelFasilitas." : ".$valueFasilitasArray."<br />";
                                     
                                 }

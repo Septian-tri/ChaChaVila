@@ -346,23 +346,14 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                                                                                                     sendErrorMessage("Gagal Menyimpan data Villa Thumnail gagal di upload", "notificationErrorField", null);
                                                                                                                     return false;
                                                                     
+                                                                                                                }else{
+
+                                                                                                                    $notifThumbnail = "Thumbnail Serta ";
+
                                                                                                                 }
 
                                                                                                             }
 
-                                                                                                            // if(isset($_FILES['UpdateFoto'])){
-
-                                                                                                            //     if(count($_FILES['UpdateFoto']) > 0){
-                                                                                                                    
-                                                                                                            //         for($q = 0; $q < count($_FILES['UpdateFoto']['name']); $q++){
-
-                                                                                                                       
-                                                                                                                        
-                                                                                                            //         }
-                                                                                                                    
-                                                                                                            //     }
-                                                                                                                
-                                                                                                            // }
                                                                                                             for($j = 0; $j < count($_FILES); $j++){
                                                                                                                 
                                                                                                                 $explodeTypeGambar = explode("_", array_keys($_FILES)[$j])[0];
@@ -693,7 +684,13 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                                                                                             
                                                                                                             }else{
                                                                                                                 
-                                                                                                                sendErrorMessage("DATA BERHASIL DI SIMPAN !", "OKE", null);
+                                                                                                                if(!isset($notifThumbnail)){
+
+                                                                                                                    $notifThumbnail = "";
+
+                                                                                                                }
+
+                                                                                                                sendErrorMessage($notifThumbnail."DATA BERHASIL DI UPDATE, Silahkan Refresh Halaman Untuk Melihat Data Terupadte !", "OKE", null);
                                                                                                                 return false;
                                                                                                             
                                                                                                             }
