@@ -472,7 +472,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                         <a href="<?php echo $hostHalaman; ?>Admin/OrdersCustomize/order_list.php">Orders</a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo $hostHalaman; ?>Admin/histori_transaksi.php">Histori Transaksi</a>
+                                        <a href="#">Credit cart</a>
                                     </li>
                                 </ul>
                             </div>

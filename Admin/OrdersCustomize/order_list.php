@@ -36,7 +36,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                         <div class=" pb-2 mb-2 border-bottom border-gray">
                             <p class="m-0">
                                 <strong class="d-block text-gray-dark h5 m-0">
-                                    Nama Pemesan <small class="muted text-primary ml-1">(#KodePemesanan)</small>
+                                    Nama Pemesan
                                 </strong>
                                 <small class="text-danger ">
                                     ( Value tanggal batas pembayaran user )
@@ -74,7 +74,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                         <div class=" pb-2 mb-2 border-bottom border-gray">
                             <p class="m-0">
                                 <strong class="d-block text-gray-dark h5 m-0">
-                                    Nama Pemesan <small class="muted text-primary ml-1">(#KodePemesanan)</small>
+                                    Nama Pemesan
                                 </strong>
                                 <small class="text-danger ">
                                     ( Value tanggal batas pembayaran user )
@@ -112,7 +112,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                         <div class=" pb-2 mb-2 border-bottom border-gray">
                             <p class="m-0">
                                 <strong class="d-block text-gray-dark h5 m-0">
-                                    Nama Pemesan <small class="muted text-primary ml-1">(#KodePemesanan)</small>
+                                    Nama Pemesan
                                 </strong>
                                 <small class="text-danger ">
                                     ( Value tanggal batas pembayaran user )
@@ -150,7 +150,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                         <div class=" pb-2 mb-2 border-bottom border-gray">
                             <p class="m-0">
                                 <strong class="d-block text-gray-dark h5 m-0">
-                                    Nama Pemesan <small class="muted text-primary ml-1">(#KodePemesanan)</small>
+                                    Nama Pemesan
                                 </strong>
                                 <small class="text-danger ">
                                     ( Value tanggal batas pembayaran user )
@@ -184,7 +184,6 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                         </div>
                     </div>
 
-                    
                     
 
                     <!-- pagination -->

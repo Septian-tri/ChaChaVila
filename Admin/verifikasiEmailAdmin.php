@@ -150,7 +150,7 @@ if(cekSession() === false){
 
 </head>
 <body class="bg-success">
-    <div class="container pt-5">
+    <div class="container">
         <div class="jumbotron">
             <h1>Hai <?php echo $namaPanggilan; ?></h1>
             <p class="lead">Mengapa Kamu Di Arah Kesini ? Kami hanya ingin memastikan bawha email yang kamu gunakan untuk mendaftar adalah email yang bersifat pribadi dan bukan milik orang lain. silahkan masukan kode verfikasi yang kami kirim melalui email, Terimakasih</p>

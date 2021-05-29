@@ -128,7 +128,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                             </form>
                         </div>
                     </div>
-                    
+
                     <?php
 
                     if(mysqli_num_rows($queryDataVilla) <= 0){

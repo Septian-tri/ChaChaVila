@@ -369,8 +369,8 @@ if(!isset($_POST['username'], $_POST['email'], $_POST['phonenumber'], $_POST['pa
                                                                                                             border-radius:10px;
                                                                                                             
                                                                                                             ">
-                                                                                                            <div style="padding-right:5%;
-                                                                                                                    padding-left:5%;">
+                                                                                                            <div style="padding-right:20%;
+                                                                                                                    padding-left:20%;">
                                                                                                                 <div style="
                                                                                                                     background-color: #ffffff;
                                                                                                                     ">
