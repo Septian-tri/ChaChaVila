@@ -6,16 +6,6 @@ $userNameDatabese   = "root";
 $passwordDataBase   = ""; 
 $namaDataBase       = "chachavilla";
 
-
-//jika terdapat parameter pada alamat URL maka akan di alihkan ke halaman beranda
-if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
-
-    die("JANGAN DI MASUKAN YANG ENGGAK2");
-    return false;
-
-}else{
-
-
     //menyambungkan ke database jika sukses akan blank putih dan jika terjadi gegalan koneksi akan menampilkan informasi kesalahan koneksi
     $koneksi = mysqli_connect($namaServer, $userNameDatabese, $passwordDataBase, $namaDataBase);
 
@@ -25,5 +15,5 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
         exit;
 
     }
-}
+    
 ?>

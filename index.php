@@ -141,8 +141,8 @@
                         echo  '
                     
                             <div class="col-sm-6 col-lg-4">
-                                <a href="/Detail_villa.php">
-                                    <div class="card mb-5 mx-auto" style="max-width: 20rem;">
+                                <div class="card mb-5 mx-auto" style="max-width: 20rem;"> 
+                                    <a href="/Detail_villa.php?VID='.$dataVilla['idunikvilla'].'">
                                         <div class="card-header bg-behance content-center p-0">
                                             <img class="card-img-top" src="/Villa/'.$dataVilla['idunikvilla']."/".$dataVilla['thumbnail'].'" alt="First slide">
                                         </div>
@@ -164,8 +164,8 @@
                                                 <small class="card-subtitle mb-2 text-muted">/ Night</small>
                                             </p>
                                         </div>
-                                    </div>
-                                 </a>
+                                    </a>
+                                </div>
                             </div>';
 
                 }
