@@ -51,7 +51,8 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                         </div>
 
                         <div class="mb-3">
-                            <label for="address">Harga Permalam</label>
+                            <label for="address">Harga Permalam</label><br />
+                            <small id="smNotif">* Jika tidak memilki discount, biarkan field discount kosong</small>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="btn bg-success text-white">
@@ -59,6 +60,12 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                     </span>
                                 </div>
                                 <input type="text" class="FV form-control" id="HargaVilla" placeholder="Total harga permalam">
+                                <div class="input-group-prepend">
+                                    <span class="btn bg-success text-white">
+                                        Discount Rp 
+                                    </span>
+                                </div>
+                                <input type="text" class="FV form-control" id="HargaVillaDisc" placeholder="Contoh : 100.000">
                             </div>
                         </div>
 
