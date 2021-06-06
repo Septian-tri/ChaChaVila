@@ -44,7 +44,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
         //from login admin di gunakan ketika di database sudag =h terdapat  nama admin dan email admin yang memeilki type akun master admin
         //silhakan percantik..
         echo '
-            <div class="col-md-4 mx-auto" style="top:120px;">
+            <div class="col-md-4 mx-auto" style="top:80px;">
                 <div class="card">
                     <div class="text-center p-4 ">
                         <text class="text-secondary h1 font-weight-bold mb-0">
@@ -76,8 +76,8 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
         //from dafatar admin di gunakan ketika di database tidak di temukan nama admin dan email admin yang memeilki type akun master admin
         //silhakan percantik..   
         echo '
-            <div class="col-md-6 mx-auto" style="top:-30px;">
-                <div class="card">
+            <div class="col-md-6 mx-auto mb-2">
+                <div class="card" >
                     <div class="text-center p-4 ">
                         <text class="text-secondary h1 font-weight-bold mb-0">
                             Register

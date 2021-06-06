@@ -6,6 +6,9 @@
         <script src="/Settings/js/bootstrap.min.js"></script>
 
         <style>
+            .navbar{
+                background: rgba(255, 255, 255, 0.7);
+            }
             .navbar-nav {
                 font-size: 1.5rem;
             }
@@ -57,7 +60,7 @@
                 display: block;
             }
         </style>
-        <nav class="navbar navbar-expand-lg navbar-light bg-transparent mb-5">
+        <nav class="navbar navbar-expand-sm navbar-light sticky-top mb-5">
             <a class="navbar-brand" href="/">
                 <i class="fa fa-tree text-success"></i>
                 Chacha<text class="text-success">Villa</text>
@@ -68,7 +71,7 @@
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
+                    <li class="nav-item ">
                         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
@@ -100,12 +103,25 @@
                         }else{
 
                             echo'
-                            <a href="Register.php" class="nav-link h5">
-                                Daftar
-                            </a>
-                            <a href="Login.php" class="nav-link h5">
-                                Login
-                            </a>';
+
+                            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                                <li class="nav-item active">
+                                    <a href="Register.php" class="nav-link h5">
+                                        Daftar
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    
+                                </li>
+                                <li class="nav-item active">
+                                    <a href="Login.php" class="nav-link h5">
+                                        Login
+                                    </a>
+                                </li>
+                            </ul>
+
+                           
+                           ';
                         
                         }
                         ?>
