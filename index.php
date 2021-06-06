@@ -95,6 +95,33 @@
             ?>
         </title>
 
+        <style>
+            /* untuk sementara jangan di hapus dulu untuk di tindak lebih jauh nanati */
+            .banner_holder{
+                width: 100%;
+                height: 300px;
+                min-height: 200px;
+                position: relative;
+                outline:1px dotted red;
+            }
+
+            .banner_holderImage{
+                height: 100%;
+                position:relative;
+                background-size: cover;
+                background-repeat:   no-repeat;
+                background-position: center center;      
+            }
+
+            .sizeimg{
+                max-height: 300px;
+                min-height: 300px;
+            }
+            /* .hovernone a:visited  {
+                text-decoration: none;
+            } */
+        </style>
+
     </head>
     <body id="bg">
     
@@ -157,14 +184,18 @@
                             $discount  = null;
 
                         }
-                               
+                    // untuk sementara jangan di hapus dulu untuk di tindak lebih jauh nanati
 
+                    // <div class="banner_holder">
+                    //     <div class="banner_holderImage" style="background:url(/Villa/'.$dataVilla['idunikvilla']."/".$dataVilla['thumbnail'].');"></div>  
+                    // </div>
                         echo  '<div class="col-sm-6 col-lg-4">
                                     <div class="card mb-5 mx-auto" style="max-width: 20rem;"> 
-                                        <a href="/Detail_villa.php?VID='.$dataVilla['idunikvilla'].'">
-                                            <div class="card-header bg-behance content-center p-0" style="height: 170px;background-position: center;background-repeat: no-repeat;background-attachment: fixed;background-size: cover;background:url(/Villa/'.$dataVilla['idunikvilla']."/".$dataVilla['thumbnail'].');">
-                                                
-                                            </div>
+                                        <a href="/Detail_villa.php?VID='.$dataVilla['idunikvilla'].'" style="text-decoration : none">
+                                          
+
+
+                                        
                                             <div class="card-body">
                                                 <h5 class="card-title">'.$dataVilla['namavilla'].'</h5>
                                                 <h6 class="card-subtitle mb-2 text-muted">'.$dataVilla['lokasivilla'].'</h6>
@@ -191,10 +222,14 @@
 
                         }else{
 
-                            echo '<p class="card-text">
+                            echo '  <small class="card-subtitle mb-2 text-muted">
+                                    &nbsp;
+                                    </small>
+                            
+                                <p class="card-text">
                                     Rp '.preg_replace('/\B(?<!\.)(?=(\d{3})+(?!\d))/', ".", $dataVilla['hargavilla']).' ,-
                                     <small class="card-subtitle mb-2 text-muted">/ Night</small>
-                                  </p>';
+                                </p>';
 
                         }
                                            
