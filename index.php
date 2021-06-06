@@ -95,6 +95,25 @@
             ?>
         </title>
 
+        <style>
+            .banner_holder{
+                width: 100%;
+                height: 300px;
+                min-height: 200px;
+                position: relative;
+                outline:1px dotted red;
+            }
+
+            .banner_holderImage{
+                height: 100%;
+                position:relative;
+                /* background:   url("http://placekitten.com/g/800/600"); */
+                background: url("/Villa/.$dataVilla['idunikvilla'].'/'.$dataVilla['thumbnail'].");
+                background-size: cover;
+                background-position: center;
+            }
+        </style>
+
     </head>
     <body id="bg">
     
@@ -158,12 +177,17 @@
 
                         }
                                
-
+                        // <img class="card-img-top" src="/Villa/'.$dataVilla['idunikvilla']."/".$dataVilla['thumbnail'].'" alt="First slide">
                         echo  '<div class="col-sm-6 col-lg-4">
                                     <div class="card mb-5 mx-auto" style="max-width: 20rem;"> 
                                         <a href="/Detail_villa.php?VID='.$dataVilla['idunikvilla'].'">
                                             <div class="card-header bg-behance content-center p-0">
-                                                <img class="card-img-top" src="/Villa/'.$dataVilla['idunikvilla']."/".$dataVilla['thumbnail'].'" alt="First slide">
+                                                
+
+                                                <div class="banner_holder">
+                                                    <div class="banner_holderImage" style=""></div>  
+                                                </div>
+
                                             </div>
                                             <div class="card-body">
                                                 <h5 class="card-title">'.$dataVilla['namavilla'].'</h5>
