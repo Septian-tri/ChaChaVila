@@ -96,6 +96,7 @@
         </title>
 
         <style>
+            /* untuk sementara jangan di hapus dulu untuk di tindak lebih jauh nanati */
             .banner_holder{
                 width: 100%;
                 height: 300px;
@@ -107,11 +108,18 @@
             .banner_holderImage{
                 height: 100%;
                 position:relative;
-                /* background:   url("http://placekitten.com/g/800/600"); */
-                background: url("/Villa/.$dataVilla['idunikvilla'].'/'.$dataVilla['thumbnail'].");
                 background-size: cover;
-                background-position: center;
+                background-repeat:   no-repeat;
+                background-position: center center;      
             }
+
+            .sizeimg{
+                max-height: 300px;
+                min-height: 300px;
+            }
+            /* .hovernone a:visited  {
+                text-decoration: none;
+            } */
         </style>
 
     </head>
@@ -176,17 +184,17 @@
                             $discount  = null;
 
                         }
-                               
-                        // <img class="card-img-top" src="/Villa/'.$dataVilla['idunikvilla']."/".$dataVilla['thumbnail'].'" alt="First slide">
+                    // untuk sementara jangan di hapus dulu untuk di tindak lebih jauh nanati
+
+                    // <div class="banner_holder">
+                    //     <div class="banner_holderImage" style="background:url(/Villa/'.$dataVilla['idunikvilla']."/".$dataVilla['thumbnail'].');"></div>  
+                    // </div>
                         echo  '<div class="col-sm-6 col-lg-4">
                                     <div class="card mb-5 mx-auto" style="max-width: 20rem;"> 
-                                        <a href="/Detail_villa.php?VID='.$dataVilla['idunikvilla'].'">
+                                        <a href="/Detail_villa.php?VID='.$dataVilla['idunikvilla'].'" style="text-decoration : none">
                                             <div class="card-header bg-behance content-center p-0">
                                                 
-
-                                                <div class="banner_holder">
-                                                    <div class="banner_holderImage" style=""></div>  
-                                                </div>
+                                            <img class="card-img-top sizeimg" src="/Villa/'.$dataVilla['idunikvilla']."/".$dataVilla['thumbnail'].'" alt="First slide">
 
                                             </div>
                                             <div class="card-body">
@@ -215,10 +223,14 @@
 
                         }else{
 
-                            echo '<p class="card-text">
+                            echo '  <small class="card-subtitle mb-2 text-muted">
+                                    &nbsp;
+                                    </small>
+                            
+                                <p class="card-text">
                                     Rp '.preg_replace('/\B(?<!\.)(?=(\d{3})+(?!\d))/', ".", $dataVilla['hargavilla']).' ,-
                                     <small class="card-subtitle mb-2 text-muted">/ Night</small>
-                                  </p>';
+                                </p>';
 
                         }
                                            

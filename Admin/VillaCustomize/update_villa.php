@@ -374,5 +374,4 @@ if (!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])) {
     </div>
     <script src="../../Settings/js/updateVillaSystem.js"></script>
 </body>
-
 </html>
