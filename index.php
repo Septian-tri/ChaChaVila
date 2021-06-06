@@ -162,8 +162,8 @@
                         echo  '<div class="col-sm-6 col-lg-4">
                                     <div class="card mb-5 mx-auto" style="max-width: 20rem;"> 
                                         <a href="/Detail_villa.php?VID='.$dataVilla['idunikvilla'].'">
-                                            <div class="card-header bg-behance content-center p-0">
-                                                <img class="card-img-top" src="/Villa/'.$dataVilla['idunikvilla']."/".$dataVilla['thumbnail'].'" alt="First slide">
+                                            <div class="card-header bg-behance content-center p-0" style="height: 170px;background-position: center;background-repeat: no-repeat;background-attachment: fixed;background-size: cover;background:url(/Villa/'.$dataVilla['idunikvilla']."/".$dataVilla['thumbnail'].');">
+                                                
                                             </div>
                                             <div class="card-body">
                                                 <h5 class="card-title">'.$dataVilla['namavilla'].'</h5>
@@ -184,7 +184,7 @@
                                         Disc '.round(($discount / $dataVilla['hargavilla']) * 100, 2).'%
                                     </span>
                                   </small>
-                                  <p class="card-text">
+                                  <p class="card-text"> 
                                     Rp '.preg_replace('/\B(?<!\.)(?=(\d{3})+(?!\d))/', ".", round($dataVilla['hargavilla'] - $discount)).' ,-
                                     <small class="card-subtitle mb-2 text-muted">/ Night</small>
                                   </p>';
