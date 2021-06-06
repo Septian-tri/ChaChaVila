@@ -193,9 +193,7 @@
                                     <div class="card mb-5 mx-auto" style="max-width: 20rem;"> 
                                         <a href="/Detail_villa.php?VID='.$dataVilla['idunikvilla'].'" style="text-decoration : none">
                                             <div class="card-header bg-behance content-center p-0">
-                                                
-                                            <img class="card-img-top sizeimg" src="/Villa/'.$dataVilla['idunikvilla']."/".$dataVilla['thumbnail'].'" alt="First slide">
-
+                                                <img class="card-img-top sizeimg" src="/Villa/'.$dataVilla['idunikvilla']."/".$dataVilla['thumbnail'].'" alt="First slide">
                                             </div>
                                             <div class="card-body">
                                                 <h5 class="card-title">'.$dataVilla['namavilla'].'</h5>
