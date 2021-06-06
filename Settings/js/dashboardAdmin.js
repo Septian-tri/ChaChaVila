@@ -1,21 +1,82 @@
 var btnAdd              = document.getElementById("advBtn");
+var smNotif             = document.getElementById("smNotif");
 var notificationMode    = "Tampilkan";
 var boolAddVilla        = false;
 
+window.document.onkeyup = function(e){
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    e.preventDefault();
 
-document.getElementById("HargaVilla").onkeyup = function(){
+    var target = e.target; 
 
-    if(this.value.split(".").join("").match(/^[0-9]*$/g)){
+    if(target.id === "HargaVilla"){
 
-        this.value = this.value.split(".").join("").replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
+        smNotif.innerHTML = "* Jika tidak memilki discount, biarkan field discount kosong";
+
+        if(target.value.split(".").join("").match(/^[0-9]*$/g)){
+
+            target.value = target.value.split(".").join("").replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
+            
+        }else{
+            
+            target.value = "";
+            document.getElementById("HargaVillaDisc").value = "";
+            
+        }
+
+        if(target.value.length <= 0){
+
+            document.getElementById("HargaVillaDisc").value = "";
         
-    }else{
+        }
 
-        this.value = "";
+    }else if(target.id === "HargaVillaDisc"){
+
+        if(document.getElementById("HargaVilla") !== undefined && document.getElementById("HargaVilla") !== null){
+         
+            if(document.getElementById("HargaVilla").value.length > 0){
+            
+                if(!target.value.split(".").join("").match(/^[0-9]*$/g)){
+
+                    target.value = "";
+                    document.getElementById("HargaVilla").focus();    
+
+                }else{
+
+                    target.value = target.value.split(".").join("").replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
+ 
+                    if(parseInt(target.value.split(".").join("")) > parseInt(document.getElementById("HargaVilla").value.split(".").join(""))){
+
+                        smNotif.innerHTML = "* Discount tidak dapat lebih besar dari Harga villa !";
+                        smNotif.style.cssText = "color : #"+ Math.floor(Math.random() * 999999) + ";";
+                        target.value = "";
+
+                        return false;
+                    }
+
+                }
+
+            }else{
+
+                target.value = "";
+                smNotif.innerHTML = "* Silahkan isi Terlebih dahulu harga Villa !";
+                document.getElementById("HargaVilla").focus();
+
+            }
+
+        }else{
+
+            target.value = "";
+            return false;
+
+        }
 
     }
     
 }
+
+
 
 btnAdd.onclick = function(e){
 
@@ -81,6 +142,10 @@ btnAdd.onclick = function(e){
             
             if(FV[i].id === "HargaVilla"){
                 
+                fileFormat.append(FV[i].id, FV[i].value.split(".").join(""));
+            
+            }else if(FV[i].id === "HargaVillaDisc"){
+
                 fileFormat.append(FV[i].id, FV[i].value.split(".").join(""));
             
             }else if(FV[i].id === "deskripsi"){

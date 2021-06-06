@@ -358,10 +358,39 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                    <?php echo $deskripsiVilla; ?>
                 </p>
                 <i class="fa fa-users mr-1 mb-3"></i> 6 Tamu
-                <p class="mb-2 text-muted">
-                    <s>Rp 2.000.000</s>
-                </p>
-                <h4 class=""><?php echo preg_replace('/\B(?<!\.)(?=(\d{3})+(?!\d))/', ".", $haragaVilla); ?><small class="e mb-2 text-muted"> / Night</small></h4>
+                <?php
+
+                    if(isset($fasilitasVilla -> Discount)){
+                       
+                        if($fasilitasVilla -> Discount !== "TIDAK TERSEDIA"){
+
+                            echo '<p class="mb-2 text-muted">
+                                    Rp. <s>'.preg_replace('/\B(?<!\.)(?=(\d{3})+(?!\d))/', ".", $haragaVilla).'</s> / Night 
+                                    <span class="badge badge-primary"> 
+                                        Disc '.round(($fasilitasVilla -> Discount / $haragaVilla) * 100, 2).'%
+                                    </span>
+                                  </p>
+                                  <h4 class="">
+                                    Rp. '.preg_replace('/\B(?<!\.)(?=(\d{3})+(?!\d))/', ".", ($haragaVilla - $fasilitasVilla -> Discount)).'
+                                    <small class="e mb-2 text-muted"> / Night</small>
+                                  </h4>';
+                        }else{
+
+                            goto HargaNormal;
+
+                        }
+
+                    }else{
+
+                        HargaNormal:
+                        echo '<h4 class="">
+                                Rp. '.preg_replace('/\B(?<!\.)(?=(\d{3})+(?!\d))/', ".", $haragaVilla).'
+                                <small class="e mb-2 text-muted"> / Night</small>
+                              </h4>';
+
+                    }
+
+                ?>
                 <a href="CheckIn.php" class="btn btn-primary mt-3">Check In</a>
             </div>
         </div>
@@ -392,7 +421,7 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
 
         <div class="container">
             <div class="rounded bg-white mt-3 p-3">
-                <h4>FASILTAS</h4>
+                <h4>FASILTAS & RUANGAN</h4>
                 <hr/>
                 <p>
                    <?php 
@@ -403,12 +432,23 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                             for($e =0; $e < count(array_keys($fasilitasArray)); $e++){
 
                                 $valueFasilitasArray = $fasilitasArray[array_keys($fasilitasArray)[$e]];
-                                $labelFasilitas      = array_keys($fasilitasArray)[$e]; 
-                                    
+                                $labelFasilitas      = preg_replace("/(?<=[^A-Z])[A-Z]/", " $0", explode("_", array_keys($fasilitasArray)[$e])[1]);
+
                                 if($valueFasilitasArray !== "TIDAK DI ISI"){
 
-                                    echo  $labelFasilitas." : ".$valueFasilitasArray."<br />";
-                                    
+                                    if($valueFasilitasArray === "true"){
+
+                                        echo $labelFasilitas." : Tersedia<br />";
+
+                                    }else if($valueFasilitasArray === "false"){
+
+                                        echo $labelFasilitas." : Tidak Tersedia<br />";
+
+                                    }else if(preg_match("/^[1-9]*$/" , $valueFasilitasArray)){
+
+                                        echo  $valueFasilitasArray." ".$labelFasilitas."<br />";
+
+                                    }
                                 }
 
                             }
@@ -416,29 +456,6 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                         }
                    ?>
                 </p>
-            </div>
-            <div class="rounded bg-white mt-3 p-3">
-                <h4>REVIEW</h4>
-                <hr/>
-                <div class="border rounded" >
-                    <div class="card-header bg-white">
-                        User Name
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star text-warning"></i>
-                            <i class="fa fa-star-half text-warning"></i>
-                        </p>
-                        <p>
-                            some text some text some text some text some text some text
-                            some text some text some text some text some text some text
-                            some text some text some text some text some text some text 
-                        </p>
-                    </div>
-                </div>
             </div>
 
 
@@ -462,6 +479,29 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                                 width:100%;
                             }
                         </style>
+                    </div>
+                </div>
+            </div>
+            <div class="rounded bg-white mt-3 p-3">
+                <h4>REVIEW</h4>
+                <hr/>
+                <div class="border rounded" >
+                    <div class="card-header bg-white">
+                        User Name
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star text-warning"></i>
+                            <i class="fa fa-star-half text-warning"></i>
+                        </p>
+                        <p>
+                            some text some text some text some text some text some text
+                            some text some text some text some text some text some text
+                            some text some text some text some text some text some text 
+                        </p>
                     </div>
                 </div>
             </div>

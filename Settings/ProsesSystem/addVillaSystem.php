@@ -237,6 +237,69 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                 
                                                                                             }else{
                                                                                                 
+
+                                                                                                if(isset($_POST['HargaVillaDisc'])){
+
+                                                                                                    if(preg_match('/^[\s]*$/', $_POST['HargaVillaDisc'])){
+                                                                                                        
+                                                                                                        $discount = "TIDAK TERSEDIA";
+                                                                                                        
+                                                                                                    }else{
+                                                                                                        
+                                                                                                        if(strlen($_POST['HargaVillaDisc']) > 20){
+                                                                                                            
+                                                                                                            sendErrorMessage("Jumlah Digit discount melebihin batas", "notificationErrorField", 'HargaVillaDisc');
+                                                                                                            return false;
+
+                                                                                                        }else{
+   
+                                                                                                            if(!preg_match('/^[0-9]*$/', $_POST['HargaVillaDisc'])){
+                                                                                                                
+                                                                                                                sendErrorMessage("Silahkan Hanya Masukan Angka pada Field Diskon !", "notificationErrorField", 'HargaVillaDisc');
+                                                                                                                return false;
+
+                                                                                                            }else{
+
+                                                                                                                if($_POST['HargaVillaDisc'] > $_POST['HargaVilla']){
+                                                                                                                
+                                                                                                                    sendErrorMessage("Jumlah Diskon tidak dapat lebih besar dari harga villa !", "notificationErrorField", 'HargaVillaDisc');
+                                                                                                                    return false;
+        
+                                                                                                                }else{
+
+                                                                                                                    if($_POST['HargaVillaDisc'] <= 0){
+
+                                                                                                                        $discount = "TIDAK TERSEDIA";
+                                                                                                                        
+                                                                                                                    }else{
+                                                                                                                        
+                                                                                                                        if(($_POST['HargaVilla'] - $_POST['HargaVillaDisc']) < 10000){
+                                                                                                                        
+                                                                                                                            sendErrorMessage("Maaf saat ini harga vilaa setelah discount tidak dapat kurang dari 10 ribu !", "notificationErrorField", 'HargaVillaDisc');
+                                                                                                                            return false;
+
+                                                                                                                        }else{
+
+                                                                                                                            $discount = $_POST['HargaVillaDisc'];
+
+                                                                                                                        }
+
+                                                                                                                    }
+
+                                                                                                                }
+
+                                                                                                            }
+
+                                                                                                        }
+
+                                                                                                    }
+
+                                                                                                }else{
+
+                                                                                                    $discount = "TIDAK TERSEDIA";
+
+                                                                                                }
+
                                                                                                 if(count($_FILES) <= 1){
 
                                                                                                     for($ha = 0; $ha < count($_POST); $ha++){
@@ -399,7 +462,7 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
 
                                                                                                         }
 
-                                                                                                        $queryInputDataVilla = mysqli_query($koneksi, "INSERT INTO villa (namavilla, lokasivilla, statusvilla, idunikvilla, fasilitasvilla, hargavilla, deskripsi, thumbnail) VALUES ('$namaVilla', '$alamatVilla', 'KOSONG', '$finalIdRandom', '".json_encode(array("fotoVilla" => $objekJsonGambar, "fasilitasVilla" => $dataJsonFasilitas, "fotoTidakDiSet" => $fasilitasGambarKSG))."', '$hargaVilla', '$deskripsiVilla', '".$finalIdRandom."_"."Thumbnail".substr($_FILES['ThumbnailVilla']['name'], strlen($_FILES['ThumbnailVilla']['name'])-4, strlen($_FILES['ThumbnailVilla']['name']))."')  ");
+                                                                                                        $queryInputDataVilla = mysqli_query($koneksi, "INSERT INTO villa (namavilla, lokasivilla, statusvilla, idunikvilla, fasilitasvilla, hargavilla, deskripsi, thumbnail) VALUES ('$namaVilla', '$alamatVilla', 'KOSONG', '$finalIdRandom', '".json_encode(array("Discount" => $discount, "fotoVilla" => $objekJsonGambar, "fasilitasVilla" => $dataJsonFasilitas, "fotoTidakDiSet" => $fasilitasGambarKSG))."', '$hargaVilla', '$deskripsiVilla', '".$finalIdRandom."_"."Thumbnail".substr($_FILES['ThumbnailVilla']['name'], strlen($_FILES['ThumbnailVilla']['name'])-4, strlen($_FILES['ThumbnailVilla']['name']))."')  ");
 
                                                                                                         if(!$queryInputDataVilla){
                                                                                                             

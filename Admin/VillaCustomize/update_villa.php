@@ -47,7 +47,9 @@ if (!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])) {
                             return false;
                         } else {
 
-                            $dataVilla = mysqli_fetch_array($queryCekIDVilla);
+                            $dataVilla          = mysqli_fetch_array($queryCekIDVilla);
+                            $fasilitasEncode    = json_decode($dataVilla['fasilitasvilla']);
+
                         }
                     }
                 }
@@ -116,7 +118,8 @@ if (!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])) {
                         </div>
 
                         <div class="mb-3">
-                            <label for="address">Harga Permalam</label>
+                            <label for="address">Harga Permalam</label><br />
+                            <small id="smNotif">* Jika tidak memilki discount, biarkan field discount kosong</small>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="btn bg-success text-white">
@@ -124,6 +127,22 @@ if (!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])) {
                                     </span>
                                 </div>
                                 <input type="text" class="FV form-control" id="HargaVilla" placeholder="Total harga permalam" value="<?php echo preg_replace('/\B(?<!\.)(?=(\d{3})+(?!\d))/', ".", $dataVilla['hargavilla']); ?>">
+                                <div class="input-group-prepend">
+                                    <span class="btn bg-success text-white">
+                                        Discount Rp 
+                                    </span>
+                                </div>
+                                <input type="text" class="FV form-control" id="HargaVillaDisc" placeholder="Disc Count e.g 100.000" value="<?php 
+                                    if(isset($fasilitasEncode -> Discount)){
+
+                                        if($fasilitasEncode -> Discount !== "TIDAK TERSEDIA"){
+    
+                                            echo preg_replace('/\B(?<!\.)(?=(\d{3})+(?!\d))/', ".", $fasilitasEncode -> Discount); 
+    
+                                        }
+                                        
+                                    }
+                                ?>">
                             </div>
                         </div>
 
@@ -142,13 +161,14 @@ if (!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])) {
                             <ul class="list-group">
 
                                 <?php
-
-                                $fasilitasEncode    = json_decode($dataVilla['fasilitasvilla']);
-                                $fotoVilla          = $fasilitasEncode->fotoVilla;
-                                $fasilitas          = $fasilitasEncode->fasilitasVilla;
-                                $fotoTidakDiSet     = $fasilitasEncode->fotoTidakDiSet;
-                                $jumlahFasilitas    = count($fasilitas);
-                                $arrayFasilitas     = [];
+                                    
+                                    $fotoVilla          = $fasilitasEncode -> fotoVilla;
+                                    $fasilitas          = $fasilitasEncode -> fasilitasVilla;
+                                    $fotoTidakDiSet     = $fasilitasEncode -> fotoTidakDiSet;
+                                    $jumlahFasilitas    = count($fasilitas);
+                                    $arrayFasilitas     = [];
+                                
+                                    for($a = 0; $a < $jumlahFasilitas; $a++){
 
                                 for ($a = 0; $a < $jumlahFasilitas; $a++) {
 
@@ -161,21 +181,23 @@ if (!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])) {
                                 for ($b = 0; $b < count($arrayFasilitas); $b++) {
 
                                     $namaIdFasilitas = array_keys($arrayFasilitas)[$b];
-
-                                    if (explode("_", $namaIdFasilitas)[0] === "FVT") {
-
-                                        if ($arrayFasilitas[$namaIdFasilitas] === "TIDAK DI ISI") {
-
-                                            $statusBidangText = "";
-                                            $labelText        = "";
-                                        } else {
-
-                                            $labelText        = '<label class="text-secondary" for="' . $namaIdFasilitas . '">' . explode("_", $namaIdFasilitas)[1] . '</label>';
-                                            $statusBidangText = $arrayFasilitas[$namaIdFasilitas];
-                                        }
-
-                                        //edit field fasilitas vila disini
-                                        echo '
+                                    
+                                        if(explode("_", $namaIdFasilitas)[0] === "FVT"){
+                                            
+                                            if($arrayFasilitas[$namaIdFasilitas] === "TIDAK DI ISI"){
+                                                
+                                                $statusBidangText = "";
+                                                $labelText        = "";
+                                                
+                                            }else{
+                                                
+                                                $labelText        = '<label class="text-secondary" for="'.$namaIdFasilitas.'">'.preg_replace("/(?<=[^A-Z])[A-Z]/", " $0", explode("_", $namaIdFasilitas)[1]).'</label>';
+                                                $statusBidangText = $arrayFasilitas[$namaIdFasilitas];
+                                            
+                                            }
+                                            
+                                            //edit field fasilitas vila disini
+                                            echo'
                                                 <li class="list-group-item">
                                                     ' . $labelText . '
                                                     <div class="input-group">
@@ -184,7 +206,7 @@ if (!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])) {
                                                                 <i class="fa fa-pencil text-white"></i>
                                                             </span>
                                                         </div>
-                                                        <input type="text" class="FV form-control border-0" id="' . $namaIdFasilitas . '" placeholder="' . explode("_", $namaIdFasilitas)[1] . '" value="' . $statusBidangText . '">
+                                                        <input type="text" class="FV form-control border-0" id="'.$namaIdFasilitas.'" placeholder="'.preg_replace("/(?<=[^A-Z])[A-Z]/", " $0", explode("_", $namaIdFasilitas)[1]).'" value="'.$statusBidangText.'">
                                                     </div>
                                                 </li>';
                                     } else if (explode("_", $namaIdFasilitas)[0] === "FVC") {
