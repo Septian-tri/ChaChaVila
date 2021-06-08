@@ -169,19 +169,21 @@ if (!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])) {
                                     $arrayFasilitas     = [];
                                 
                                     for($a = 0; $a < $jumlahFasilitas; $a++){
-
-                                for ($a = 0; $a < $jumlahFasilitas; $a++) {
-
-                                    foreach ((array) $fasilitas[$a] as $nomorUrut => $text) {
-
-                                        $arrayFasilitas[$nomorUrut] = $text;
+                                        
+                                        for ($a = 0; $a < $jumlahFasilitas; $a++) {
+                                            
+                                            foreach ((array) $fasilitas[$a] as $nomorUrut => $text) {
+                                                
+                                                $arrayFasilitas[$nomorUrut] = $text;
+                                            
+                                            }
+                                        }
                                     }
-                                }
-
-                                for ($b = 0; $b < count($arrayFasilitas); $b++) {
-
-                                    $namaIdFasilitas = array_keys($arrayFasilitas)[$b];
                                     
+                                    for ($b = 0; $b < count($arrayFasilitas); $b++) {
+                                        
+                                        $namaIdFasilitas = array_keys($arrayFasilitas)[$b];
+                                        
                                         if(explode("_", $namaIdFasilitas)[0] === "FVT"){
                                             
                                             if($arrayFasilitas[$namaIdFasilitas] === "TIDAK DI ISI"){
@@ -209,34 +211,36 @@ if (!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])) {
                                                         <input type="text" class="FV form-control border-0" id="'.$namaIdFasilitas.'" placeholder="'.preg_replace("/(?<=[^A-Z])[A-Z]/", " $0", explode("_", $namaIdFasilitas)[1]).'" value="'.$statusBidangText.'">
                                                     </div>
                                                 </li>';
-                                    } else if (explode("_", $namaIdFasilitas)[0] === "FVC") {
+                                            
+                                        } else if (explode("_", $namaIdFasilitas)[0] === "FVC") {
 
-                                        if ($arrayFasilitas[$namaIdFasilitas] === "true") {
+                                            if ($arrayFasilitas[$namaIdFasilitas] === "true") {
 
-                                            $statusCentang = "checked";
-                                        } else {
+                                                $statusCentang = "checked";
+                                            } else {
 
-                                            $statusCentang = "";
+                                                $statusCentang = "";
+                                            }
+
+                                            //edit checkbox villa disini
+                                            echo '
+                                                    <li class="list-group-item">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="btn bg-success">
+                                                                    <i class="fa fa-check text-white"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="custom-control custom-checkbox my-auto ml-5" style="left:1.8px;">
+                                                                <input type="checkbox" class="FV custom-control-input" id="' . $namaIdFasilitas . '" aria-label="..." ' . $statusCentang . '>
+                                                                <label class="custom-control-label text-secondary" for="' . $namaIdFasilitas . '">' . explode("_", $namaIdFasilitas)[1] . '</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>';
+                                                
                                         }
-
-                                        //edit checkbox villa disini
-                                        echo '
-                                                <li class="list-group-item">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="btn bg-success">
-                                                                <i class="fa fa-check text-white"></i>
-                                                            </span>
-                                                        </div>
-                                                        <div class="custom-control custom-checkbox my-auto ml-5" style="left:1.8px;">
-                                                            <input type="checkbox" class="FV custom-control-input" id="' . $namaIdFasilitas . '" aria-label="..." ' . $statusCentang . '>
-                                                            <label class="custom-control-label text-secondary" for="' . $namaIdFasilitas . '">' . explode("_", $namaIdFasilitas)[1] . '</label>
-                                                        </div>
-                                                    </div>
-                                                </li>';
+                                    
                                     }
-                                }
-
                                 ?>
                             </ul>
                         </div>

@@ -126,6 +126,7 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                         $jumlahFasilitasFoto    = count($fasilitasVillaFoto);
                         $haragaVilla            = $dataVilla['hargavilla'];
                         $lokasivilla            = $dataVilla['lokasivilla'];
+                        $idUnikVilla            = $dataVilla['idunikvilla'];
 
                     }
                     
@@ -366,6 +367,8 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                        
                         if($fasilitasVilla -> Discount !== "TIDAK TERSEDIA"){
 
+                            $disc = $fasilitasVilla -> Discount;
+
                             echo '<p class="mb-2 text-muted">
                                     Rp. <s>'.preg_replace('/\B(?<!\.)(?=(\d{3})+(?!\d))/', ".", $haragaVilla).'</s> / Night 
                                     <span class="badge badge-primary"> 
@@ -378,6 +381,7 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                                   </h4>';
                         }else{
 
+                            $disc = 0;
                             goto HargaNormal;
 
                         }
@@ -468,27 +472,215 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
             <div class="container bg-light rounded p-4">
         <div class="py-5 text-center">
             <h2>CheckIn form</h2>
-            <p class="lead mt-4">Code Book : #WOjdsaWdnaWQ212nsoa</p>
+            <!-- <p class="lead mt-4">Code Book : #WOjdsaWdnaWQ212nsoa</p> -->
         </div>
 
         <div class="row">
             <div class="col-md-10 order-md-1 mx-auto">
-                <h4 class="mb-3">Book Date</h4>
+                <h4 class="mb-3">Tanggal Booking</h4>
                 <form class="needs-validation was-validated" novalidate="">
                     <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="firstDate">Order Date</label>
-                            <input type="date" class="form-control" id="firstDate" placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                                Valid first date is required.
-                            </div>
+                        <div class="col-md-3 mr-1">
+                            <!-- <label for="TCI">Tanggal Check in</label> -->
+                            <!-- <input type="date" class="form-control" id="TCI" placeholder="dd/mm/yyyy" min="<?php echo date("d/m/Y"); ?>"> -->
+                            <label for="TCO"><small>Tanggal Check In</small></label>
+                            <select class="form-control TCI TB" id="TCITanggal">
+                                <?php
+
+                                    for($t = 1; $t <= 31; $t++){
+
+                                        if($t == date("j")){
+
+                                            $pilih = ' selected="select"';
+    
+                                        }else{ 
+                                            $pilih = "";
+    
+                                        }
+
+                                        if($t <= 9){
+
+                                            echo '<option value="0'.$t.'"'.$pilih.'>0'.$t.'</option>';
+
+                                        }else{
+
+                                            echo '<option value="'.$t.'"'.$pilih.'>'.$t.'</option>';
+
+                                        }
+
+                                    }
+
+                                ?>
+                            </select>
+                         </div>
+                         <div class="col-md-3 mr-1">
+                            <label for="TCO"><small>Bulan Check In</small></label>
+                            <select class="form-control TCI TB" id="TCIBulan">
+                                <?php
+
+                                    for($b = 1; $b <= 12; $b++){
+
+                                        if($b == date("n")){
+
+                                            $pilih = ' selected="select"';
+
+                                        }else{
+
+                                            $pilih = "";
+
+                                        }
+
+                                        if($b <= 9){
+
+                                            echo '<option value="0'.$b.'"'.$pilih.'>0'.$b.'</option>';
+
+                                        }else{
+
+                                            echo '<option value="'.$b.'"'.$pilih.'>'.$b.'</option>';
+
+                                        }
+
+                                    }
+
+                                ?>
+                            </select>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="lastDate">Last Order Date</label>
-                            <input type="date" class="form-control" id="lastDate" placeholder="" value="" required="">
+                        <div class="col-md-3 mr-1">
+                            <label for="TCO"><small>Tahun Check In</small></label>
+                            <select class="form-control TCI TB" id="TCITahun">
+                                <?php
+
+                                    for($t = date("Y"); $t <= date("Y", strtotime("+1 year today")); $t++){
+
+                                        if($t == date("Y")){
+
+                                            $pilih = ' selected="select"';
+
+                                        }else{
+
+                                            $pilih = "";
+
+                                        }
+
+                                        if($t <= 9){
+
+                                            echo '<option value="0'.$t.'"'.$pilih.'>0'.$t.'</option>';
+
+                                        }else{
+
+                                            echo '<option value="'.$t.'"'.$pilih.'>'.$t.'</option>';
+
+                                        }
+
+                                    }
+
+                                ?>
+                            </select>
+                        </div>
+                        <!-- <div class="col-md-6 mb-3">
+                            <label for="TCO">Tanggal Check Out</label>
+                            <input type="date" class="form-control" id="TCO" placeholder="dd/mm/yyyy" max="<?php echo date("d/m/Y", strtotime("+1 day today")); ?>">
                             <div class="invalid-feedback">
                                 Valid last date is required.
                             </div>
+                        </div> -->
+                        <div class="col-md-3 mr-1">
+                            <label for="TCO"><small>Tanggal Check Out</small></label>
+                            <select class="form-control TCO TB" id="TCOTanggal">
+                            <?php
+
+                                for($t = 1; $t <= 31; $t++){
+
+                                    if($t == date("j", strtotime("+1 day today"))){
+
+                                        
+                                        $pilih = ' selected="select"';
+
+                                    }else{
+
+                                        $pilih = "";
+
+                                    }
+
+                                    if($t <= 9){
+
+                                        echo '<option value="0'.$t.'"'.$pilih.'>0'.$t.'</option>';
+
+                                    }else{
+
+                                        echo '<option value="'.$t.'"'.$pilih.'>'.$t.'</option>';
+
+                                    }
+
+                                }
+
+                            ?>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mr-1">
+                        <label for="TCO"><small>Bulan Check Out</small></label>
+                            <select class="form-control TCO TB" id="TCOBulan">
+                                <?php
+
+                                    for($b = 1; $b <= 12; $b++){
+
+                                        if($b == date('n', strtotime("+1 day today"))){
+
+                                            $pilih = ' selected="select"';
+
+                                        }else{
+
+                                            $pilih = "";
+
+                                        }
+
+                                        if($b <= 9){
+
+                                            echo '<option value="0'.$b.'"'.$pilih.'>0'.$b.'</option>';
+
+                                        }else{
+
+                                            echo '<option value="'.$b.'"'.$pilih.'>'.$b.'</option>';
+
+                                        }
+
+                                        echo date('n', strtotime("+1 day today"));  
+                                    }
+
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mr-1">
+                            <label for="TCO"><small>Tahun Check Out</small></label>
+                            <select class="form-control TCO TB" id="TCOTahun">
+                                <?php
+
+                                    for($t = date("Y"); $t <= date("Y", strtotime("+1 year today")); $t++){
+
+                                        if($t == date("Y", strtotime("+1 day today"))){
+
+                                            $pilih = ' selected="select"';
+
+                                        }else{
+
+                                            $pilih = "";
+
+                                        }
+
+                                        if($t <= 9){
+
+                                            echo '<option value="0'.$t.'"'.$pilih.'>0'.$t.'</option>';
+
+                                        }else{
+
+                                            echo '<option value="'.$t.'"'.$pilih.'>'.$t.'</option>';
+
+                                        }
+
+                                    }
+
+                                ?>
+                            </select>
                         </div>
                     </div>
 
@@ -496,7 +688,7 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                         <label for="username">Duration</label>
                         <div class="input-group">
                             <i class="fa fa-clock-o fa-lg mr-2"></i>
-                            <span>4 days</span>
+                            <span id="durasiBooking"></span>
                         </div>
                     </div>
 
@@ -512,18 +704,18 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
 
                     <div class="d-block my-3">
                         <label for="username">Rental Costs</label>
-                        <h2>Rp. 100.000.000</h2>
+                        <h2 id="totalHarga"></h2>
                     </div>
 
                     <hr class="mb-5">
-                    <a href="CheckOut.php" class="btn btn-primary btn-lg btn-block" type="submit">Bayar Dan Check In</a>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="bProses">Bayar Dan Check In</button>
                 </form>
             </div>
         </div>
         <footer class="my-4 col-md-10 mx-auto px-0 text-muted text-center text-small">
             <span class="d-block text-center mb-4 text-muted"> or </span>
 
-            <label class="lead mb-3">Meet in Person</label>
+            <label class="lead mb-3" id="aa">Meet in Person</label>
             
             <div class="card card-body">
                 <p>
@@ -583,6 +775,147 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                 </div>
             </div>
         </div>
+        <script language="javascript">
+
+            var TCI = [];
+            var TCO = [];
+
+            function durasiBooking(){
+
+                for(var bkd = 0; bkd < document.getElementsByClassName("TB").length; bkd++){
+
+                    if(document.getElementsByClassName("TB")[bkd].className === "form-control TCI TB"){
+
+                        TCI.push(document.getElementById(document.getElementsByClassName("TB")[bkd].id).value);
+                    
+                    }else if(document.getElementsByClassName("TB")[bkd].className === "form-control TCO TB"){
+
+                        TCO.push(document.getElementById(document.getElementsByClassName("TB")[bkd].id).value);
+
+                    }
+
+                }
+
+                
+                var waktuTCI        = new Date(TCI[1] + "/" + TCI[0] + "/" + TCI[2]);
+                var waktuTCO        = new Date(TCO[1] + "/" + TCO[0] + "/" + TCO[2]);
+
+                var perbedaanWaktu  = waktuTCO.getTime() - waktuTCI.getTime();
+        
+                if(waktuTCO < waktuTCI){
+
+                    alert("Tanggal Check out tidak dapat lebih kecil dari tanggal check in !");
+
+                }else if(waktuTCI < new Date("<?php echo date("m/d/Y"); ?>").getTime()){
+
+                    alert("Tanggal Check In tidak dapat kurang dari hari ini");
+
+                }else{
+
+                    dBo         = perbedaanWaktu/(1000 * 60 * 60 * 24);
+                    totalHarga  = <?php echo $haragaVilla - $disc; ?> * dBo;
+
+                    document.getElementById("totalHarga").innerHTML = "Rp. " + totalHarga.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
+                    return document.getElementById("durasiBooking").innerHTML = dBo + " Hari";
+
+                }
+
+
+            }
+
+            function orderData(){
+
+                return {
+
+                        "HargaVilla"    : "<?php echo $haragaVilla; ?>",
+                        "idUnikVilla"   : "<?php echo $idUnikVilla; ?>"
+
+                    };
+
+            }
+
+            document.onchange = function(e){
+
+                var id  = e.target.id;
+                var val = e.target.value;
+
+                if(id === "TCITahun" || id === "TCOTahun"){
+                   
+                    if(val <  <?php echo date("Y"); ?> || val > <?php echo date("Y", strtotime("+1 year today")) ?>){
+
+                        alert("Tahun tidak valid !");
+                        window.location.reload(true);
+                        
+                    }else{
+
+                        if(id === "TCITahun"){
+
+                            TCI[2] = val;
+                            durasiBooking();
+
+                        }else if(id === "TCOTahun"){
+
+                            TCO[2] = val;
+                            durasiBooking();
+
+                        }
+
+                    }
+
+                }else if(id === "TCITanggal" || id === "TCOTanggal"){
+                   
+                   if(val <  1 || val > 31){
+
+                       alert("Tanggal tidak Valid !");
+                       window.location.reload(true);
+                       
+                   }else{
+
+                        if(id === "TCITanggal"){
+
+                            TCI[0] = val;
+                            durasiBooking();
+
+                        }else if(id === "TCOTanggal"){
+
+                            TCO[0] = val;
+                            durasiBooking();
+
+                        }
+
+                    }
+
+               }else if(id === "TCIBulan" || id === "TCOBulan"){
+                   
+                   if(val <  1 || val > 12){
+
+                       alert("bulan tidak Valid !");
+                       window.location.reload(true);
+                       
+                   }else{
+
+                        if(id === "TCIBulan"){
+
+                            TCI[1] = val;
+                            durasiBooking();
+
+                        }else if(id === "TCOBulan"){
+
+                            TCO[1] = val;
+                            durasiBooking();
+
+                        }
+
+                  }
+
+               }
+               
+            }
+            
+            durasiBooking();
+                                                            
+        </script>
         <script src="Settings/js/main.js"></script>
+        <script src="Settings/js/bookingSystem.js"></script>
     </body>
 </html>
