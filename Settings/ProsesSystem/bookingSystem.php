@@ -67,8 +67,73 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                     
                             }else{
 
-                                $dataPengguna = mysqli_fetch_array($queryCekDataUser);
-                                $data         = array("namaPengguna" => base64_decode($dataPengguna['namapengguna']), "namaPanggilan" => $dataPengguna['namapanggilan']);
+                                if(!isset($_POST['idUnikVilla'], $_POST['TCI'], $_POST['TCO'])){
+
+                                    sendErrorMessage("Order Data Vilaa Tidak Valid UNS", "notificationErrorField", null);
+                                    return false;
+
+                                }else{
+
+                                    if(preg_match('/^[\s]$/', $_POST['idUnikVilla'])){
+
+                                        sendErrorMessage("ID Vilaa Tidak Valid ED", "notificationErrorField", null);
+                                        return false;
+                                
+                                    }else{
+                                    
+                                        if(!preg_match('/^[a-zA-Z0-9]{15,}$/', $_POST['idUnikVilla'])){
+
+                                            sendErrorMessage("ID Vilaa Tidak Valid ED", "notificationErrorField", null);
+                                            return false;
+                                    
+                                        }else{
+                                        
+                                            if(count(explode(",", $_POST['TCI'])) !== 3){
+
+                                                sendErrorMessage(explode(",", $_POST['TCI']), "notificationErrorField", null);
+                                                return false;
+
+                                            }else{
+
+                                                if(count(explode(",", $_POST['TCO'])) !== 3){
+
+                                                    sendErrorMessage("Tanggal Check Out Tidak Valid !", "notificationErrorField", null);
+                                                    return false;
+    
+                                                }else{
+                                                    
+                                                    if(explode(",", $_POST['TCI'])[0] <= 0 || explode(",", $_POST['TCI'])[0] > 31){
+
+                                                        sendErrorMessage("Tanggal Tidak Valid !", "notificationErrorField", "TCITanggal");
+                                                        return false;
+
+                                                    }else{
+
+                                                        if(explode(",", $_POST['TCO'])[0] <= 0 || explode(",", $_POST['TCO'])[0] > 31){
+
+                                                            sendErrorMessage("Tanggal Tidak Valid !", "notificationErrorField", "TCITanggal");
+                                                            return false;
+    
+                                                        }else{
+    
+                                                            sendErrorMessage($_POST['TCO'], "notificationErrorField", "TCITanggal");
+                                                            return false;
+    
+                                                        }
+
+                                                    }
+                                                    // $dataPengguna = mysqli_fetch_array($queryCekDataUser);
+                                                    // $data         = array("namaPengguna" => base64_decode($dataPengguna['namapengguna']), "namaPanggilan" => $dataPengguna['namapanggilan']);
+
+                                                }
+
+                                            }
+    
+                                        }
+
+                                    }
+
+                                }
 
                             }
 

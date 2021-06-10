@@ -777,8 +777,15 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
         </div>
         <script language="javascript">
 
-            var TCI = [];
-            var TCO = [];
+            var TCI         = [];
+            var TCO         = [];
+            var orderData   = {
+                
+                        "idUnikVilla"   : "<?php echo $idUnikVilla; ?>",
+                        "TCI"           : TCI,
+                        "TCO"           : TCO 
+                };
+
 
             function durasiBooking(){
 
@@ -786,9 +793,21 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
 
                     if(document.getElementsByClassName("TB")[bkd].className === "form-control TCI TB"){
 
+                        if(Object.keys(TCI).length >= 3){
+
+                            TCI = [];
+
+                        }
+
                         TCI.push(document.getElementById(document.getElementsByClassName("TB")[bkd].id).value);
                     
                     }else if(document.getElementsByClassName("TB")[bkd].className === "form-control TCO TB"){
+
+                        if(Object.keys(TCO).length >= 3){
+
+                            TCO = [];
+
+                        }
 
                         TCO.push(document.getElementById(document.getElementsByClassName("TB")[bkd].id).value);
 
@@ -796,7 +815,10 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
 
                 }
 
-                
+            }
+
+            function totalHargaDurasi(){
+
                 var waktuTCI        = new Date(TCI[1] + "/" + TCI[0] + "/" + TCI[2]);
                 var waktuTCO        = new Date(TCO[1] + "/" + TCO[0] + "/" + TCO[2]);
 
@@ -820,19 +842,8 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
 
                 }
 
-
             }
 
-            function orderData(){
-
-                return {
-
-                        "HargaVilla"    : "<?php echo $haragaVilla; ?>",
-                        "idUnikVilla"   : "<?php echo $idUnikVilla; ?>"
-
-                    };
-
-            }
 
             document.onchange = function(e){
 
@@ -851,17 +862,16 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                         if(id === "TCITahun"){
 
                             TCI[2] = val;
-                            durasiBooking();
 
                         }else if(id === "TCOTahun"){
 
                             TCO[2] = val;
-                            durasiBooking();
-
+                            
                         }
 
                     }
 
+                    totalHargaDurasi();
                 }else if(id === "TCITanggal" || id === "TCOTanggal"){
                    
                    if(val <  1 || val > 31){
@@ -874,17 +884,16 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                         if(id === "TCITanggal"){
 
                             TCI[0] = val;
-                            durasiBooking();
 
                         }else if(id === "TCOTanggal"){
 
                             TCO[0] = val;
-                            durasiBooking();
 
                         }
 
                     }
 
+                    totalHargaDurasi();
                }else if(id === "TCIBulan" || id === "TCOBulan"){
                    
                    if(val <  1 || val > 12){
@@ -897,22 +906,21 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                         if(id === "TCIBulan"){
 
                             TCI[1] = val;
-                            durasiBooking();
 
                         }else if(id === "TCOBulan"){
 
                             TCO[1] = val;
-                            durasiBooking();
-
+                            
                         }
-
                   }
 
+                  totalHargaDurasi();
                }
                
             }
             
             durasiBooking();
+            totalHargaDurasi();
                                                             
         </script>
         <script src="Settings/js/main.js"></script>

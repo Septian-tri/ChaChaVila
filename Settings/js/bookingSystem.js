@@ -15,22 +15,25 @@ if(bProses === undefined || bProses === null){
         e.stopImmediatePropagation();
         e.stopPropagation();
 
-        var dataUser            = {
-
-            "idUnikVilla"       : orderData['idUnikVilla'],
-            "tanggalCheckIn"    : ""
-
-        }
         
-        //Kirim data ke loginSystem.php
         if(bolProses === false){
-                
+            
+            var formDataOrder = new FormData();
+    
+                for(var od = 0; od < Object.keys(orderData).length; od++){
+    
+                    formDataOrder.append(Object.keys(orderData)[od] ,orderData[Object.keys(orderData)[od]]);
+                    
+                }  
+            
             $.ajax({
                 url         : document.location.origin + "/settings/ProsesSystem/bookingSystem.php",
-                data        : dataUser,
-                accepts     : "text/html",
+                data        : formDataOrder,
                 method      : "POST",
+                cahce       : false,
+                processData : false,
                 crossDomain : false,
+                contentType : false,
                 beforeSend  : function(){
                         
                     bolProses = true;
