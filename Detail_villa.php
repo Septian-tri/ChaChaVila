@@ -159,123 +159,7 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
 
             .btn-group img{
                 width : 100%;
-            }
-
-            /* Styles the thumbnail */
-
-            /* a.lightbox img {
-            width   : 30%;
-            height  : auto;
-            border  : 3px solid white;
-            box-shadow: 0px 0px 8px rgba(0,0,0,.3);
-            display: block;
-            } */
-
-            /* Styles the lightbox, removes it from sight and adds the fade-in transition */
-
-            /* .lightbox-target {
-            position: fixed;
-            top: -100%;
-            width: 100%;
-            background: rgba(0,0,0,.7);
-            width: 100%;
-            opacity: 0;
-            -webkit-transition: opacity .5s ease-in-out;
-            -moz-transition: opacity .5s ease-in-out;
-            -o-transition: opacity .5s ease-in-out;
-            transition: opacity .5s ease-in-out;
-            overflow: hidden;
-            } */
-
-            /* Styles the lightbox image, centers it vertically and horizontally, adds the zoom-in transition and makes it responsive using a combination of margin and absolute positioning */
-
-            /* .lightbox-target img {
-            margin: auto;
-            position: absolute;
-            top: 0;
-            left:0;
-            right:0;
-            bottom: 0;
-            max-height: 0%;
-            max-width: 0%;
-            border: 3px solid white;
-            box-shadow: 0px 0px 8px rgba(0,0,0,.3);
-            box-sizing: border-box;
-            -webkit-transition: .5s ease-in-out;
-            -moz-transition: .5s ease-in-out;
-            -o-transition: .5s ease-in-out;
-            transition: .5s ease-in-out;
-            } */
-
-            /* Styles the close link, adds the slide down transition */
-
-            /* a.lightbox-close {
-            display: block;
-            width:50px;
-            height:50px;
-            box-sizing: border-box;
-            background: white;
-            color: black;
-            text-decoration: none;
-            position: absolute;
-            top: -80px;
-            right: 0;
-            -webkit-transition: .5s ease-in-out;
-            -moz-transition: .5s ease-in-out;
-            -o-transition: .5s ease-in-out;
-            transition: .5s ease-in-out;
-            } */
-
-            /* Provides part of the "X" to eliminate an image from the close link */
-
-            /* a.lightbox-close:before {
-            content: "";
-            display: block;
-            height: 30px;
-            width: 1px;
-            background: black;
-            position: absolute;
-            left: 26px;
-            top:10px;
-            -webkit-transform:rotate(45deg);
-            -moz-transform:rotate(45deg);
-            -o-transform:rotate(45deg);
-            transform:rotate(45deg);
-            } */
-
-            /* Provides part of the "X" to eliminate an image from the close link */
-
-            /* a.lightbox-close:after {
-            content: "";
-            display: block;
-            height: 30px;
-            width: 1px;
-            background: black;
-            position: absolute;
-            left: 26px;
-            top:10px;
-            -webkit-transform:rotate(-45deg);
-            -moz-transform:rotate(-45deg);
-            -o-transform:rotate(-45deg);
-            transform:rotate(-45deg);
-            } */
-
-            /* Uses the :target pseudo-class to perform the animations upon clicking the .lightbox-target anchor */
-
-            /* .lightbox-target:target {
-            opacity: 1;
-            top: 0;
-            bottom: 0;
-            }
-
-            .lightbox-target:target img {
-            max-height: 100%;
-            max-width: 100%;
-            }
-
-            .lightbox-target:target a.lightbox-close {
-            top: 0px;
-            } */
+            }           
 
             .typeGambar{
                 width : 100%;
@@ -297,7 +181,7 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
             .box {
             flex: 1;
             overflow: hidden;
-            transition: .5s;
+            transition: .3s;
             /* margin: 0 2%; */
             box-shadow: 0 20px 30px rgba(0,0,0,.1);
             line-height: 0;
@@ -310,15 +194,8 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
             transition: .5s;
             }
 
-            /* .box > span {
-            font-size: 3.8vh;
-            display: block;
-            text-align: center;
-            height: 10vh;
-            line-height: 2.6;
-            } */
             @media (max-width: 600px) {
-                .box:active{ flex: 1 1 60%; }
+                .box:active{ flex: 60%; }
                 .box > img{
                     pointer-events: none;
                 }
@@ -332,7 +209,6 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                     height: 80vh;
                 }
             }
-            /* .box:hover { flex: 1 1 20%; } */
             .box:hover > img {
             width: 100%;
             height: 100%;
@@ -475,30 +351,6 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
     
             </div>
         </div>
-
-        
-        <!-- modal -->
-        <!-- <div class="lightbox-target" id="1">
-            <img src="http://placehold.it/700x400"/>
-            <a class="lightbox-close" href="#"></a>
-        </div>
-        <div class="lightbox-target" id="2">
-            <img src="http://placehold.it/400x400"/>
-            <a class="lightbox-close" href="#"></a>
-        </div>
-        <div class="lightbox-target" id="3">
-            <img src="http://placehold.it/700x400"/>
-            <a class="lightbox-close" href="#"></a>
-        </div>
-        <div class="lightbox-target" id="4">
-            <img src="http://placehold.it/400x400"/>
-            <a class="lightbox-close" href="#"></a>
-        </div>
-        <div class="lightbox-target" id="5">
-            <img src="http://placehold.it/400x400"/>
-            <a class="lightbox-close" href="#"></a>
-        </div> -->
-        <!-- modal -->
 
         <div class="container">
             <div class="rounded bg-white mt-3 p-3">
