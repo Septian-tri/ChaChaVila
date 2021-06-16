@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Apr 2021 pada 17.41
+-- Waktu pembuatan: 16 Jun 2021 pada 17.26
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.3.13
 
@@ -43,6 +43,26 @@ CREATE TABLE `admindata` (
   `tanggalbergabung` text CHARACTER SET utf8mb4 NOT NULL,
   `typepengguna` text CHARACTER SET utf8mb4 NOT NULL,
   `kodeverifikasi` text CHARACTER SET utf8mb4 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `bookinghistory`
+--
+
+CREATE TABLE `bookinghistory` (
+  `Id_Booking` int(11) NOT NULL,
+  `idunikbooking` text COLLATE latin1_general_cs NOT NULL,
+  `idunikpengguna` text COLLATE latin1_general_cs NOT NULL,
+  `tanggalcheckin` int(11) NOT NULL,
+  `tanggalcheckout` int(11) NOT NULL,
+  `idunikvilla` text COLLATE latin1_general_cs NOT NULL,
+  `statusbooking` varchar(15) COLLATE latin1_general_cs NOT NULL,
+  `statuspembayaran` varchar(15) COLLATE latin1_general_cs NOT NULL,
+  `hargavilla` varchar(11) COLLATE latin1_general_cs NOT NULL,
+  `statusci_co` varchar(10) COLLATE latin1_general_cs NOT NULL,
+  `tanggalorder` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
 
 -- --------------------------------------------------------
@@ -127,6 +147,12 @@ ALTER TABLE `admindata`
   ADD PRIMARY KEY (`primkey_data_admin`);
 
 --
+-- Indeks untuk tabel `bookinghistory`
+--
+ALTER TABLE `bookinghistory`
+  ADD PRIMARY KEY (`Id_Booking`);
+
+--
 -- Indeks untuk tabel `logresetpassword`
 --
 ALTER TABLE `logresetpassword`
@@ -159,6 +185,12 @@ ALTER TABLE `villa`
 --
 ALTER TABLE `admindata`
   MODIFY `primkey_data_admin` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `bookinghistory`
+--
+ALTER TABLE `bookinghistory`
+  MODIFY `Id_Booking` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `logresetpassword`

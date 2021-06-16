@@ -9,6 +9,8 @@
     ini_set('session.cookie_secure', 1);
     // session_set_cookie_params(['samesite' => 'none']); 
 
+    $arrayBulan = array(" ", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+
 
     //cek domain email jika penyedia layanan email tidak di temukan maka aka mebertikan nilai false, jika di temukan akan memberikan nilai true
     function domainEmailCheck($Email){
@@ -211,6 +213,16 @@
         rmdir($folderUtama);
 
         return true;
+
+    }
+
+    function tanggalValidasi($value, $mode){
+
+        if(!preg_match('/^[0-9]*$/', $value)){
+
+            return false;
+
+        }
 
     }
 ?>

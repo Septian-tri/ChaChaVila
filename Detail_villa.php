@@ -364,10 +364,11 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
             <?php
 
                     if(isset($fasilitasVilla -> Discount)){
+                        
+                        $disc = $fasilitasVilla -> Discount;
                        
-                        if($fasilitasVilla -> Discount !== "TIDAK TERSEDIA"){
+                        if($disc !== "TIDAK TERSEDIA"){
 
-                            $disc = $fasilitasVilla -> Discount;
 
                             echo '<p class="mb-2 text-muted">
                                     Rp. <s>'.preg_replace('/\B(?<!\.)(?=(\d{3})+(?!\d))/', ".", $haragaVilla).'</s> / Night 
@@ -382,13 +383,13 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                         }else{
 
                             $disc = 0;
-                            goto HargaNormal;
 
                         }
 
                     }else{
+                        
+                        $disc = 0;
 
-                        HargaNormal:
                         echo '<h4 class="">
                                 Rp. '.preg_replace('/\B(?<!\.)(?=(\d{3})+(?!\d))/', ".", $haragaVilla).'
                                 <small class="e mb-2 text-muted"> / Night</small>
@@ -479,12 +480,10 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
             <div class="col-md-10 order-md-1 mx-auto">
                 <h4 class="mb-3">Tanggal Booking</h4>
                 <form class="needs-validation was-validated" novalidate="">
-                    <div class="row">
-                        <div class="col-md-3 mr-1">
-                            <!-- <label for="TCI">Tanggal Check in</label> -->
-                            <!-- <input type="date" class="form-control" id="TCI" placeholder="dd/mm/yyyy" min="<?php echo date("d/m/Y"); ?>"> -->
-                            <label for="TCO"><small>Tanggal Check In</small></label>
-                            <select class="form-control TCI TB" id="TCITanggal">
+                    <small>Tanggal CheckIn</small>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">DD/MM/YYYY</span>
+                        <select class="form-control TCI TB" id="TCITanggal">
                                 <?php
 
                                     for($t = 1; $t <= 31; $t++){
@@ -511,11 +510,8 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                                     }
 
                                 ?>
-                            </select>
-                         </div>
-                         <div class="col-md-3 mr-1">
-                            <label for="TCO"><small>Bulan Check In</small></label>
-                            <select class="form-control TCI TB" id="TCIBulan">
+                         </select>
+                        <select class="form-control TCI TB" id="TCIBulan">
                                 <?php
 
                                     for($b = 1; $b <= 12; $b++){
@@ -532,25 +528,21 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
 
                                         if($b <= 9){
 
-                                            echo '<option value="0'.$b.'"'.$pilih.'>0'.$b.'</option>';
+                                            echo '<option value="0'.$b.'"'.$pilih.'>'.$arrayBulan[$b].'</option>';
 
                                         }else{
 
-                                            echo '<option value="'.$b.'"'.$pilih.'>'.$b.'</option>';
+                                            echo '<option value="'.$b.'"'.$pilih.'>'.$arrayBulan[$b].'</option>';
 
                                         }
 
                                     }
 
                                 ?>
-                            </select>
-                        </div>
-                        <div class="col-md-3 mr-1">
-                            <label for="TCO"><small>Tahun Check In</small></label>
-                            <select class="form-control TCI TB" id="TCITahun">
-                                <?php
-
-                                    for($t = date("Y"); $t <= date("Y", strtotime("+1 year today")); $t++){
+                        </select>
+                        <select class="form-control TCI TB" id="TCITahun">
+                            <?php
+                                for($t = date("Y"); $t <= date("Y", strtotime("+1 year today")); $t++){
 
                                         if($t == date("Y")){
 
@@ -575,17 +567,71 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                                     }
 
                                 ?>
+                        </select>
+                        <!-- <span class="input-group-text">Jam</span>
+                            <select class="form-control TCI TB" id="TCIJam">
+                                <?php
+
+                                    for($tj = 1; $tj <= 23; $tj++){
+
+                                        if($tj == date("H")){
+
+                                            $pilih = ' selected="select"';
+
+                                        }else{
+
+                                            $pilih = "";
+
+                                        }
+
+                                        if($tj <= 9){
+
+                                            echo '<option value="0'.$tj.'"'.$pilih.'>0'.$tj.'</option>';
+
+                                        }else{
+
+                                            echo '<option value="'.$tj.'"'.$pilih.'>'.$tj.'</option>';
+
+                                        }
+
+                                    }
+
+                                ?>
                             </select>
-                        </div>
-                        <!-- <div class="col-md-6 mb-3">
-                            <label for="TCO">Tanggal Check Out</label>
-                            <input type="date" class="form-control" id="TCO" placeholder="dd/mm/yyyy" max="<?php echo date("d/m/Y", strtotime("+1 day today")); ?>">
-                            <div class="invalid-feedback">
-                                Valid last date is required.
-                            </div>
-                        </div> -->
-                        <div class="col-md-3 mr-1">
-                            <label for="TCO"><small>Tanggal Check Out</small></label>
+                            <span class="input-group-text">:</span>
+                            <select class="form-control TCI TB" id="TCIMenit">
+                                <?php
+
+                                    for($tm = 1; $tm <= 59; $tm++){
+
+                                        if($tm == date("i")){
+
+                                            $pilih = ' selected="select"';
+
+                                        }else{
+
+                                            $pilih = "";
+
+                                        }
+
+                                        if($tm <= 9){
+
+                                            echo '<option value="0'.$tm.'"'.$pilih.'>0'.$tm.'</option>';
+
+                                        }else{
+
+                                            echo '<option value="'.$tm.'"'.$pilih.'>'.$tm.'</option>';
+
+                                        }
+
+                                    }
+
+                                ?>
+                            </select> -->
+                    </div>
+                    <small>Tanggal Check Out</small>
+                    <div class="input-group mb-3">
+                            <span class="input-group-text">DD/MM/YYYY</span>
                             <select class="form-control TCO TB" id="TCOTanggal">
                             <?php
 
@@ -616,9 +662,6 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
 
                             ?>
                             </select>
-                        </div>
-                        <div class="col-md-3 mr-1">
-                        <label for="TCO"><small>Bulan Check Out</small></label>
                             <select class="form-control TCO TB" id="TCOBulan">
                                 <?php
 
@@ -636,11 +679,11 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
 
                                         if($b <= 9){
 
-                                            echo '<option value="0'.$b.'"'.$pilih.'>0'.$b.'</option>';
+                                            echo '<option value="0'.$b.'"'.$pilih.'>'.$arrayBulan[$b].'</option>';
 
                                         }else{
 
-                                            echo '<option value="'.$b.'"'.$pilih.'>'.$b.'</option>';
+                                            echo '<option value="'.$b.'"'.$pilih.'>'.$arrayBulan[$b].'</option>';
 
                                         }
 
@@ -649,9 +692,6 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
 
                                 ?>
                             </select>
-                        </div>
-                        <div class="col-md-3 mr-1">
-                            <label for="TCO"><small>Tahun Check Out</small></label>
                             <select class="form-control TCO TB" id="TCOTahun">
                                 <?php
 
@@ -681,7 +721,6 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
 
                                 ?>
                             </select>
-                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -717,7 +756,7 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
 
             <label class="lead mb-3" id="aa">Meet in Person</label>
             
-            <div class="card card-body">
+            <div class="card card-body" id="qq">
                 <p>
                     Some contact +62 999 9999 9999
                 </p>
@@ -779,13 +818,6 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
 
             var TCI         = [];
             var TCO         = [];
-            var orderData   = {
-                
-                        "idUnikVilla"   : "<?php echo $idUnikVilla; ?>",
-                        "TCI"           : TCI,
-                        "TCO"           : TCO 
-                };
-
 
             function durasiBooking(){
 
@@ -793,27 +825,18 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
 
                     if(document.getElementsByClassName("TB")[bkd].className === "form-control TCI TB"){
 
-                        if(Object.keys(TCI).length >= 3){
-
-                            TCI = [];
-
-                        }
-
                         TCI.push(document.getElementById(document.getElementsByClassName("TB")[bkd].id).value);
-                    
+
                     }else if(document.getElementsByClassName("TB")[bkd].className === "form-control TCO TB"){
-
-                        if(Object.keys(TCO).length >= 3){
-
-                            TCO = [];
-
-                        }
 
                         TCO.push(document.getElementById(document.getElementsByClassName("TB")[bkd].id).value);
 
                     }
 
                 }
+
+                TCI = TCI.slice(0, 3);
+                TCO = TCO.slice(0, 3);
 
             }
 
@@ -823,7 +846,7 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                 var waktuTCO        = new Date(TCO[1] + "/" + TCO[0] + "/" + TCO[2]);
 
                 var perbedaanWaktu  = waktuTCO.getTime() - waktuTCI.getTime();
-        
+
                 if(waktuTCO < waktuTCI){
 
                     alert("Tanggal Check out tidak dapat lebih kecil dari tanggal check in !");
@@ -835,15 +858,14 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
                 }else{
 
                     dBo         = perbedaanWaktu/(1000 * 60 * 60 * 24);
-                    totalHarga  = <?php echo $haragaVilla - $disc; ?> * dBo;
+                    totalHarga  = <?php echo ($haragaVilla - $disc); ?> * dBo;
 
+                    document.getElementById("durasiBooking").innerHTML = dBo + " Hari";
                     document.getElementById("totalHarga").innerHTML = "Rp. " + totalHarga.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ".");
-                    return document.getElementById("durasiBooking").innerHTML = dBo + " Hari";
 
                 }
 
             }
-
 
             document.onchange = function(e){
 
@@ -921,6 +943,13 @@ if(!preg_match('/^[V]{1}[I]{1}[D]{1}[\=]{1}[a-zA-Z0-9]{15,}$/', $_SERVER['QUERY_
             
             durasiBooking();
             totalHargaDurasi();
+
+            var orderData   = {
+                
+                "idUnikVilla"   : "<?php echo $idUnikVilla; ?>",
+                "TCI"           : TCI,
+                "TCO"           : TCO 
+            };
                                                             
         </script>
         <script src="Settings/js/main.js"></script>

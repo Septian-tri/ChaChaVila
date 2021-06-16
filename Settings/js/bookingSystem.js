@@ -15,7 +15,8 @@ if(bProses === undefined || bProses === null){
         e.stopImmediatePropagation();
         e.stopPropagation();
 
-        
+    if(confirm("INFORMASI ! Untuk Jam Checkin adalah jam saat kamu menakan tombol " + e.target.innerHTML)){
+
         if(bolProses === false){
             
             var formDataOrder = new FormData();
@@ -102,6 +103,8 @@ if(bProses === undefined || bProses === null){
 
             });
         }
+
+    }
 
     }
 

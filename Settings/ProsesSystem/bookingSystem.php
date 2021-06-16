@@ -87,10 +87,10 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                             return false;
                                     
                                         }else{
-                                        
+
                                             if(count(explode(",", $_POST['TCI'])) !== 3){
 
-                                                sendErrorMessage(explode(",", $_POST['TCI']), "notificationErrorField", null);
+                                                sendErrorMessage("Tanggal Check In tidak valid !", "notificationErrorField", null);
                                                 return false;
 
                                             }else{
@@ -101,29 +101,104 @@ if(!preg_match('/^[\s]*$/', $_SERVER['QUERY_STRING'])){
                                                     return false;
     
                                                 }else{
-                                                    
-                                                    if(explode(",", $_POST['TCI'])[0] <= 0 || explode(",", $_POST['TCI'])[0] > 31){
+
+                                                    for($i = 0; $i < count(explode(",", $_POST['TCO'])); $i++){
+
+                                                        if(!preg_match('/^[0-9]*$/', explode(",", $_POST['TCO'])[$i])){
+
+                                                            sendErrorMessage("Taggal Checkout Tidak Valid !", "notificationErrorField", "TCOTanggal");
+                                                            return false;
+
+                                                        }
+                                                        
+                                                    }
+
+                                                    for($i = 0; $i < count(explode(",", $_POST['TCI'])); $i++){
+
+                                                        if(!preg_match('/^[0-9]*$/', explode(",", $_POST['TCI'])[$i])){
+
+                                                            sendErrorMessage("Taggal Check In Tidak Valid !", "notificationErrorField", "TCITanggal");
+                                                            return false;
+
+                                                        }
+                                                        
+                                                    }
+
+                                                    if(explode(",", $_POST['TCI'])[0] <= 0 || explode(",", $_POST['TCI'])[0] > 31 || explode(",", $_POST['TCO'])[0] <= 0 || explode(",", $_POST['TCO'])[0] > 31){
 
                                                         sendErrorMessage("Tanggal Tidak Valid !", "notificationErrorField", "TCITanggal");
                                                         return false;
 
                                                     }else{
+                                                        
+                                                        if(explode(",", $_POST['TCO'])[1] <= 0 || explode(",", $_POST['TCO'])[1] > 12 || explode(",", $_POST['TCI'])[1] <= 0 || explode(",", $_POST['TCI'])[1] > 12){
 
-                                                        if(explode(",", $_POST['TCO'])[0] <= 0 || explode(",", $_POST['TCO'])[0] > 31){
-
-                                                            sendErrorMessage("Tanggal Tidak Valid !", "notificationErrorField", "TCITanggal");
+                                                            sendErrorMessage("Bulan Tidak Valid !", "notificationErrorField", "TCOTanggal");
                                                             return false;
-    
+        
                                                         }else{
-    
-                                                            sendErrorMessage($_POST['TCO'], "notificationErrorField", "TCITanggal");
-                                                            return false;
-    
+        
+                                                            if(explode(",", $_POST['TCO'])[2] < date("Y", strtotime("today")) || explode(",", $_POST['TCO'])[2] > date("Y", strtotime("+1 year +1 day today")) || explode(",", $_POST['TCI'])[2] < date("Y", strtotime("today")) || explode(",", $_POST['TCI'])[2] > date("Y", strtotime("+1 year today"))){
+
+                                                                sendErrorMessage("Tahun Tidak Valid ! ", "notificationErrorField", null);
+                                                                return false;
+            
+                                                            }else{
+                                                                
+                                                                $queryCekIDVilla = mysqli_query($koneksi, "SELECT idunikvilla, namavilla, lokasivilla, deskripsi, fasilitasvilla, hargavilla FROM villa WHERE idunikvilla = BINARY('".$_POST['idUnikVilla']."') ");
+            
+                                                                if(!$queryCekIDVilla){
+                                                                    
+                                                                    sendErrorMessage("Data Villa tidak dapat di temukan !", "notificationErrorField", null);
+                                                                    return false;
+                                                                
+                                                                }else{
+                                                                    
+                                                                    if(mysqli_num_rows($queryCekIDVilla) !== 1){
+                                                                        
+                                                                        sendErrorMessage("Villa Sudah tidak lagi tersedia", "notificationErrorField", null);
+                                                                        return false;
+                                                                    
+                                                                    }else{
+                                                                        
+                                                                        if(!file_exists("../../Villa/".$_POST['idUnikVilla'])){
+                                                    
+                                                                            sendErrorMessage("Asset Missing !", "notificationErrorField", null);
+                                                                            return false;
+                                                    
+                                                                        }else{
+                                                                            
+                                                                            $tanggalCheckIn     = str_replace(",", "-", $_POST['TCI']);
+                                                                            $tanggalCheckOut    = str_replace(",", "-", $_POST['TCO']);
+
+                                                                            // $dataVilla              = mysqli_fetch_array($queryCekIDVilla);
+                                                                            // $namaVilla              = stripslashes(html_entity_decode($dataVilla['namavilla'])); 
+                                                                            // $deskripsiVilla         = stripslashes(html_entity_decode($dataVilla['deskripsi']));
+                                                                            // $fasilitasVilla         = json_decode($dataVilla['fasilitasvilla']);
+                                                                            // $fasilitasVillaFoto     = $fasilitasVilla -> fotoVilla;
+                                                                            // $fasilitasVillaText     = $fasilitasVilla -> fasilitasVilla;
+                                                                            // $jumlahFasilitasFoto    = count($fasilitasVillaFoto);
+                                                                            // $haragaVilla            = $dataVilla['hargavilla'];
+                                                                            // $lokasivilla            = $dataVilla['lokasivilla'];
+                                                                            // $idUnikVilla            = $dataVilla['idunikvilla'];
+
+                                                                            // $queryCekBookingHistory = 
+
+                                                                            
+                                                                            sendErrorMessage($tanggalCheckin, "notificationErrorField", null);
+                                                                            return false;
+                                                    
+                                                                        }
+                                                                        
+                                                                    }
+                                                    
+                                                                }
+
+                                                            }
+        
                                                         }
 
                                                     }
-                                                    // $dataPengguna = mysqli_fetch_array($queryCekDataUser);
-                                                    // $data         = array("namaPengguna" => base64_decode($dataPengguna['namapengguna']), "namaPanggilan" => $dataPengguna['namapanggilan']);
 
                                                 }
 
